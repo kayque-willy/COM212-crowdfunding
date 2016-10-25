@@ -100,7 +100,7 @@
                                         echo 
                                         '<td>
                                         <a href="/usuario/alterar/'.$usuario->login.'" class="btn btn-primary">Editar usuario</a>
-                                        <a href="/usuario/remover/'.$usuario->login.'" class="btn btn-danger" data-toggle="modal">Desativar usuario</a>
+                                        <a href="/usuario/desativar/'.$usuario->login.'" class="btn btn-danger" data-toggle="modal">Desativar usuario</a>
                                         </td>';
                                         echo '</tr>';
                                 }

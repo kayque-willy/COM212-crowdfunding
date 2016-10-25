@@ -68,51 +68,66 @@ class Usuario extends CI_Controller {
 	}
 	
 	#Atualizar o usuario
-	public function alterar(){
+	public function alterar($log=''){
 
-		//Recebe os dados do formulario
-		$login= (empty($_POST['login'])) ? '' : $_POST['login'];
-		$senha= (empty($_POST['senha'])) ? '' : $_POST['senha'];
-		$pais= (empty($_POST['pais'])) ? '' : $_POST['pais'];
-		$cidade= (empty($_POST['cidade'])) ? '' : $_POST['cidade'];
-		$estado= (empty($_POST['estado'])) ? '' : $_POST['estado'];
-		$endereco= (empty($_POST['endereco'])) ? '' : $_POST['endereco'];
-		$data_nascimento= (empty($_POST['data_nascimento'])) ? '2016-10-02' : $_POST['data_nascimento'];
-		$email= (empty($_POST['email'])) ? '' : $_POST['email'];
-		$categoria= (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
-		$del= (empty($_POST['del'])) ? NULL : $_POST['del'];
+		if(!empty($_POST)){
+			//Recebe os dados do formulario
+			$login= (empty($_POST['login'])) ? '' : $_POST['login'];
+			$senha= (empty($_POST['senha'])) ? '' : $_POST['senha'];
+			$pais= (empty($_POST['pais'])) ? '' : $_POST['pais'];
+			$cidade= (empty($_POST['cidade'])) ? '' : $_POST['cidade'];
+			$estado= (empty($_POST['estado'])) ? '' : $_POST['estado'];
+			$endereco= (empty($_POST['endereco'])) ? '' : $_POST['endereco'];
+			$data_nascimento= (empty($_POST['data_nascimento'])) ? '2016-10-02' : $_POST['data_nascimento'];
+			$email= (empty($_POST['email'])) ? '' : $_POST['email'];
+			$categoria= (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
+			$del= (empty($_POST['del'])) ? NULL : $_POST['del'];
+					
+			//Carrega a model
+			$this->load->model('usuario_model');
 				
+			//Cria um objeto usuario com os dados para serem atualizados
+			//Os espaços com as aspas simples em branco estão aí para obedecer a ordem de parametro
+			$usuario = new Usuario_model(NULL,$senha,NULL,NULL,$pais,$cidade,$estado,$endereco,NULL,$email,$categoria,$del);
+		
+			//Atualiza o usuario no banco
+			$usuario->update($login);
+			
+			$this->load->helper('url');
+			redirect('/usuario/consultar', 'refresh');
+		}
+		
 		//Carrega a model
 		$this->load->model('usuario_model');
 			
-		//Cria um objeto usuario com os dados para serem atualizados
-		//Os espaços com as aspas simples em branco estão aí para obedecer a ordem de parametro
-		$usuario = new Usuario_model(NULL,$senha,NULL,NULL,$pais,$cidade,$estado,$endereco,NULL,$email,$categoria,$del);
-	
-		//Atualiza o usuario no banco
-		$usuario->update($login);
+		//Cria um novo objeto projeto
+		$usuario = new Usuario_model();
+		
+		//$consulta o projeto pelo codigo
+		$data['usuario']=$usuario->select($log);
 		
 		//Carrega a view 
-		//$this->load->view('CRUD_usuario/usuario',$data); 
+		$this->load->view('CRUD_usuario/editUSUARIO',$data); 
 	}
 	
 	#Desativar o usuario
 	public function desativar($log=''){
 		
 		//Recebe os dados do formulario
-		$login= (empty($log) ? '' : $log;
+		$login= (empty($log)) ? '' : $log;
 		
 		//Carrega a model
 		$this->load->model('usuario_model');
 		
 		//Cria um novo usuario 
-		$usuario = new usuario();
+		$usuario = new usuario_model();
 		
 		//Remove o usuario do banco
 		$usuario->remove($login);
 		
-		//Carrega a view 
-		//$this->load->view('CRUD_usuario/usuario',$data); 
+		//Redireciona para a consulta de usuarios
+		$this->load->helper('url');
+		redirect('/usuario/consultar', 'refresh');
 	}
 
 }
