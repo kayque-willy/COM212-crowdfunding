@@ -5,8 +5,8 @@ class Usuario extends CI_Controller {
 
 	#Index do controller
 	public function index() {
-	   //Sempre adicionar variaveis no vetor de $data
-	   // $data['msg']='Este é a mensagem do controller Teste!';
+	   //Carrega a view da index do projeto
+	   $this->load->view('CRUD_usuario/indexUSUARIO_fim'); 
 	 }
 	
 	#Cria um novo usuario no banco

@@ -9,6 +9,7 @@
         <script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="//pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="/css/estilo.css"> 
     </head>
     <body> 
         <nav class="navbar navbar-default" role="navigation">
