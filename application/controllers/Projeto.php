@@ -5,24 +5,22 @@ class Projeto extends CI_Controller {
 
 	#Index do controller
 	public function index() {
-	   //Sempre adicionar variaveis no vetor de $data
-	   // $data['msg']='Este é a mensagem do controller Teste!';
-	   //Carrega a view
-	   //$this->load->view('usuario'); 
+	   //Carrega a view da index do projeto
+	   $this->load->view('CRUD_projeto/indexPROJETO_fim'); 
 	 }
 	
 	#Cria um novo projeto
 	public function cadastrar(){
 	
-		//Recebe os dados do formulario
-		$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
-		$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];
-		$categoria = (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
-		$duracao = (empty($_POST['duracao'])) ? '' : $_POST['duracao'];
-		$valor = (empty($_POST['valor'])) ? '' : $_POST['valor'];
-		$status = (empty($_POST['status'])) ? '' : $_POST['status'];
+		if(!empty($_POST)){
+			//Recebe os dados do formulario
+			$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
+			$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];
+			$categoria = (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
+			$duracao = (empty($_POST['duracao'])) ? '' : $_POST['duracao'];
+			$valor = (empty($_POST['valor'])) ? '' : $_POST['valor'];
+			$status = (empty($_POST['status'])) ? '' : $_POST['status'];
 		
-		if(isset($_POST)){
 			//Carrega a model
 			$this->load->model('projeto_model');
 				
@@ -31,6 +29,10 @@ class Projeto extends CI_Controller {
 			
 			//Insere o projeto no banco
 			$projeto->insert();
+			
+			//Redireciona para a consulta de projetos
+			$this->load->helper('url');
+			redirect('/projeto/consultar', 'refresh');
 		}
 		
 		//Carrega a view 
@@ -52,44 +54,57 @@ class Projeto extends CI_Controller {
 		$projeto = new Projeto_model();
 		
 		//$consulta o projeto
-		$data['projeto']=$projeto->select($codigo,$nome,$categoria);
+		$data['projetos']=$projeto->select($codigo,$nome,$categoria);
 		
-		var_dump($data['projeto']->result());
-			
 		//Carrega a view 
-		//$this->load->view('CRUD_projeto/projeto',$data); 
+		$this->load->view('CRUD_projeto/viewPROJETO',$data); 
 	}
 	
 	#Altera o projeto
-	public function alterar(){
+	public function alterar($cod=''){
 	
-		//Recebe os dados do formulario
-		$codigo = (empty($_POST['codigo'])) ? '2' : $_POST['codigo'];
-		$nome = (empty($_POST['nome'])) ? 'c' : $_POST['nome'];
-		$categoria = (empty($_POST['categoria'])) ? 'c' : $_POST['categoria'];
-		$duracao = (empty($_POST['duracao'])) ? '13' : $_POST['duracao'];
-		$valor = (empty($_POST['valor'])) ? 'c' : $_POST['valor'];
-		$status = (empty($_POST['status'])) ? 'c' : $_POST['status'];
+		if(!empty($_POST)){
+			//Recebe os dados do formulario
+			$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
+			$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];
+			$categoria = (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
+			$duracao = (empty($_POST['duracao'])) ? '' : $_POST['duracao'];
+			$valor = (empty($_POST['valor'])) ? '' : $_POST['valor'];
+			$status = (empty($_POST['status'])) ? '' : $_POST['status'];
+			
+			//Carrega a model
+			$this->load->model('projeto_model');
+				
+			//Cria um novo projeto com os dados do POST
+			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status);
+			
+			//Atualiza o usuario no banco
+			var_dump($projeto);
+			$projeto->update($codigo);	
+				
+			//Redireciona para a consulta de projetos
+			$this->load->helper('url');
+			redirect('/projeto/consultar', 'refresh');
+		}
 		
 		//Carrega a model
 		$this->load->model('projeto_model');
 			
-		//Cria um novo projeto com os dados do POST
-		$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status);
+		//Cria um novo objeto projeto
+		$projeto = new Projeto_model();
 		
-		//Atualiza o usuario no banco
-		var_dump($projeto);
-		$projeto->update($codigo);
+		//$consulta o projeto pelo codigo
+		$data['projeto']=$projeto->select($cod);
 		
 		//Carrega a view 
-		//$this->load->view('CRUD_projeto/projeto'); 
+		$this->load->view('CRUD_projeto/editPROJETO',$data); 
 	}
 	
 	#Deletea o projeto 
-	public function remover(){
+	public function remover($cod=''){
 		
 		//Recebe os dados do formulario
-		$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
+		$codigo = (empty($cod)) ? '' : $cod;
 		
 		//Carrega a model
 		$this->load->model('projeto_model');
@@ -100,8 +115,9 @@ class Projeto extends CI_Controller {
 		//Remove o projeto do banco
 		$projeto->remove($codigo);
 		
-	    //Carrega a view 
-		//$this->load->view('CRUD_projeto/projeto'); 
+	    //Redireciona para a consulta de projetos
+		$this->load->helper('url');
+		redirect('/projeto/consultar', 'refresh');
 	}
 
 }

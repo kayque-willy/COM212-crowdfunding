@@ -20,11 +20,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">UNIFUNDING</a>
+                    <a class="navbar-brand" href="/projeto/">UNIFUNDING</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
+                        <li><a href="/projeto/">Home</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipos de projetos<b class="caret"></b></a> 
                             <ul class="dropdown-menu">
@@ -40,7 +40,7 @@
                             </ul>   
                         </li>
                         <li><a href="#">Projetos Cadastrados</a></li>
-                        <li><a href="#">Lista de Projetos Candidatos</a></li>
+                        <li class="active"><a href="/projeto/consultar">Lista de Projetos Candidatos</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
@@ -54,17 +54,70 @@
         <!-- Inicio de um CRUD --> 
         <div id="main" class="container-fluid">
             <h3 class="page-header">Editar Projeto</h3>
-            <form action="indexPROJETO_fim.html">
+            <form action="/projeto/alterar/" method="POST">
                 <!-- area de campos do form -->
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <!--<div class="form-group col-md-6">
                         <label for="campo1">Novo Código:</label>
                         <div class="input-group">
                             <span class="input-group-addon" id="basic-addon1">#</span>
                             <input type="text" class="form-control" placeholder="Novo código do gestor de projetos" aria-describedby="basic-addon1">
                         </div>
-                    </div>
-
+                    </div>-->
+                    <?php
+                    if(isset($projeto)){
+                        foreach ($projeto->result() as $proj) {
+                    ?>
+                        <!--Nome -->
+                        <div class="form-group col-md-3">
+                            <label for="campo1">Nome do Projeto:</label>
+                            <input type="text" class="form-control" id="campo1" name="nome" value='<?php echo $proj->codigo; ?>'>
+                        </div>
+                        <!--Nome -->
+                        
+                        <!-- Duração prevista -->
+                        <div class="form-group col-md-3">
+                            <label for="campo2">Duração Prevista:</label>
+                            <input type="text" class="form-control" id="campo2" name="duracao" value='<?php echo $proj->duracao; ?>'>
+                            <div id="datetimepicker4" class="input-append">
+                                <span class="add-on">
+                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                        <!-- Duração prevista -->
+                        
+                        <!-- Valor previsto -->
+                        <div class="form-group col-md-3">
+                            <label for="campo3">Valor Previsto:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">$</span>
+                                <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="valor" value='<?php echo $proj->valor; ?>'>
+                                <span class="input-group-addon">.00</span>
+                            </div>
+                        </div>
+                        <!-- Valor previsto -->
+                        
+                        <!-- Categoria -->
+                        <div class="form-group col-md-3">
+                            <label for="campo4">Categoria do Projeto:</label>
+                            <input type="text" class="form-control" id="campo4" name="categoria" value='<?php echo $proj->categoria; ?>'>
+                            <ul class="list-group">
+                                <li class="list-group-item">Pesquisa</li>
+                                <li class="list-group-item">Competição Tecnológica</li>
+                                <li class="list-group-item">Inovação no Ensino</li>
+                                <li class="list-group-item">Manutenção e Reforma</li>
+                                <li class="list-group-item">Pequenas Obras</li>
+                            </ul>
+                        </div>   
+                        <!-- Categoria -->
+                    <?php
+                        }
+                    }
+                    ?>
+                   
+                    <!-- Status -->
                     <div class="form-group col-md-6">
                         <label for="campo2">STATUS: **Vermelho>Verde=Reprovado** **Verde>Vermelho=Aprovado** **100% verde=Finalizado:</label>
                         <div class="progress">
@@ -76,18 +129,19 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Status -->
                 </div>
                 <!-- Fim de todos os campos do form -->
-                <hr/>
                 <div id="actions" class="row">
                     <div class="col-md-12">
                         <button type="submit" class="btn btn-primary">Salvar alterações no projeto</button>
                         <a href="indexPROJETO_fim.html" class="btn btn-default">Cancelar</a>
                     </div>
                 </div>
+                
             </form>
         </div>
-
+        <hr/>
         <!-- Aqui está a criação da parte de baixo do site, footer -->
         <footer>	
             <div class="container">

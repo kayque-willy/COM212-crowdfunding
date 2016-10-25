@@ -22,11 +22,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">UNIFUNDING</a>
+                    <a class="navbar-brand" href="/projeto/">UNIFUNDING</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
+                        <li class="active"><a href="/projeto/">Home</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipos de projetos<b class="caret"></b></a> 
                             <ul class="dropdown-menu">
@@ -42,7 +42,7 @@
                             </ul>   
                         </li>
                         <li><a href="#">Projetos Cadastrados</a></li>
-                        <li><a href="#">Lista de Projetos Candidatos</a></li>
+                        <li><a href="/projeto/consultar">Lista de Projetos Candidatos</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">

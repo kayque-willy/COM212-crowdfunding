@@ -1,0 +1,36 @@
+img {
+	width: 100%;
+}
+
+.navbar {
+	margin-bottom: 0;
+}
+
+.wrapper {
+	padding: 40px 0;
+	background-color: #f5f5f5;
+}
+
+.artigo {
+	padding: 15px 0;
+	border-top: 1px solid #ddd;
+}
+.artigo:first-child {
+	padding-top: 0;
+	border-top: 0;
+}
+
+
+footer {
+	padding: 20px 0;
+	border-top: 1px solid #ddd;
+}
+
+.copyright {
+	padding: 5px 0;
+	background-color: #666;
+	color: #fff;
+}
+.copyright p {
+	margin: 0; 
+}
