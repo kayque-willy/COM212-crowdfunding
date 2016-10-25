@@ -1,5 +1,5 @@
 <?php
-class model_teste extends CI_Model{
+class projeto extends CI_Model{
  
   private $codigo;
   private $nome;
@@ -16,8 +16,6 @@ class model_teste extends CI_Model{
      if(isset($duracao)) $this->duracao=$duracao;
      if(isset($valor)) $this->valor=$valor;
      if(isset($status)) $this->status=$status;
-     
-     
   }
   
   
