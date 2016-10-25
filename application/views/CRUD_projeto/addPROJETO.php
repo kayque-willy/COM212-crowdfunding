@@ -107,6 +107,7 @@
         </div>
         <hr/>
         <!-- Aqui está a criação da parte de baixo do site, footer -->
+        <!-- Aqui está a criação da parte de baixo do site, footer -->
         <footer>	
             <div class="container">
                 <div class="row">                       
