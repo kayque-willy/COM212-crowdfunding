@@ -77,7 +77,7 @@ class Usuario extends CI_Controller {
 		$data_nascimento= (empty($_POST['data_nascimento'])) ? '2016-10-02' : $_POST['data_nascimento'];
 		$email= (empty($_POST['email'])) ? '' : $_POST['email'];
 		$categoria= (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
-		$del= (empty($_POST['del'])) ? '' : $_POST['del'];
+		$del= (empty($_POST['del'])) ? NULL : $_POST['del'];
 				
 		//Carrega a model
 		$this->load->model('usuario_model');

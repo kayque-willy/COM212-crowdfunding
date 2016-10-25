@@ -54,4 +54,3 @@ class Projeto_model extends CI_Model{
    return $this->db->get('projeto');
   }
 }
-?>
