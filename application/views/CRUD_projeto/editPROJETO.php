@@ -71,7 +71,8 @@
                         <!--Nome -->
                         <div class="form-group col-md-3">
                             <label for="campo1">Nome do Projeto:</label>
-                            <input type="text" class="form-control" id="campo1" name="nome" value='<?php echo $proj->codigo; ?>'>
+                            <input type="hidden" name="codigo" value='<?php echo $proj->codigo; ?>'>
+                            <input type="text" class="form-control" id="campo1" name="nome" value='<?php echo $proj->nome; ?>'>
                         </div>
                         <!--Nome -->
                         

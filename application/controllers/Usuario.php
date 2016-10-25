@@ -90,13 +90,11 @@ class Usuario extends CI_Controller {
 			//Os espaços com as aspas simples em branco estão aí para obedecer a ordem de parametro
 			$usuario = new Usuario_model(NULL,$senha,NULL,NULL,$pais,$cidade,$estado,$endereco,NULL,$email,$categoria,$del);
 		
-			var_dump($usuario);
-			
 			//Atualiza o usuario no banco
 			$usuario->update($login);
 			
 			$this->load->helper('url');
-			//redirect('/usuario/consultar', 'refresh');
+			redirect('/usuario/consultar', 'refresh');
 		}
 		
 		//Carrega a model
