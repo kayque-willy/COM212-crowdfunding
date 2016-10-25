@@ -15,24 +15,26 @@ class Projeto extends CI_Controller {
 	public function cadastrar(){
 	
 		//Recebe os dados do formulario
-		$codigo = (empty($_POST['codigo'])) ? '2' : $_POST['codigo'];
-		$nome = (empty($_POST['nome'])) ? 'a' : $_POST['nome'];
-		$categoria = (empty($_POST['categoria'])) ? 'a' : $_POST['categoria'];
-		$duracao = (empty($_POST['duracao'])) ? 'a' : $_POST['duracao'];
-		$valor = (empty($_POST['valor'])) ? 'a' : $_POST['valor'];
-		$status = (empty($_POST['status'])) ? 'a' : $_POST['status'];
+		$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
+		$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];
+		$categoria = (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
+		$duracao = (empty($_POST['duracao'])) ? '' : $_POST['duracao'];
+		$valor = (empty($_POST['valor'])) ? '' : $_POST['valor'];
+		$status = (empty($_POST['status'])) ? '' : $_POST['status'];
 		
-		//Carrega a model
-		$this->load->model('projeto_model');
+		if(isset($_POST)){
+			//Carrega a model
+			$this->load->model('projeto_model');
+				
+			//Cria um novo projeto com os dados do POST
+			$projeto = new Projeto_model($codigo,$nome,$categoria,$duracao,$valor,$status);
 			
-		//Cria um novo projeto com os dados do POST
-		$projeto = new Projeto_model($codigo,$nome,$categoria,$duracao,$valor,$status);
-		
-		//Insere o projeto no banco
-		$projeto->insert();
+			//Insere o projeto no banco
+			$projeto->insert();
+		}
 		
 		//Carrega a view 
-		//$this->load->view('CRUD_projeto/projeto',$data); 
+		$this->load->view('CRUD_projeto/addPROJETO'); 
 	}
 	
 	#Lista os projetos
