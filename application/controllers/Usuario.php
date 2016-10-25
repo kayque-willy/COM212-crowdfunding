@@ -7,112 +7,109 @@ class Usuario extends CI_Controller {
 	public function index() {
 	   //Sempre adicionar variaveis no vetor de $data
 	   // $data['msg']='Este é a mensagem do controller Teste!';
-	   //Carrega a view
-	   //$this->load->view('usuario'); 
 	 }
 	
 	#Cria um novo usuario no banco
 	public function cadastrar(){
 	
 		//Recebe os dados do formulario
-		if(isset($_POST)){
-			$login = $_POST['login'];
-			$senha=$_POST['senha'];
-			$nome=$_POST['nome'];
-			$cpf=$_POST['cpf'];
-			$pais= $_POST['pais'];
-			$cidade= $_POST['cidade'];
-			$estado= $_POST['estado'];
-			$endereco=$_POST['endereco'];
-			$data_nascimento=$_POST['data_nascimento'];
-			$email= $_POST['email'];
-			$tipo=$_POST['tipo'];
-			$categoria=$_POST['categoria'];
-			$del=$_POST['del'];
+		$login= (empty($_POST['login'])) ? '' : $_POST['login'];
+		$senha= (empty($_POST['senha'])) ? '' : $_POST['senha'];
+		$nome= (empty($_POST['nome'])) ? '' : $_POST['nome'];
+		$cpf= (empty($_POST['cpf'])) ? '' : $_POST['cpf'];
+		$pais= (empty($_POST['pais'])) ? '' : $_POST['pais'];
+		$cidade= (empty($_POST['cidade'])) ? '' : $_POST['cidade'];
+		$estado= (empty($_POST['estado'])) ? '' : $_POST['estado'];
+		$endereco= (empty($_POST['endereco'])) ? '' : $_POST['endereco'];
+		$data_nascimento= (empty($_POST['data_nascimento'])) ? '' : $_POST['data_nascimento'];
+		$email= (empty($_POST['email'])) ? '' : $_POST['email'];
+		$tipo= (empty($_POST['tipo'])) ? '' : $_POST['tipo'];
+		$categoria= (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
+		$del= (empty($_POST['del'])) ? '' : $_POST['del'];
 				
-			//Carrega a model
-			$this->load->model('usuario');
+		//Carrega a model
+		$this->load->model('usuario_model');
 			
-			//Cria um novo usuario com os dados do POST
-			$usuario = new usuario($login,$senha,$cpf,$pais,$cidade,$estado,$endereco,$data_nascimento,$email, $tipo,$categoria,$del);
-		
-			//Insere o usuario no banco
-			$usuario->insert();
-		}
-		
+		//Cria um novo usuario com os dados do POST
+		$usuario= new Usuario_model($login,$senha,$nome,$cpf,$pais,$cidade,$estado,$endereco,$data_nascimento,$email, $tipo,$categoria,$del);
+	
+		//Insere o usuario no banco
+		var_dump($usuario->insert());
+	
 		//Carrega a view 
-		$this->load->view('usuario'); 
+		//$this->load->view('CRUD_usuario/usuario',$data); 
 	}
 	
-	#Consultar
+	#Consultar os usuarios
 	public function consultar(){
 		
 		//Recebe o filtro
-		if(isset($_POST)){
-			$login = $_POST['login'];
-			$nome = $_POST['nome'];
-			$del = $_POST['del'];
+		$login = (empty($_POST['login'])) ? '' : $_POST['login'];
+		$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];
+		$del = (empty($_POST['del'])) ? '' : $_POST['del'];
 				
-			//Carrega a model
-			$this->load->model('usuario');
+		//Carrega a model
+		$this->load->model('usuario_model');
 			
-			//Cria um novo objeto usuario
-			$usuario = new usuario();
+		//Cria um novo objeto usuario
+		$usuario = new Usuario_model();
 		
-			//Insere o usuario no banco
-			$data['usuario']=$usuario->select($login,$nome,$del);
+		//Consuta os usuarios
+		$data['usuario']=$usuario->select($login,$nome,$del);
 			
-			//Carrega a view 
-			$this->load->view('usuario',$data); 
-		}
+		var_dump($data['usuario']->result());	
+			
+		//Carrega a view 
+		//$this->load->view('CRUD_usuario/usuario',$data); 
+
 	}
 	
-	#Cria um novo usuario no banco
+	#Atualizar o usuario
 	public function alterar(){
-	
+
 		//Recebe os dados do formulario
-		if(isset($_POST)){
-			$login = $_POST['login'];
-			$senha=$_POST['senha'];
-			$pais= $_POST['pais'];
-			$cidade= $_POST['cidade'];
-			$estado= $_POST['estado'];
-			$endereco=$_POST['endereco'];
-			$email= $_POST['email'];
-			$categoria=$_POST['categoria'];
-			$del=$_POST['del'];
+		$login= (empty($_POST['login'])) ? '' : $_POST['login'];
+		$senha= (empty($_POST['senha'])) ? '' : $_POST['senha'];
+		$pais= (empty($_POST['pais'])) ? '' : $_POST['pais'];
+		$cidade= (empty($_POST['cidade'])) ? '' : $_POST['cidade'];
+		$estado= (empty($_POST['estado'])) ? '' : $_POST['estado'];
+		$endereco= (empty($_POST['endereco'])) ? '' : $_POST['endereco'];
+		$data_nascimento= (empty($_POST['data_nascimento'])) ? '2016-10-02' : $_POST['data_nascimento'];
+		$email= (empty($_POST['email'])) ? '' : $_POST['email'];
+		$categoria= (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
+		$del= (empty($_POST['del'])) ? NULL : $_POST['del'];
 				
-			//Carrega a model
-			$this->load->model('usuario');
+		//Carrega a model
+		$this->load->model('usuario_model');
 			
-			//Cria um novo usuario com os dados do POST
-			$usuario = new usuario($senha,$pais,$cidade,$estado,$endereco,$email,$categoria,$del);
-		
-			//Atualiza o usuario no banco
-			$usuario->update($login);
-		}
-	}
+		//Cria um objeto usuario com os dados para serem atualizados
+		//Os espaços com as aspas simples em branco estão aí para obedecer a ordem de parametro
+		$usuario = new Usuario_model(NULL,$senha,NULL,NULL,$pais,$cidade,$estado,$endereco,NULL,$email,$categoria,$del);
 	
-	#Desativar usuario
-	public function deletar(){
-		
-		//Recebe os dados do formulario
-		if(isset($_POST)){
-			$login = $_POST['login'];
-		
-			//Carrega a model
-			$this->load->model('usuario');
-			
-			//Cria um novo usuario com os dados do POST
-			$usuario = new usuario($del='1');
-		
-			//Remove o usuario do banco
-			$usuario->remove($login);
-		}
+		//Atualiza o usuario no banco
+		$usuario->update($login);
 		
 		//Carrega a view 
-		$this->load->view('usuario'); 
+		//$this->load->view('CRUD_usuario/usuario',$data); 
+	}
+	
+	#Desativar o usuario
+	public function desativar(){
 		
+		//Recebe os dados do formulario
+		$login= (empty($_POST['login'])) ? '' : $_POST['login'];
+		
+		//Carrega a model
+		$this->load->model('usuario_model');
+		
+		//Cria um novo usuario 
+		$usuario = new usuario();
+		
+		//Remove o usuario do banco
+		$usuario->remove($login);
+		
+		//Carrega a view 
+		//$this->load->view('CRUD_usuario/usuario',$data); 
 	}
 
 }

@@ -1,5 +1,5 @@
 <?php
-class model_teste extends CI_Model{
+class Model_exemplo extends CI_Model{
  
   private $nome;
   private $descricao;

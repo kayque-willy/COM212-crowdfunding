@@ -15,96 +15,91 @@ class Projeto extends CI_Controller {
 	public function cadastrar(){
 	
 		//Recebe os dados do formulario
-		if(isset($_POST)){
-			$codigo = $_POST['codigo'];
-			$nome=$_POST['nome'];
-			$categoria= $_POST['categoria'];
-			$duracao= $_POST['duracao'];
-			$valor= $_POST['valor'];
-			$status=$_POST['status'];
+		$codigo = (empty($_POST['codigo'])) ? '2' : $_POST['codigo'];
+		$nome = (empty($_POST['nome'])) ? 'a' : $_POST['nome'];
+		$categoria = (empty($_POST['categoria'])) ? 'a' : $_POST['categoria'];
+		$duracao = (empty($_POST['duracao'])) ? 'a' : $_POST['duracao'];
+		$valor = (empty($_POST['valor'])) ? 'a' : $_POST['valor'];
+		$status = (empty($_POST['status'])) ? 'a' : $_POST['status'];
 		
-			//Carrega a model
-			$this->load->model('projeto');
+		//Carrega a model
+		$this->load->model('projeto_model');
 			
-			//Cria um novo usuario com os dados do POST
-			$projeto = new projeto($codigo,$nome,$categoria,$duracao,$valor,$status);
+		//Cria um novo projeto com os dados do POST
+		$projeto = new Projeto_model($codigo,$nome,$categoria,$duracao,$valor,$status);
 		
-			//Insere o usuario no banco
-			$projeto->insert();
-		}
+		//Insere o projeto no banco
+		$projeto->insert();
 		
 		//Carrega a view 
-		$this->load->view('projeto'); 
+		//$this->load->view('CRUD_projeto/projeto',$data); 
 	}
 	
 	#Lista os projetos
 	public function consultar(){
 		
 		//Recebe o filtro
-		if(isset($_POST)){
-			$codigo = $_POST['codigo'];
-			$nome = $_POST['nome'];
-			$categoria = $_POST['categoria'];
+		$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
+		$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];
+		$categoria = (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
 				
-			//Carrega a model
-			$this->load->model('projeto');
+		//Carrega a model
+		$this->load->model('projeto_model');
 			
-			//Cria um novo objeto projeto
-			$projeto = new projeto();
+		//Cria um novo objeto projeto
+		$projeto = new Projeto_model();
 		
-			//Insere o projeto no banco
-			$data['projeto']=$projeto->select($codigo,$nome,$categoria);
+		//$consulta o projeto
+		$data['projeto']=$projeto->select($codigo,$nome,$categoria);
+		
+		var_dump($data['projeto']->result());
 			
-			//Carrega a view 
-			$this->load->view('projeto',$data); 
-		}
+		//Carrega a view 
+		//$this->load->view('CRUD_projeto/projeto',$data); 
 	}
 	
 	#Altera o projeto
 	public function alterar(){
 	
 		//Recebe os dados do formulario
-		if(isset($_POST)){
-			
-			$codigo = $_POST['codigo'];
-			$nome=$_POST['nome'];
-			$categoria= $_POST['categoria'];
-			$duracao= $_POST['duracao'];
-			$valor= $_POST['valor'];
-			$status=$_POST['status'];
+		$codigo = (empty($_POST['codigo'])) ? '2' : $_POST['codigo'];
+		$nome = (empty($_POST['nome'])) ? 'c' : $_POST['nome'];
+		$categoria = (empty($_POST['categoria'])) ? 'c' : $_POST['categoria'];
+		$duracao = (empty($_POST['duracao'])) ? '13' : $_POST['duracao'];
+		$valor = (empty($_POST['valor'])) ? 'c' : $_POST['valor'];
+		$status = (empty($_POST['status'])) ? 'c' : $_POST['status'];
 		
-			//Carrega a model
-			$this->load->model('projeto');
+		//Carrega a model
+		$this->load->model('projeto_model');
 			
-			//Cria um novo projeto com os dados do POST
-			$projeto = new projeto($nome,$categoria,$duracao,$valor,$status);
+		//Cria um novo projeto com os dados do POST
+		$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status);
 		
-			//Atualiza o usuario no banco
-			$projeto->update($codigo);
-		}
+		//Atualiza o usuario no banco
+		var_dump($projeto);
+		$projeto->update($codigo);
+		
 		//Carrega a view 
-		$this->load->view('projeto'); 
+		//$this->load->view('CRUD_projeto/projeto'); 
 	}
 	
 	#Deletea o projeto 
-	public function deletar(){
+	public function remover(){
 		
 		//Recebe os dados do formulario
-		if(isset($_POST)){
-			$codigo = $_POST['codigo'];
+		$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
 		
-			//Carrega a model
-			$this->load->model('projeto');
+		//Carrega a model
+		$this->load->model('projeto_model');
 			
-			//Cria um novo usuario com os dados do POST
-			$projeto = new projeto($codigo);
+		//Cria um novo objeto projeto
+		$projeto = new Projeto_model($codigo);
 		
-			//Remove o usuario do banco
-			$projeto->remove($login);
-		}
+		//Remove o projeto do banco
+		$projeto->remove($codigo);
 		
 	    //Carrega a view 
-		$this->load->view('projeto'); 
+		//$this->load->view('CRUD_projeto/projeto'); 
 	}
 
 }
