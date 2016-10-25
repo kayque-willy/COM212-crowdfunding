@@ -127,6 +127,8 @@
                                     </div>
                                 </div>
                     </div>
+                <!-- Nova linha de campos-->
+                    
                 </div>
                 <!-- Nova linha de campos-->
             </form>
