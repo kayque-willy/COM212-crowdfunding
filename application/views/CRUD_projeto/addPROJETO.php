@@ -51,7 +51,7 @@
                     </form>
                 </div>
             </div>
-        </nav> <!-- Fim da barra de navehação superior-->
+        </nav> 
 <!-- Fim da barra de navehação superior-->
         <!-- Inicio de um CRUD --> 
         <div id="main" class="container-fluid">
