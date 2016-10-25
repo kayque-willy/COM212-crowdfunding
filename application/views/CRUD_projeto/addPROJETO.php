@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <title>UNIFUNDING</title>
@@ -51,6 +51,7 @@
                 </div>
             </div>
         </nav> <!-- Fim da barra de navehação superior-->
+<!-- Fim da barra de navehação superior-->
         <!-- Inicio de um CRUD --> 
         <div id="main" class="container-fluid">
             <h3 class="page-header">Adicionar Projeto</h3>
