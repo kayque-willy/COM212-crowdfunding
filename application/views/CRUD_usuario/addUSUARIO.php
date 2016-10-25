@@ -10,27 +10,7 @@
                 <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
                 <script src='js/bootstrap.min.js' type="text/javascript"></script>
         </head>
-<body>
-                    <!-- Modal -->
-                    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-                    <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="modalLabel">Excluir usuário</h4>
-                        </div>
-                        <div class="modal-body">
-                         Exclusão de usuário deleta >>PROJETO<< ligado a ele,deseja realizar a operação?
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Sim</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
-                        </div>
-                    </div>
-                    </div>
-                    </div> 
-                    <!-- /.modal -->
-                    
+<body> 
                     <nav class="navbar navbar-default" role="navigation">
                         <div class="container">
                                 <div class="navbar-header">
@@ -56,7 +36,7 @@
                                                                 <li class="divider"></li>
                                                                 <li><a href="#">Avaliador de Projetos</a></li> 
                                                                 <li class="divider"></li>
-                                                                <li><a href="#">Financiador Acadêmico</a></li>                                  
+                                                                <li><a href="#">Financiador Acadêmico</a></li> 
                                                         </ul>   
                                                 </li>
                                                 <li><a href="#">Usuários Online</a></li>
@@ -73,28 +53,108 @@
                 </nav> <!-- Fim da barra de navehação superior-->
  <!-- Inicio de um CRUD --> 
  <div id="main" class="container-fluid">
- <h3 class="page-header">Visualizar produto:</h3>
+ <h3 class="page-header">Inserir Usuário</h3>
+ <form action="indexUSUARIO_fim.html">
+  <!-- area de campos do form -->
+<div class="row">
+ <div class="form-group col-md-3">
+   <label for="campo1">Login(Nickname):</label>
+   <input type="text" class="form-control" id="campo1">
+ </div>
  
- <div class="row"> 
- <div class="col-md-6">
- <p><strong>Nome do Usuário</strong></p>
- <p>Guilherme Silva Borges</p>
- </div> 
- <div class="col-md-6">
- <p><strong>Login:</strong></p>
- <p>GuilhermeSB</p>
+ <div class="form-group col-md-3">
+        <form class="pure-form">
+        <fieldset>
+            <legend>Confirmação de Senha </legend>
+            <input type="password" placeholder="Senha" id="password" required>
+            <input type="password" placeholder="Confirme Senha" id="confirm_password" required>
+            <button type="submit" class="pure-button pure-button-primary">Confirmar</button>
+        </fieldset>
+        </form>
  </div>
-</div>
-</div>
-
-<hr />
-<div id="actions" class="row">
- <div class="col-md-12">
-  <a href="editUSUARIO.html" class="btn btn-primary">Editar</a>
-  <a href="indexUSUARIO_fim.html" class="btn btn-default">Fechar</a>
-  <a href="#" class="btn btn-default" data-toggle="modal" data-target="#delete-modal">Excluir</a>
+ 
+ <div class="form-group col-md-3">
+   <label for="campo3">Digite seu nome completo:</label>
+   <input type="text" class="form-control" id="campo3">
  </div>
-</div> 
+    
+<div class="form-group col-md-3">
+   <label for="campo4">Digite o tipo de usuário desejado:</label>
+   <input type="text" class="form-control" id="campo4">
+        <ul class="list-group">
+        <li class="list-group-item">Administrativo</li>
+        <li class="list-group-item">Usuário Público</li>
+        <li class="list-group-item">Gestor de Projetos</li>
+        <li class="list-group-item">Avaliador de Projetos</li>
+        <li class="list-group-item">Financiador Acadêmico</li>
+        </ul>
+ </div>      
+</div>
+  <!-- Nova linha de campos-->
+<div class="row">
+ <div class="form-group col-md-4">
+        <form id="cpf_form" class="form-horizontal">
+        <div class="form-group"><div class="col-md-4">
+            <label class="control-label" id="campo">CPF</label>
+            <input type="text" class="form-control" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this);" />
+           </div>
+        </div>
+        </form>
+ </div>
+ 
+ <div class="form-group col-md-4">
+        <script type="text/javascript">
+        $(document).ready(function() {
+        $('#bairro').multiselect({
+            maxHeight: 10000
+        });
+        });
+        </script>
+            <form action="" method="post">
+            <h1>Localizações</h1>
+            <label><span>País:</span>
+            <select name="pais" id="pais"></select>
+            </label>
+            <label><span>Estado:</span>
+            <select name="estado" id="estado"><option value="0">--Primeiro o País--</option></select>
+            </label>
+            <label><span>Cidade:</span>
+            <select name="cidade" id="cidade"><option value="0">--Primeiro o Estado--</option></select>
+            </label>
+            <label><span>Bairro:</span>
+            <select name="bairro" id="bairro">
+            <option multiple="multiple" name="multiselect[]">--Primeiro a Cidade--</option></select>
+            </label>
+            <br />
+            <label><input type="submit" value="Procurar"  />
+ </div>
+    
+    <div class="form-group col-md-4">
+      <label for="campo3">Digite a sua data de aniversário:</label>
+      <select name="dia" class="form-control">
+        <option>Selecione o dia</option>
+      </select>
+    
+      <select name="mes" class="form-control">
+        <option>Selecione o mes</option>
+      </select>
+    
+      <select name="ano" class="form-control">
+        <option>Selecione o ano</option>
+      </select>
+    </div>    
+</div>
+  <!-- Fim de todos os campos do form -->
+  <hr/>
+  <div id="actions" class="row">
+    <div class="col-md-12">
+      <button type="submit" class="btn btn-primary">Registrar Usuário</button>
+      <a href="indexUSUARIO_fim.html" class="btn btn-default">Cancelar registro</a>
+    </div>
+  </div>
+</form>
+</div>
+ 
  <!-- Aqui está a criação da parte de baixo do site, footer -->
      <footer>	
                         <div class="container">
@@ -109,7 +169,7 @@
                                                 <h4> Contate-nos</h4>
                                                 <ul>
                                                         <li> <a href="#">unifei.edu.br</a></li>
-                                                        <li><a href="#">UNIFEI/Google+</a></li>
+                                                        <li><a href="#">UNIFEI/Google+</a></li> 
                                                 </ul>
                                         </div> <!-- Redes Sociais -->
                                         <div id="logoFooter" class="col-xs-12 col-sm-3 col-md-3 col-sm-offset-3 col-md-offset-3"> 
@@ -127,9 +187,5 @@
                                 </div>
                         </div>
                 </div>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 </html>

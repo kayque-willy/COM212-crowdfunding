@@ -12,32 +12,37 @@ class Usuario extends CI_Controller {
 	#Cria um novo usuario no banco
 	public function cadastrar(){
 	
-		//Recebe os dados do formulario
-		$login= (empty($_POST['login'])) ? '' : $_POST['login'];
-		$senha= (empty($_POST['senha'])) ? '' : $_POST['senha'];
-		$nome= (empty($_POST['nome'])) ? '' : $_POST['nome'];
-		$cpf= (empty($_POST['cpf'])) ? '' : $_POST['cpf'];
-		$pais= (empty($_POST['pais'])) ? '' : $_POST['pais'];
-		$cidade= (empty($_POST['cidade'])) ? '' : $_POST['cidade'];
-		$estado= (empty($_POST['estado'])) ? '' : $_POST['estado'];
-		$endereco= (empty($_POST['endereco'])) ? '' : $_POST['endereco'];
-		$data_nascimento= (empty($_POST['data_nascimento'])) ? '' : $_POST['data_nascimento'];
-		$email= (empty($_POST['email'])) ? '' : $_POST['email'];
-		$tipo= (empty($_POST['tipo'])) ? '' : $_POST['tipo'];
-		$categoria= (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
-		$del= (empty($_POST['del'])) ? '' : $_POST['del'];
+		if(!empty($_POST)){
+			//Recebe os dados do formulario
+			$login= (empty($_POST['login'])) ? '' : $_POST['login'];
+			$senha= (empty($_POST['senha'])) ? '' : $_POST['senha'];
+			$nome= (empty($_POST['nome'])) ? '' : $_POST['nome'];
+			$cpf= (empty($_POST['cpf'])) ? '' : $_POST['cpf'];
+			$pais= (empty($_POST['pais'])) ? '' : $_POST['pais'];
+			$cidade= (empty($_POST['cidade'])) ? '' : $_POST['cidade'];
+			$estado= (empty($_POST['estado'])) ? '' : $_POST['estado'];
+			$endereco= (empty($_POST['endereco'])) ? '' : $_POST['endereco'];
+			$data_nascimento= (empty($_POST['data_nascimento'])) ? '' : $_POST['data_nascimento'];
+			$email= (empty($_POST['email'])) ? '' : $_POST['email'];
+			$tipo= (empty($_POST['tipo'])) ? '' : $_POST['tipo'];
+			$categoria= (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
+			$del= (empty($_POST['del'])) ? '' : $_POST['del'];
+					
+			//Carrega a model
+			$this->load->model('usuario_model');
 				
-		//Carrega a model
-		$this->load->model('usuario_model');
+			//Cria um novo usuario com os dados do POST
+			$usuario= new Usuario_model($login,$senha,$nome,$cpf,$pais,$cidade,$estado,$endereco,$data_nascimento,$email, $tipo,$categoria,$del);
+		
+			//Insere o usuario no banco
+			$usuario->insert();
 			
-		//Cria um novo usuario com os dados do POST
-		$usuario= new Usuario_model($login,$senha,$nome,$cpf,$pais,$cidade,$estado,$endereco,$data_nascimento,$email, $tipo,$categoria,$del);
-	
-		//Insere o usuario no banco
-		var_dump($usuario->insert());
-	
+			//Redireciona para a consulta de projetos
+			$this->load->helper('url');
+			redirect('/usuario/consultar', 'refresh');
+		}
 		//Carrega a view 
-		//$this->load->view('CRUD_usuario/usuario',$data); 
+		$this->load->view('CRUD_usuario/addUSUARIO'); 
 	}
 	
 	#Consultar os usuarios
@@ -55,12 +60,10 @@ class Usuario extends CI_Controller {
 		$usuario = new Usuario_model();
 		
 		//Consuta os usuarios
-		$data['usuario']=$usuario->select($login,$nome,$del);
-			
-		var_dump($data['usuario']->result());	
+		$data['usuarios']=$usuario->select($login,$nome,$del);
 			
 		//Carrega a view 
-		//$this->load->view('CRUD_usuario/usuario',$data); 
+		$this->load->view('CRUD_usuario/viewUSUARIO',$data); 
 
 	}
 	
@@ -94,10 +97,10 @@ class Usuario extends CI_Controller {
 	}
 	
 	#Desativar o usuario
-	public function desativar(){
+	public function desativar($log=''){
 		
 		//Recebe os dados do formulario
-		$login= (empty($_POST['login'])) ? '' : $_POST['login'];
+		$login= (empty($log) ? '' : $log;
 		
 		//Carrega a model
 		$this->load->model('usuario_model');
