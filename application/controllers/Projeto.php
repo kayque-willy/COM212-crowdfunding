@@ -79,7 +79,6 @@ class Projeto extends CI_Controller {
 			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status);
 			
 			//Atualiza o usuario no banco
-			var_dump($projeto);
 			$projeto->update($codigo);	
 				
 			//Redireciona para a consulta de projetos
