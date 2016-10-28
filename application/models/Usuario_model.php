@@ -71,11 +71,11 @@ class Usuario_model extends CI_Model{
   }
   
   #Retorna o usuario
-  public function select($login='',$nome='',$del='') {
+  public function select($filtro='') {
    //Adiciona clausula where
-   if(!empty($login)) $this->db->where('login', $login);
-   if(!empty($nome)) $this->db->where('nome', $nome);
-   if(!empty($del)) $this->db->where('del', $del);
+   if(!empty($filtro['login'])) $this->db->where('login', $filtro['login']);
+   if(!empty($filtro['nome'])) $this->db->where('nome', $filtro['nome']);
+   if(!empty($filtro['del'])) $this->db->where('del', $filtro['del']);
    return $this->db->get('usuario');
   }
   

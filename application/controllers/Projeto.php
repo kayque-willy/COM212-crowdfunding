@@ -36,6 +36,7 @@ class Projeto extends CI_Controller {
 		}
 		
 		//Carrega a view 
+		$this->load->helper('url');
 		$this->load->view('CRUD_projeto/addPROJETO'); 
 	}
 	
@@ -57,6 +58,7 @@ class Projeto extends CI_Controller {
 		$data['projetos']=$projeto->select($codigo,$nome,$categoria);
 		
 		//Carrega a view 
+		$this->load->helper('url');
 		$this->load->view('CRUD_projeto/viewPROJETO',$data); 
 	}
 	
@@ -96,6 +98,7 @@ class Projeto extends CI_Controller {
 		$data['projeto']=$projeto->select($cod);
 		
 		//Carrega a view 
+		$this->load->helper('url');
 		$this->load->view('CRUD_projeto/editPROJETO',$data); 
 	}
 	
