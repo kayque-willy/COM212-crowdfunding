@@ -98,15 +98,18 @@
                             echo '<tr>';
                             echo '<td>'.$projeto->codigo.'</td>';
                             echo '<td>'.$projeto->nome.'</td>';
+                           header('Content-type: image/jpg');
+                    
+                            echo' <img src="'.$projeto->imagem.'">';
+                            
                             echo '<td>'.$projeto->categoria.'</td>';
                             echo '<td>'.$projeto->duracao.'</td>';
                             echo '<td>'.$projeto->valor.'</td>';
-                            echo 
-                            '<td>
-                			    <a href="<?php echo base_url("/projeto/alterar"); ?>"'.$projeto->codigo.'" class="btn btn-primary">Editar projeto</a>
-                                <a href="<?php echo base_url("/projeto/remover"); ?>"'.$projeto->codigo.'" class="btn btn-danger" data-toggle="modal">Excluir projeto</a>
-                			</td>';
-                			  echo '</tr>';
+                            echo '<td>
+                			 <a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-primary">Editar projeto</a>
+                                <a href='.base_url("/projeto/remover/").$projeto->codigo.' class="btn btn-danger" data-toggle="modal">Excluir projeto</a>
+                			 </td>';
+                			echo '</tr>';
                            }
                         }
                 	?>

@@ -4,28 +4,22 @@ class Avaliacao_projeto_model extends CI_Model{
   public $codigo;
   public $nome;
   public $categoria;
-  public $avaliador;
+  public $codAvaliador;
   public $nomeAvaliador;
   public $data;
  
   #constroi o objeto
-  public function __construct($codigo='', $nome='',$categoria='',$avaliador='',$nomeAvaliador='',$data=''){
+  public function __construct($codigo='', $nome='',$categoria='',$codAvaliador='',$nomeAvaliador='',$data=''){
      if(isset($codigo)) $this->codigo=$codigo;
      if(isset($nome)) $this->nome=$nome;
      if(isset($categoria)) $this->categoria=$categoria;
-     if(isset($avaliador)) $this->avaliador=$avaliador;
+     if(isset($codAvaliador)) $this->codAvaliador=$codAvaliador;
      if(isset($nomeAvaliador)) $this->nomeAvaliador=$nomeAvaliador;
      if(isset($data)) $this->data=$data;
   }
   
-  #insere um novo registro no banco
-  #cara eu tenho que colocar oque aqui msm
-  //$this->db->insert('nome da tabela do banco',$this)
-  //cria uma tabela no banco de dados
-  //tabela avaliacao?
-  
   public function insert(){
-   return $this->db->insert('projeto',$this);
+   return $this->db->insert('avaliacao',$this);
  }
   
   #Remove um objeto de acordo com o nome

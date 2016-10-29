@@ -7,15 +7,22 @@ class Projeto_model extends CI_Model{
   public $duracao;
   public $valor;
   public $status;
+  public $descricao;
+  public $video;
+  public $imagem;
+    
  
   #constroi o objeto
-  public function __construct($codigo='', $nome='',$categoria='',$duracao='',$valor='',$status=''){
+  public function __construct($codigo='', $nome='',$categoria='',$duracao='',$valor='',$status='',$descricao='',$video='',$imagem=''){
      if(isset($codigo)) $this->codigo=$codigo;
      if(isset($nome)) $this->nome=$nome;
      if(isset($categoria)) $this->categoria=$categoria;
      if(isset($duracao)) $this->duracao=$duracao;
      if(isset($valor)) $this->valor=$valor;
      if(isset($status)) $this->status=$status;
+     if(isset($descricao)) $this->descricao=$descricao;
+     if(isset($video)) $this->video=$video;
+     if(isset($imagem)) $this->imagem=$imagem;
   }
   
   #insere um novo registro no banco
@@ -37,6 +44,9 @@ class Projeto_model extends CI_Model{
      if(isset($this->duracao)) $data['duracao'] = $this->duracao;
      if(isset($this->valor)) $data['valor'] = $this->valor;
      if(isset($this->status)) $data['status'] = $this->status;
+     if(isset($descricao)) $data['descricao'] = $this->descricao;
+     if(isset($video)) $data['video'] = $this->video;
+     if(isset($imagem)) $data['imagem'] = $this->imagem;
      
      //Cria um vetor com a chave primária 
      $where['codigo']=$codigo;
@@ -46,11 +56,11 @@ class Projeto_model extends CI_Model{
   }
   
   #Retorna o objeto
-  public function select($codigo='',$nome='',$categoria='') {
+  public function select($filtro='') {
    //Adiciona clausula where
-   if(!empty($codigo)) $this->db->where('codigo', $codigo);
-   if(!empty($nome)) $this->db->where('nome', $nome);
-   if(!empty($categoria)) $this->db->where('categoria', $categoria);
+   if(!empty($filtro['codigo'])) $this->db->where('codigo', $filtro['codigo']);
+   if(!empty($filtro['nome'])) $this->db->where('nome', $filtro['nome']);
+   if(!empty($filtro['categoria'])) $this->db->where('categoria', $filtro['categoria']);
    return $this->db->get('projeto');
   }
 }
