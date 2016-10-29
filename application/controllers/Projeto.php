@@ -13,6 +13,7 @@ class Projeto extends CI_Controller {
 	public function cadastrar(){
 	
 		if(!empty($_POST)){
+			var_dump($_POST);
 			//Recebe os dados do formulario
 			$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
 			$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];

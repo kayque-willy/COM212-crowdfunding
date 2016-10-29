@@ -23,11 +23,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                <a class="navbar-brand" href="/usuario/">UNIFUNDING</a>
+                <a class="navbar-brand" href="<?php echo base_url('/usuario/'); ?>">UNIFUNDING</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/usuario/">Home</a></li>
+                    <li><a href="<?php echo base_url('/usuario/'); ?>">Home</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Módulos de Usuário<b class="caret"></b></a>
                         <ul class="dropdown-menu">
@@ -42,7 +42,7 @@
                             <li><a href="#">Financiador Acadêmico</a></li>
                         </ul>
                     </li>
-                    <li class="active"><a href="/usuario/consultar">Listar usuários</a></li>
+                    <li class="active"><ahref="<?php echo base_url('/usuario/consultar'); ?>">Listar usuários</a></li>
                     <li><a href="#">Usuários Online</a></li>
                     <li><a href="#">Usuários Excluídos</a></li>
                 </ul>

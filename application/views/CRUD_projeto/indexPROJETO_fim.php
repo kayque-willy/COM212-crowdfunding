@@ -42,7 +42,7 @@
                             </ul>   
                         </li>
                         <li><a href="#">Projetos Cadastrados</a></li>
-                        <li><a href="/projeto/consultar">Lista de Projetos Candidatos</a></li>
+                        <li><a href="<?php echo base_url('/projeto/consultar'); ?>">Lista de Projetos Candidatos</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">

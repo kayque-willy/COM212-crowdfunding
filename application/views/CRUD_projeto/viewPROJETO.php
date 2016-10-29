@@ -42,11 +42,11 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/projeto/">UNIFUNDING</a>
+                    <a class="navbar-brand" href="<?php echo base_url('/projeto/'); ?>">UNIFUNDING</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="/projeto/">Home</a></li>
+                        <li><a href="<?php echo base_url('/projeto/'); ?>">Home</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipos de projetos<b class="caret"></b></a> 
                             <ul class="dropdown-menu">
@@ -62,7 +62,7 @@
                             </ul>   
                         </li>
                         <li><a href="#">Projetos Cadastrados</a></li>
-                        <li class="active"><a href="/projeto/consultar">Lista de Projetos Candidatos</a></li>
+                        <li class="active"><a href="<?php echo base_url('/projeto/consultar'); ?>">Lista de Projetos Candidatos</a></li>
                     </ul>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
@@ -77,7 +77,7 @@
         <!-- Inicio de um CRUD --> 
         <div id="main" class="container-fluid">
            <h3 class="page-header">Projetos candidatos</h3>
-           <a href="/projeto/cadastrar/" class="btn btn-success">Cadastrar novo projeto</a>
+           <a href="<?php echo base_url('/projeto/cadastrar'); ?>" class="btn btn-success">Cadastrar novo projeto</a>
            <div class="center-block">
                <table class="table">
                 	<thead>
@@ -103,8 +103,8 @@
                             echo '<td>'.$projeto->valor.'</td>';
                             echo 
                             '<td>
-                			    <a href="/projeto/alterar/'.$projeto->codigo.'" class="btn btn-primary">Editar projeto</a>
-                                <a href="/projeto/remover/'.$projeto->codigo.'" class="btn btn-danger" data-toggle="modal">Excluir projeto</a>
+                			    <a href="<?php echo base_url("/projeto/alterar"); ?>"'.$projeto->codigo.'" class="btn btn-primary">Editar projeto</a>
+                                <a href="<?php echo base_url("/projeto/remover"); ?>"'.$projeto->codigo.'" class="btn btn-danger" data-toggle="modal">Excluir projeto</a>
                 			</td>';
                 			  echo '</tr>';
                            }
