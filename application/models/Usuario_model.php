@@ -54,6 +54,7 @@ class Usuario_model extends CI_Model{
   public function update ($login='') {
      //Cria um vetor de valores para atualização
      $data = [];
+     if(isset($this->login)) $data['login'] = $this->login;
      if(isset($this->senha)) $data['senha'] = $this->senha;
      if(isset($this->pais)) $data['pais'] = $this->pais;
      if(isset($this->cidade)) $data['cidade'] = $this->cidade;

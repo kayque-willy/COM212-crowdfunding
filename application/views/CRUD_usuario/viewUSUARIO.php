@@ -1,35 +1,37 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>UNIFUNDING</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
-        <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" >
-        <link rel="stylesheet" href="/assets/css/estilo.css">
-    </head>
-    <body>
-        <!-- Modal -->
-        <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="modalLabel">Excluir usuário</h4>
-                    </div>
-                    <div class="modal-body">
-                        Exclusão de usuário deleta >>PROJETO<< ligado a ele,deseja realizar a operação?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Sim</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
-                    </div>
+
+<head>
+    <title>UNIFUNDING</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/estilo.css">
+</head>
+
+<body>
+    <!-- Modal -->
+    <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalLabel">Excluir usuário</h4>
+                </div>
+                <div class="modal-body">
+                    Exclusão de usuário deleta >>PROJETO
+                    << ligado a ele,deseja realizar a operação? </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary">Sim</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+                        </div>
                 </div>
             </div>
-        </div> 
+        </div>
         <!-- /.modal -->
 
         <nav class="navbar navbar-default" role="navigation">
@@ -45,20 +47,20 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li ><a href="/usuario/">Home</a></li>
+                        <li><a href="/usuario/">Home</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Módulos de Usuário<b class="caret"></b></a> 
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Módulos de Usuário<b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">Administrativo</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Usuário Público</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Gestor de Programas</a></li> 
+                                <li><a href="#">Gestor de Programas</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Avaliador de Projetos</a></li> 
+                                <li><a href="#">Avaliador de Projetos</a></li>
                                 <li class="divider"></li>
-                                <li><a href="#">Financiador Acadêmico</a></li> 
-                            </ul>   
+                                <li><a href="#">Financiador Acadêmico</a></li>
+                            </ul>
                         </li>
                         <li class="active"><a href="/usuario/consultar">Listar usuários</a></li>
                         <li><a href="#">Usuários Online</a></li>
@@ -72,12 +74,37 @@
                     </form>
                 </div>
             </div>
-        </nav> <!-- Fim da barra de navehação superior-->
-        <!-- Inicio de um CRUD --> 
+        </nav>
+        <!-- Fim da barra de navehação superior-->
+        <!-- Inicio de um CRUD -->
+
         <div id="main" class="container-fluid">
             <h3 class="page-header">Todos os usuarios</h3>
+            <?php 
+                if (isset($sucesso)){ 
+            ?>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Operação realizada com sucesso!</strong>
+                <p>
+                    <?php echo $msg; ?>
+                </p>
+            </div>
+            <?php } ?>
+            <?php 
+                if (isset($falha)){ 
+            ?>
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Falha ao realizar operação!</strong>
+                <p>
+                    <?php echo $msg; ?>
+                </p>
+            </div>
+            <?php } ?>
             <a href="/usuario/cadastrar/" class="btn btn-success">Cadastrar novo usuario</a>
             <div class="center-block">
+
                 <table class="table">
                     <thead>
                         <tr>
@@ -106,33 +133,36 @@
                                 }
                         }
                         ?>
-                        <!-- Percorre o objeto de consulta enviado do controller-->
+                            <!-- Percorre o objeto de consulta enviado do controller-->
                     </tbody>
-                </table>        
+                </table>
             </div>
             <hr>
             <!-- Aqui está a criação da parte de baixo do site, footer -->
-            <footer>	
+            <footer>
                 <div class="container">
-                    <div class="row">                       
-                        <div id="linksImportantes" class="col-xs-12 col-sm-3 col-md-3">		
+                    <div class="row">
+                        <div id="linksImportantes" class="col-xs-12 col-sm-3 col-md-3">
                             <h4> Para novas ideias de projetos e/ou sugestões:</h4>
-                            <ul>                                                   
+                            <ul>
                                 <li><a href="#">facebook.com/gsilvaborges</a></li>
                             </ul>
-                        </div> <!-- Aqui em cima CRUD de links que podem ser armazenados e retirados -->
+                        </div>
+                        <!-- Aqui em cima CRUD de links que podem ser armazenados e retirados -->
                         <div id="redesSociais" class="col-xs-12 col-sm-3 col-md-3">
                             <h4> Contate-nos</h4>
                             <ul>
                                 <li> <a href="#">unifei.edu.br</a></li>
                                 <li><a href="#">UNIFEI/Google+</a></li>
                             </ul>
-                        </div> <!-- Redes Sociais -->
-                        <div id="logoFooter" class="col-xs-12 col-sm-3 col-md-3 col-sm-offset-3 col-md-offset-3"> 
+                        </div>
+                        <!-- Redes Sociais -->
+                        <div id="logoFooter" class="col-xs-12 col-sm-3 col-md-3 col-sm-offset-3 col-md-offset-3">
                             <h2>Crowdfunding UNIFEI</h2>
-                        </div> <!-- Logo abaixo foi feito o rodapé da Outlet -->
+                        </div>
+                        <!-- Logo abaixo foi feito o rodapé da Outlet -->
                     </div>
-                </div> 
+                </div>
             </footer>
             <div class="copyright">
                 <div class="container">
@@ -147,5 +177,6 @@
 
             <!-- Latest compiled and minified JavaScript -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    </body>
+</body>
+
 </html>

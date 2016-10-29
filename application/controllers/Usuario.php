@@ -36,11 +36,15 @@ class Usuario extends CI_Controller {
 			$usuario= new Usuario_model($login,$senha,$nome,$cpf,$pais,$cidade,$estado,$endereco,$data_nascimento,$email, $tipo,$categoria,$del);
 		
 			//Insere o usuario no banco
-			$usuario->insert();
-			
-			//Redireciona para a consulta de projetos
-			$this->load->helper('url');
-			redirect('/usuario/consultar', 'refresh');
+			if($usuario->insert()){
+				//Se a operação for bem sucedida, redireciona com mensagem de sucesso
+				$this->load->helper('url');
+				redirect('/usuario/consultar/cad_sucesso', 'refresh');
+			}else{
+				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+				$this->load->helper('url');
+				redirect('/usuario/consultar/cad_falha', 'refresh');
+			}
 		}
 		//Carrega a view 
 		$this->load->helper('url');
@@ -48,7 +52,37 @@ class Usuario extends CI_Controller {
 	}
 	
 	#Consultar os usuarios
-	public function consultar(){
+	public function consultar($result=''){
+		
+		//Mensagem de resultado de alguma operação
+		if(isset($result)){
+			switch ($result){
+				case 'cad_sucesso': 
+					$data['sucesso']=true;
+					$data['msg'] = 'Usuario cadastrado com sucesso!';
+					break;
+				case 'cad_falha': 
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao cadastrar o usuário!';
+					break;
+				case 'alt_sucesso':
+					$data['sucesso']=true;
+					$data['msg'] = 'Usuario atualizado com sucesso!';
+					break;
+				case 'alt_falha': 
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao atualizar o usuário!';
+					break;
+				case 'des_sucesso':
+					$data['sucesso']=true;
+					$data['msg'] = 'Usuario desativado com sucesso!';
+					break;
+				case 'des_falha':
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao desativar o usuário!';
+					break;
+			}
+		}
 		
 		//Recebe o filtro
 		$filtro['login'] = (empty($_POST['login'])) ? '' : $_POST['login'];
@@ -65,8 +99,8 @@ class Usuario extends CI_Controller {
 		$data['usuarios']=$usuario->select($filtro);
 			
 		//Carrega a view 
+		$this->load->helper('url');
 		$this->load->view('CRUD_usuario/viewUSUARIO',$data); 
-
 	}
 	
 	#Atualizar o usuario
@@ -90,13 +124,18 @@ class Usuario extends CI_Controller {
 				
 			//Cria um objeto usuario com os dados para serem atualizados
 			//Os espaços com as aspas simples em branco estão aí para obedecer a ordem de parametro
-			$usuario = new Usuario_model(NULL,$senha,NULL,NULL,$pais,$cidade,$estado,$endereco,NULL,$email,$categoria,$del);
+			$usuario = new Usuario_model($login,$senha,NULL,NULL,$pais,$cidade,$estado,$endereco,NULL,$email,$categoria,$del);
 		
 			//Atualiza o usuario no banco
-			$usuario->update($login);
-			
-			$this->load->helper('url');
-			redirect('/usuario/consultar', 'refresh');
+			if($usuario->update($log)){
+				//Se a operação for bem sucedida, redireciona com mensagem de sucesso
+				$this->load->helper('url');
+				redirect('/usuario/consultar/alt_sucesso', 'refresh');
+			}else{
+				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+				$this->load->helper('url');
+				redirect('/usuario/consultar/alt_falha', 'refresh');
+			}
 		}
 		
 		//Carrega a model
@@ -106,7 +145,8 @@ class Usuario extends CI_Controller {
 		$usuario = new Usuario_model();
 		
 		//$consulta o projeto pelo codigo
-		$data['usuario']=$usuario->select($log);
+		$filtro['login']=$log;
+		$data['usuario']=$usuario->select($filtro);
 		
 		//Carrega a view 
 		$this->load->helper('url');
@@ -125,8 +165,16 @@ class Usuario extends CI_Controller {
 		//Cria um novo usuario 
 		$usuario = new usuario_model();
 		
-		//Remove o usuario do banco
-		$usuario->remove($login);
+		//Remove o usuario no banco
+		if($usuario->remove($login)){
+			//Se a operação for bem sucedida, redireciona com mensagem de sucesso
+			$this->load->helper('url');
+			redirect('/usuario/consultar/des_sucesso', 'refresh');
+		}else{
+			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+			$this->load->helper('url');
+			redirect('/usuario/consultar/des_falha', 'refresh');
+		}
 		
 		//Redireciona para a consulta de usuarios
 		$this->load->helper('url');
