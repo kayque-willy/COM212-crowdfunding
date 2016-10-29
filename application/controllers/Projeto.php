@@ -26,13 +26,13 @@ class Projeto extends CI_Controller {
 			//Tratamento para salvar a imagem
 			$imagem=NULL;
 			//Se tiver imagem, realiza o upload
-			if(!empty($_FILES["imagem"])) { 
+			if(!empty($_FILES["imagem"]['tmp_name'])) { 
 				$config['upload_path'] = './temp/';
 				$config['allowed_types'] = 'gif|jpg|png';
 				$config['overwrite']=TRUE;
 				$config['max_size']  = '10048000';
-				$config['max_width'] = '1024';
-				$config['max_height'] = '768';
+				//$config['max_width'] = '10000';
+				//$config['max_height'] = '10000';
 				$this->load->library('upload', $config);
 				$this->upload->do_upload('imagem');
 				$imagem=$this->upload->data();
@@ -86,16 +86,33 @@ class Projeto extends CI_Controller {
 			//Recebe os dados do formulario
 			$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
 			$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];
+			$descricao = (empty($_POST['descricao'])) ? '' : $_POST['descricao'];
 			$categoria = (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
 			$duracao = (empty($_POST['duracao'])) ? '' : $_POST['duracao'];
 			$valor = (empty($_POST['valor'])) ? '' : $_POST['valor'];
-			$status = (empty($_POST['status'])) ? '' : $_POST['status'];
+			$video = (empty($_POST['video'])) ? '' : $_POST['video'];
+			$status = (empty($_POST['status'])) ? null : $_POST['status'];
+			
+			//Tratamento para salvar a imagem
+			$imagem=null;
+			//Se tiver imagem, realiza o upload
+			if(!empty($_FILES["imagem"]['tmp_name'])) { 
+				$config['upload_path'] = './temp/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['overwrite']=TRUE;
+				$config['max_size']  = '10048000';
+				//$config['max_width'] = '1024';
+				//$config['max_height'] = '768';
+				$this->load->library('upload', $config);
+				$this->upload->do_upload('imagem');
+				$imagem=$this->upload->data();
+			} 
 			
 			//Carrega a model
 			$this->load->model('projeto_model');
 				
 			//Cria um novo projeto com os dados do POST
-			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status);
+			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem);
 			
 			//Atualiza o usuario no banco
 			$projeto->update($codigo);	
