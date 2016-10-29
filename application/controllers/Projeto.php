@@ -24,26 +24,28 @@ class Projeto extends CI_Controller {
 			$status = 'candidato';
 			
 			//Tratamento para salvar a imagem
-			$conteudo = $_FILES['imagem']['tmp_name'];
-		  	$tamanho = $_FILES['imagem']['size'];
-		    $imagem=NULL;
-		  	
-		  	//Caso houver upload de imagem realiza a abertura do arquivo
-		  	if ( $conteudo != "none" ){
-		      $fp = fopen($conteudo, "rb");
-		      $imagem = fread($fp, $tamanho);
-		      $imagem = addslashes($imagem);
-		      fclose($fp);
-			}
-		 
+		  	$imagem = $_FILES["imagem"];
+		
+			//Se tiver imagem, realiza o upload
+			if($imagem != NULL) { 
+				$nomeFinal = time().'.jpg';
+				if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
+					$tamanhoImg = filesize($nomeFinal); 
+					$mysqlImg = addslashes(fread(fopen($nomeFinal, "r"), $tamanhoImg)); 
+				}
+			} 
+			
 			//Carrega a model
 			$this->load->model('projeto_model');
 				
 			//Cria um novo projeto com os dados do POST
-			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem);
+			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$mysqlImg);
 			
 			//Insere o projeto no banco
 			$projeto->insert();
+			
+			//Limpa a imagem temporaria
+			unlink($nomeFinal);
 			
 			//Redireciona para a consulta de projetos
 			$this->load->helper('url');
@@ -71,8 +73,6 @@ class Projeto extends CI_Controller {
 		
 		//$consulta o projeto
 		$data['projetos']=$projeto->select($codigo,$nome,$categoria);
-		
-		var_dump($data['projetos']->result());
 		
 		//Carrega a view 
 		$this->load->helper('url');

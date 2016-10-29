@@ -27,7 +27,7 @@ class Projeto_model extends CI_Model{
   
   #insere um novo registro no banco
   public function insert(){
-   return $this->db->insert('projeto',$this);
+    return $this->db->insert('projeto',$this);
  }
   
   #Remove um objeto de acordo com o nome
@@ -44,9 +44,9 @@ class Projeto_model extends CI_Model{
      if(isset($this->duracao)) $data['duracao'] = $this->duracao;
      if(isset($this->valor)) $data['valor'] = $this->valor;
      if(isset($this->status)) $data['status'] = $this->status;
-     if(isset($descricao)) $data['descricao'] = $this->descricao;
-     if(isset($video)) $data['video'] = $this->video;
-     if(isset($imagem)) $data['imagem'] = $this->imagem;
+     if(isset($this->descricao)) $data['descricao'] = $this->descricao;
+     if(isset($this->video)) $data['video'] = $this->video;
+     if(isset($this->imagem)) $data['imagem'] = $this->imagem;
      
      //Cria um vetor com a chave primária 
      $where['codigo']=$codigo;

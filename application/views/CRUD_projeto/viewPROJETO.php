@@ -84,6 +84,7 @@
                 		<tr>
                 			<th>Código do Projeto</th>
                 			<th>Nome do Projeto</th>
+                			<th>Imagem</th>
                 			<th>Categoria do Projeto</th>
                 			<th>Duração do Projeto</th>
                 			<th>Valor do Projeto</th>
@@ -98,10 +99,7 @@
                             echo '<tr>';
                             echo '<td>'.$projeto->codigo.'</td>';
                             echo '<td>'.$projeto->nome.'</td>';
-                           header('Content-type: image/jpg');
-                    
-                            echo' <img src="'.$projeto->imagem.'">';
-                            
+                            echo '<td><img src="data:;base64,' . base64_encode($projeto->imagem).'" height="200" width="50" /></td>';
                             echo '<td>'.$projeto->categoria.'</td>';
                             echo '<td>'.$projeto->duracao.'</td>';
                             echo '<td>'.$projeto->valor.'</td>';
