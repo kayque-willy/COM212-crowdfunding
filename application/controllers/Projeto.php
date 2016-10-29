@@ -11,7 +11,7 @@ class Projeto extends CI_Controller {
 	
 	#Cria um novo projeto
 	public function cadastrar(){
-	
+		
 		if(!empty($_POST)){
 			
 			//Recebe os dados do formulario
@@ -24,36 +24,37 @@ class Projeto extends CI_Controller {
 			$status = 'candidato';
 			
 			//Tratamento para salvar a imagem
-		  	$imagem = $_FILES["imagem"];
-		
+			$imagem=NULL;
 			//Se tiver imagem, realiza o upload
-			if($imagem != NULL) { 
-				$nomeFinal = time().'.jpg';
-				if (move_uploaded_file($imagem['tmp_name'], $nomeFinal)) {
-					$tamanhoImg = filesize($nomeFinal); 
-					$mysqlImg = addslashes(fread(fopen($nomeFinal, "r"), $tamanhoImg)); 
-				}
+			if(!empty($_FILES["imagem"])) { 
+				$config['upload_path'] = './temp/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['overwrite']=TRUE;
+				$config['max_size']  = '10048000';
+				$config['max_width'] = '1024';
+				$config['max_height'] = '768';
+				$this->load->library('upload', $config);
+				$this->upload->do_upload('imagem');
+				$imagem=$this->upload->data();
 			} 
 			
 			//Carrega a model
 			$this->load->model('projeto_model');
-				
+		
 			//Cria um novo projeto com os dados do POST
-			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$mysqlImg);
+			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem);
 			
 			//Insere o projeto no banco
 			$projeto->insert();
 			
 			//Limpa a imagem temporaria
-			unlink($nomeFinal);
+			unlink($imagem['full_path']);
 			
 			//Redireciona para a consulta de projetos
-			$this->load->helper('url');
 			redirect('/projeto/consultar', 'refresh');
 		}
 		
 		//Carrega a view 
-		$this->load->helper('url');
 		$this->load->view('CRUD_projeto/addPROJETO'); 
 	}
 	
@@ -75,7 +76,6 @@ class Projeto extends CI_Controller {
 		$data['projetos']=$projeto->select($codigo,$nome,$categoria);
 		
 		//Carrega a view 
-		$this->load->helper('url');
 		$this->load->view('CRUD_projeto/viewPROJETO',$data); 
 	}
 	
@@ -101,7 +101,6 @@ class Projeto extends CI_Controller {
 			$projeto->update($codigo);	
 				
 			//Redireciona para a consulta de projetos
-			$this->load->helper('url');
 			redirect('/projeto/consultar', 'refresh');
 		}
 		
@@ -115,7 +114,6 @@ class Projeto extends CI_Controller {
 		$data['projeto']=$projeto->select($cod);
 		
 		//Carrega a view 
-		$this->load->helper('url');
 		$this->load->view('CRUD_projeto/editPROJETO',$data); 
 	}
 	
@@ -135,7 +133,6 @@ class Projeto extends CI_Controller {
 		$projeto->remove($codigo);
 		
 	    //Redireciona para a consulta de projetos
-		$this->load->helper('url');
 		redirect('/projeto/consultar', 'refresh');
 	}
 

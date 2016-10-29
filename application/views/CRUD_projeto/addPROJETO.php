@@ -58,7 +58,7 @@
     <div id="main" class="container-fluid">
         <h3 class="page-header">Adicionar novo Projeto</h3>
         <div class="row">
-            <form action="<?php echo base_url('/projeto/cadastrar'); ?>"  method="POST" role="form" enctype="multipart/form-data" >
+            <?php echo form_open_multipart('projeto/cadastrar');?>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="control-label">Nome do rpojeto</label>
@@ -108,7 +108,7 @@
                         <a href="<?php echo base_url('/projeto/'); ?>" class="btn btn-default">Cancelar</a>
                     </div>
                 </div>
-            </form>
+            <?php echo form_close();?>
         </div>
         <hr/>
         <!-- Aqui está a criação da parte de baixo do site, footer -->

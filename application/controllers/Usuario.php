@@ -6,7 +6,6 @@ class Usuario extends CI_Controller {
 	#Index do controller
 	public function index() {
 	   //Carrega a view da index do projeto
-	   $this->load->helper('url');
 	   $this->load->view('CRUD_usuario/indexUSUARIO_fim'); 
 	 }
 	
@@ -38,16 +37,13 @@ class Usuario extends CI_Controller {
 			//Insere o usuario no banco
 			if($usuario->insert()){
 				//Se a operação for bem sucedida, redireciona com mensagem de sucesso
-				$this->load->helper('url');
 				redirect('/usuario/consultar/cad_sucesso', 'refresh');
 			}else{
 				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
-				$this->load->helper('url');
 				redirect('/usuario/consultar/cad_falha', 'refresh');
 			}
 		}
 		//Carrega a view 
-		$this->load->helper('url');
 		$this->load->view('CRUD_usuario/addUSUARIO'); 
 	}
 	
@@ -99,7 +95,6 @@ class Usuario extends CI_Controller {
 		$data['usuarios']=$usuario->select($filtro);
 			
 		//Carrega a view 
-		$this->load->helper('url');
 		$this->load->view('CRUD_usuario/viewUSUARIO',$data); 
 	}
 	
@@ -129,11 +124,9 @@ class Usuario extends CI_Controller {
 			//Atualiza o usuario no banco
 			if($usuario->update($log)){
 				//Se a operação for bem sucedida, redireciona com mensagem de sucesso
-				$this->load->helper('url');
 				redirect('/usuario/consultar/alt_sucesso', 'refresh');
 			}else{
 				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
-				$this->load->helper('url');
 				redirect('/usuario/consultar/alt_falha', 'refresh');
 			}
 		}
@@ -149,7 +142,6 @@ class Usuario extends CI_Controller {
 		$data['usuario']=$usuario->select($filtro);
 		
 		//Carrega a view 
-		$this->load->helper('url');
 		$this->load->view('CRUD_usuario/editUSUARIO',$data); 
 	}
 	
@@ -168,16 +160,12 @@ class Usuario extends CI_Controller {
 		//Remove o usuario no banco
 		if($usuario->remove($login)){
 			//Se a operação for bem sucedida, redireciona com mensagem de sucesso
-			$this->load->helper('url');
 			redirect('/usuario/consultar/des_sucesso', 'refresh');
 		}else{
 			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
-			$this->load->helper('url');
 			redirect('/usuario/consultar/des_falha', 'refresh');
 		}
-		
 		//Redireciona para a consulta de usuarios
-		$this->load->helper('url');
 		redirect('/usuario/consultar', 'refresh');
 	}
 
@@ -206,7 +194,6 @@ class Usuario extends CI_Controller {
 				$data['msg']="Usuario ou senha inválidos!";
 				
 				//Carrega a view com a mensagem
-				$this->load->helper('url');
 				$this->load->view('CRUD_usuario/loginUSUARIO.php',$data); 
 			}else{
 				//Apenas organiza o resultado
@@ -218,12 +205,10 @@ class Usuario extends CI_Controller {
 				$_SESSION['tipo']=$login->tipo;
 				
 				//Redireciona para a consulta de projetos
-				$this->load->helper('url');
 				redirect('/projeto/', 'refresh');
 			}
 		}else{
 			//Carrega a view 
-			$this->load->helper('url');
 			$this->load->view('CRUD_usuario/loginUSUARIO.php'); 
 		}
 	}	
@@ -235,7 +220,6 @@ class Usuario extends CI_Controller {
 		unset($_SESSION['tipo']);
 					
 		//Redireciona para a pagina inicial home
-		$this->load->helper('url');
 		$url = base_url();
 		redirect($url,'refresh');
 	}	
@@ -269,19 +253,16 @@ class Usuario extends CI_Controller {
 				$data['msg_sucesso']="Entre com seu login e senha!";
 				
 				//Carrega a view com a mensagem
-				$this->load->helper('url');
 				$this->load->view('CRUD_usuario/loginUSUARIO.php',$data); 
 			}else{
 				//Mensagem de falha do cadastro
 				$data['msg']="Erro ao inserir o usuário!";
 		
 				//Carrega a view com a mensagem
-				$this->load->helper('url');
 				$this->load->view('CRUD_usuario/regUSUARIO.php',$data);  
 			}
 		}else{
 			//Carrega a view 
-			$this->load->helper('url');
 			$this->load->view('CRUD_usuario/regUSUARIO.php'); 
 		}
 	}

@@ -99,7 +99,7 @@
                             echo '<tr>';
                             echo '<td>'.$projeto->codigo.'</td>';
                             echo '<td>'.$projeto->nome.'</td>';
-                            echo '<td><img src="data:;base64,' . base64_encode($projeto->imagem).'" height="200" width="50" /></td>';
+                            echo '<td><img src="data:;base64,'.base64_encode($projeto->imagem).'" height="200" width="50" /></td>';
                             echo '<td>'.$projeto->categoria.'</td>';
                             echo '<td>'.$projeto->duracao.'</td>';
                             echo '<td>'.$projeto->valor.'</td>';

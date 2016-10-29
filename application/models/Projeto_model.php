@@ -22,7 +22,7 @@ class Projeto_model extends CI_Model{
      if(isset($status)) $this->status=$status;
      if(isset($descricao)) $this->descricao=$descricao;
      if(isset($video)) $this->video=$video;
-     if(isset($imagem)) $this->imagem=$imagem;
+     if(isset($imagem['full_path'])) $this->imagem = file_get_contents($imagem['full_path']);
   }
   
   #insere um novo registro no banco
