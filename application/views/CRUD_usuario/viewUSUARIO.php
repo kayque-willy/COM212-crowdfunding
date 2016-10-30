@@ -93,7 +93,7 @@
             <?php } ?>
             <?php 
                 
-                if (isset($falha)){ 
+            if (isset($falha)){ 
             ?>
             <div class="alert alert-danger">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -103,16 +103,26 @@
                 </p>
             </div>
             <?php } ?>
-            <a href="/usuario/cadastrar/" class="btn btn-success">Cadastrar novo usuario</a>
-            <div class="center-block">
-
+            <a href="/usuario/cadastrar/" class="btn btn-success">Cadastrar novo usuario</a><br><br>
+            <!--Fitro-->
+            <form action="<?php echo base_url('/usuario/consultar'); ?>" class="form-inline" method="GET">
+                 <div class="form-group">
+                    <input name="nome"type="text" class="form-control" placeholder="Filtrar por nome">
+                </div>
+                <div class="form-group">
+                     <input name="login" type="text" class="form-control" placeholder="Filtrar por login">
+                </div>
+               
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </form>
+            <!--Fitro-->
+            <div class="center-block" <!-- Lista de usuarios-->
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Nome</th>
                             <th>Login</th>
                             <th>Status</th>
-                            <th>Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -121,15 +131,11 @@
                         if(isset($usuarios)){
                                 foreach ($usuarios->result() as $usuario) {
                                         echo '<tr>';
-                                        echo '<td>'.$usuario->nome.'</td>';
+                                        echo '
+                                        <td><a href="#">'.$usuario->nome.'</a></td>';
                                         echo '<td>'.$usuario->login.'</td>';
                                         if($usuario->del=='0') echo '<td>ativo</td>';
                                         if($usuario->del=='1') echo '<td>inativo</td>';
-                                        echo 
-                                        '<td>
-                                        <a href="/usuario/alterar/'.$usuario->login.'" class="btn btn-primary">Editar usuario</a>
-                                        <a href="/usuario/desativar/'.$usuario->login.'" class="btn btn-danger" data-toggle="modal">Desativar usuario</a>
-                                        </td>';
                                         echo '</tr>';
                                 }
                         }
@@ -137,6 +143,7 @@
                             <!-- Percorre o objeto de consulta enviado do controller-->
                     </tbody>
                 </table>
+                <!-- Lista de usuarios-->
             </div>
             <hr>
             <!-- Aqui está a criação da parte de baixo do site, footer -->
@@ -178,6 +185,12 @@
 
             <!-- Latest compiled and minified JavaScript -->
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+            <script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
+});
+</script>
+
 </body>
 
 </html>

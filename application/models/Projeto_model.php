@@ -27,12 +27,25 @@ class Projeto_model extends CI_Model{
   
   #insere um novo registro no banco
   public function insert(){
-    return $this->db->insert('projeto',$this);
+    //Cria um vetor de valores para atualização
+     $data = [];
+     if(isset($this->codigo)) $data['codigo'] = $this->codigo;
+     if(isset($this->nome)) $data['nome'] = $this->nome;
+     if(isset($this->categoria)) $data['categoria'] = $this->categoria;
+     if(isset($this->duracao)) $data['duracao'] = $this->duracao;
+     if(isset($this->valor)) $data['valor'] = $this->valor;
+     if(isset($this->status)) $data['status'] = $this->status;
+     if(isset($this->descricao)) $data['descricao'] = $this->descricao;
+     if(isset($this->video)) $data['video'] = $this->video;
+     if(isset($this->imagem)) $data['imagem'] = $this->imagem;
+     return $this->db->insert('projeto',$data);
  }
   
   #Remove um objeto de acordo com o nome
   public function remove () {
-    return $this->db->delete('projeto',array('codigo'=>$this->codigo));
+    $data = [];
+    if(isset($this->codigo)) $data['codigo'] = $this->codigo;
+    return $this->db->delete('projeto',$data);
   }
  
   #Atualiza o objeto a partir da chave primaria

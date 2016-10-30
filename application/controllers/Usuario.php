@@ -81,9 +81,9 @@ class Usuario extends CI_Controller {
 		}
 		
 		//Recebe o filtro
-		$filtro['login'] = (empty($_POST['login'])) ? '' : $_POST['login'];
-		$filtro['nome'] = (empty($_POST['nome'])) ? '' : $_POST['nome'];
-		$filtro['del'] = (empty($_POST['del'])) ? '' : $_POST['del'];
+		$filtro['login'] = (empty($_GET['login'])) ? '' : $_GET['login'];
+		$filtro['nome'] = (empty($_GET['nome'])) ? '' : $_GET['nome'];
+		$filtro['del'] = (empty($_GET['del'])) ? '' : $_GET['del'];
 				
 		//Carrega a model
 		$this->load->model('usuario_model');

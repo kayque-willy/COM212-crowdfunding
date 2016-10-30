@@ -42,7 +42,7 @@
                             <li><a href="#">Financiador Acadêmico</a></li>
                         </ul>
                     </li>
-                    <li class="active"><ahref="<?php echo base_url('/usuario/consultar'); ?>">Listar usuários</a></li>
+                    <li class="active"><a href="<?php echo base_url('/usuario/consultar'); ?>">Listar usuários</a></li>
                     <li><a href="#">Usuários Online</a></li>
                     <li><a href="#">Usuários Excluídos</a></li>
                 </ul>
@@ -65,33 +65,33 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="control-label" for="exampleInputEmail1">Login</label>
-                            <input name="login" class="form-control" id="exampleInputEmail1" placeholder="text" type="Login">
+                            <input name="login" class="form-control" id="exampleInputEmail1" placeholder="Login (Nickname)" type="Login">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="exampleInputPassword1">Email:</label>
-                            <input name="email" class="form-control" type="email" id="exampleInputPassword1" placeholder="Senha">
+                            <input name="email" class="form-control" type="email" id="exampleInputPassword1" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Senha:&nbsp;</label>
-                            <input name="senha" class="form-control" type="password">
+                            <input name="senha" class="form-control" type="password"  placeholder="Senha">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Confirmar senha:</label>
-                            <input class="form-control" type="password">
+                            <input class="form-control" type="password" placeholder="Confirmar senha">
                         </div>  
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="control-label">CPF:</label>
-                            <input name="cpf" class="form-control" type="text" onkeypress="formatar('###.###.###-##', this);" >
+                            <input name="cpf" class="form-control" type="text" onkeypress="formatar('###.###.###-##', this);" placeholder="CPF">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Nome completo:</label>
-                            <input name="nome" class="form-control" type="text">
+                            <input name="nome" class="form-control" type="text" placeholder="Nome completo">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Data de nascimento:</label>
-                            <input name="data" class="form-control" type="date">
+                            <input name="data" class="form-control" type="date" placeholder="Data de nascimento">
                         </div>
                     </div>
                     <div class="col-md-3">

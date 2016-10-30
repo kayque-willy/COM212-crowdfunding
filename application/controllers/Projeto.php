@@ -24,7 +24,7 @@ class Projeto extends CI_Controller {
 			$status = 'candidato';
 			
 			//Tratamento para salvar a imagem
-			$imagem=NULL;
+			$imagem=null;
 			//Se tiver imagem, realiza o upload
 			if(!empty($_FILES["imagem"]['tmp_name'])) { 
 				$config['upload_path'] = './temp/';
@@ -42,13 +42,13 @@ class Projeto extends CI_Controller {
 			$this->load->model('projeto_model');
 		
 			//Cria um novo projeto com os dados do POST
-			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem);
+			$projeto = new Projeto_model(null,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem);
 			
 			//Insere o projeto no banco
 			$projeto->insert();
 			
 			//Limpa a imagem temporaria
-			unlink($imagem['full_path']);
+			if(!empty($imagem)) unlink($imagem['full_path']);
 			
 			//Redireciona para a consulta de projetos
 			redirect('/projeto/consultar', 'refresh');
@@ -62,9 +62,9 @@ class Projeto extends CI_Controller {
 	public function consultar(){
 		
 		//Recebe o filtro
-		$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
-		$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];
-		$categoria = (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
+		$filtro['codigo'] = (empty($_GET['codigo'])) ? '' : $_GET['codigo'];
+		$filtro['nome'] = (empty($_GET['nome'])) ? '' : $_GET['nome'];
+		$filtro['categoria'] = (empty($_GET['categoria'])) ? '' : $_GET['categoria'];
 				
 		//Carrega a model
 		$this->load->model('projeto_model');
@@ -73,10 +73,28 @@ class Projeto extends CI_Controller {
 		$projeto = new Projeto_model();
 		
 		//$consulta o projeto
-		$data['projetos']=$projeto->select($codigo,$nome,$categoria);
+		$data['projetos']=$projeto->select($filtro);
 		
 		//Carrega a view 
 		$this->load->view('CRUD_projeto/viewPROJETO',$data); 
+	}
+	
+	#Visaliza o projeto individudal
+	public function ver_projeto($codigo=''){
+		//Recebe o código
+		$filtro['codigo']=$codigo;
+		
+		//Carrega a model
+		$this->load->model('projeto_model');
+			
+		//Cria um novo objeto projeto
+		$projeto = new Projeto_model();
+		
+		//$consulta o projeto
+		$data['projetos']=$projeto->select($filtro);
+		
+		//Carrega a view 
+		$this->load->view('CRUD_projeto/readPROJETO',$data); 
 	}
 	
 	#Altera o projeto

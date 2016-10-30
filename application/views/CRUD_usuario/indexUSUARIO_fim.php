@@ -40,7 +40,7 @@
                                 <li><a href="#">Financiador Acadêmico</a></li> 
                             </ul>   
                         </li>
-                        <li ><ahref="<?php echo base_url('/usuario/consultar'); ?>">Listar usuários</a></li>
+                        <li ><a href="<?php echo base_url('/usuario/consultar'); ?>">Listar usuários</a></li>
                         <li><a href="#">Usuários Online</a></li>
                         <li><a href="#">Usuários Excluídos</a></li>
                     </ul>

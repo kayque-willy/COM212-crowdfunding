@@ -77,14 +77,32 @@
         <!-- Inicio de um CRUD --> 
         <div id="main" class="container-fluid">
            <h3 class="page-header">Projetos candidatos</h3>
-           <a href="<?php echo base_url('/projeto/cadastrar'); ?>" class="btn btn-success">Cadastrar novo projeto</a>
+           <a href="<?php echo base_url('/projeto/cadastrar'); ?>" class="btn btn-success">Cadastrar novo projeto</a><br><br>
+           <form action="<?php echo base_url('/projeto/consultar'); ?>" class="form-inline" method="GET">
+                 <div class="form-group">
+                    <input name="codigo" type="text" class="form-control" placeholder="Filtrar por codigo">
+                </div>
+                <div class="form-group">
+                     <input name="nome" type="text" class="form-control" placeholder="Filtrar por nome">
+                </div>
+               <div class="form-group">
+                     <select name="categoria" type="text" class="form-control" placeholder="Filtrar por categoria">
+                        <option value="" disabled selected>Categoria</option>
+                        <option>Pesquisa</option>
+                        <option>Competição Tecnológica</option>
+                        <option>Inovação no Ensino</option>
+                        <option>Manutenção e Reforma</option>
+                        <option>Pequenas Obras</option>
+                     </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+            </form>
            <div class="center-block">
                <table class="table">
                 	<thead>
                 		<tr>
                 			<th>Código do Projeto</th>
                 			<th>Nome do Projeto</th>
-                			<th>Imagem</th>
                 			<th>Categoria do Projeto</th>
                 			<th>Duração do Projeto</th>
                 			<th>Valor do Projeto</th>
@@ -98,8 +116,7 @@
                           foreach ($projetos->result() as $projeto) {
                             echo '<tr>';
                             echo '<td>'.$projeto->codigo.'</td>';
-                            echo '<td>'.$projeto->nome.'</td>';
-                            echo '<td><img src="data:;base64,'.base64_encode($projeto->imagem).'" height="200" width="50" /></td>';
+                            echo '<td><a href="'.base_url("/projeto/ver_projeto/$projeto->codigo").'">'.$projeto->nome.'</a></td>';
                             echo '<td>'.$projeto->categoria.'</td>';
                             echo '<td>'.$projeto->duracao.'</td>';
                             echo '<td>'.$projeto->valor.'</td>';

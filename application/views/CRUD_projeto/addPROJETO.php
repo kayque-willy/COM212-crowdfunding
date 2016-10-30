@@ -56,7 +56,7 @@
     <!-- Fim da barra de navehação superior-->
     <!-- Inicio de um CRUD -->
     <div id="main" class="container-fluid">
-        <h3 class="page-header">Adicionar novo Projeto</h3>
+        <h3 class="page-header">Adicionar novo Projeto Candidato</h3>
         <div class="row">
             <?php echo form_open_multipart('projeto/cadastrar');?>
                 <div class="col-md-6">
