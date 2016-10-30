@@ -14,47 +14,9 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">     
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                <a class="navbar-brand" href="<?php echo base_url('/usuario/'); ?>">UNIFUNDING</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="<?php echo base_url('/usuario/'); ?>">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Módulos de Usuário<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Administrativo</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Usuário Público</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Gestor de Programas</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Avaliador de Projetos</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Financiador Acadêmico</a></li>
-                        </ul>
-                    </li>
-                    <li class="active"><a href="<?php echo base_url('/usuario/consultar'); ?>">Listar usuários</a></li>
-                    <li><a href="#">Usuários Online</a></li>
-                    <li><a href="#">Usuários Excluídos</a></li>
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Digite um usuário a ser buscado">
-                    </div>
-                    <button type="submit" class="btn btn-default">Procurar Usuário</button>
-                </form>
-            </div>
-        </div>
-    </nav>
+    <!--Header-->
+    <?php $this->load->view("CRUD_usuario/headerUSUARIO");?>
+    <!--Header-->
     <!-- Fim da barra de navehação superior-->
     <!-- Inicio de um CRUD -->
     <div id="main" class="container-fluid">
@@ -163,42 +125,9 @@
                 });
             });
         </script>
-
-        <!-- Aqui está a criação da parte de baixo do site, footer -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div id="linksImportantes" class="col-xs-12 col-sm-3 col-md-3">
-                        <h4> Para novas ideias de projetos e/ou sugestões:</h4>
-                        <ul>
-                            <li><a href="#">facebook.com/gsilvaborges</a></li>
-                        </ul>
-                    </div>
-                    <!-- Aqui em cima CRUD de links que podem ser armazenados e retirados -->
-                    <div id="redesSociais" class="col-xs-12 col-sm-3 col-md-3">
-                        <h4> Contate-nos</h4>
-                        <ul>
-                            <li> <a href="#">unifei.edu.br</a></li>
-                            <li><a href="#">UNIFEI/Google+</a></li>
-                        </ul>
-                    </div>
-                    <!-- Redes Sociais -->
-                    <div id="logoFooter" class="col-xs-12 col-sm-3 col-md-3 col-sm-offset-3 col-md-offset-3">
-                        <h2>Crowdfunding UNIFEI</h2>
-                    </div>
-                    <!-- Logo abaixo foi feito o rodapé da Outlet -->
-                </div>
-            </div>
-        </footer>
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p>&copy; Desenvolvedor Guilherme Borges.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--Footer-->
+        <?php $this->load->view("footer");?>
+        <!--Footer-->
 </body>
 
 </html>

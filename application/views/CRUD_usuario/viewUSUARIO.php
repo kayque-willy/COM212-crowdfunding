@@ -34,162 +34,115 @@
         </div>
         <!-- /.modal -->
 
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">     
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/usuario/">UNIFUNDING</a>
-                </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/usuario/">Home</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Módulos de Usuário<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Administrativo</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Usuário Público</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Gestor de Programas</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Avaliador de Projetos</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Financiador Acadêmico</a></li>
-                            </ul>
-                        </li>
-                        <li class="active"><a href="/usuario/consultar">Listar usuários</a></li>
-                        <li><a href="#">Usuários Online</a></li>
-                        <li><a href="#">Usuários Excluídos</a></li>
-                    </ul>
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Digite um usuário a ser buscado">
-                        </div>
-                        <button type="submit" class="btn btn-default">Procurar Usuário</button>
-                    </form>
-                </div>
-            </div>
-        </nav>
-        <!-- Fim da barra de navehação superior-->
+        <!--Header-->
+        <?php $this->load->view("CRUD_usuario/headerUSUARIO");?>
+        <!--Header-->
         <!-- Inicio de um CRUD -->
 
-        <div id="main" class="container-fluid">
-            <h3 class="page-header">Todos os usuarios</h3>
-            <?php 
+
+        <div class="wrapper" role="main">
+            <div class="container">
+                <div class="row">
+                    <h3 class="page-header">Todos os usuarios</h3>
+                    <?php 
                 if (isset($sucesso)){ 
             ?>
-            <div class="alert alert-success">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Operação realizada com sucesso!</strong>
-                <p>
-                    <?php echo $msg; ?>
-                </p>
-            </div>
-            <?php } ?>
-            <?php 
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Operação realizada com sucesso!</strong>
+                        <p>
+                            <?php echo $msg; ?>
+                        </p>
+                    </div>
+                    <?php } ?>
+                    <?php 
                 
             if (isset($falha)){ 
             ?>
-            <div class="alert alert-danger">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <strong>Falha ao realizar operação!</strong>
-                <p>
-                    <?php echo $msg; ?>
-                </p>
-            </div>
-            <?php } ?>
-            <a href="/usuario/cadastrar/" class="btn btn-success">Cadastrar novo usuario</a><br><br>
-            <!--Fitro-->
-            <form action="<?php echo base_url('/usuario/consultar'); ?>" class="form-inline" method="GET">
-                 <div class="form-group">
-                    <input name="nome"type="text" class="form-control" placeholder="Filtrar por nome">
-                </div>
-                <div class="form-group">
-                     <input name="login" type="text" class="form-control" placeholder="Filtrar por login">
-                </div>
-               
-                <button type="submit" class="btn btn-primary">Filtrar</button>
-            </form>
-            <!--Fitro-->
-            <div class="center-block" <!-- Lista de usuarios-->
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Login</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Percorre o objeto de consulta enviado do controller-->
-                        <?php
-                        if(isset($usuarios)){
-                                foreach ($usuarios->result() as $usuario) {
-                                        echo '<tr>';
-                                        echo '
-                                        <td><a href="#">'.$usuario->nome.'</a></td>';
-                                        echo '<td>'.$usuario->login.'</td>';
-                                        if($usuario->del=='0') echo '<td>ativo</td>';
-                                        if($usuario->del=='1') echo '<td>inativo</td>';
-                                        echo '</tr>';
-                                }
-                        }
-                        ?>
-                            <!-- Percorre o objeto de consulta enviado do controller-->
-                    </tbody>
-                </table>
-                <!-- Lista de usuarios-->
-            </div>
-            <hr>
-            <!-- Aqui está a criação da parte de baixo do site, footer -->
-            <footer>
-                <div class="container">
-                    <div class="row">
-                        <div id="linksImportantes" class="col-xs-12 col-sm-3 col-md-3">
-                            <h4> Para novas ideias de projetos e/ou sugestões:</h4>
-                            <ul>
-                                <li><a href="#">facebook.com/gsilvaborges</a></li>
-                            </ul>
-                        </div>
-                        <!-- Aqui em cima CRUD de links que podem ser armazenados e retirados -->
-                        <div id="redesSociais" class="col-xs-12 col-sm-3 col-md-3">
-                            <h4> Contate-nos</h4>
-                            <ul>
-                                <li> <a href="#">unifei.edu.br</a></li>
-                                <li><a href="#">UNIFEI/Google+</a></li>
-                            </ul>
-                        </div>
-                        <!-- Redes Sociais -->
-                        <div id="logoFooter" class="col-xs-12 col-sm-3 col-md-3 col-sm-offset-3 col-md-offset-3">
-                            <h2>Crowdfunding UNIFEI</h2>
-                        </div>
-                        <!-- Logo abaixo foi feito o rodapé da Outlet -->
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Falha ao realizar operação!</strong>
+                        <p>
+                            <?php echo $msg; ?>
+                        </p>
                     </div>
-                </div>
-            </footer>
-            <div class="copyright">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p>&copy; Desenvolvedor Guilherme Borges.</p>
+                    <?php } ?>
+                    <!--Fitro-->
+                    <form action="<?php echo base_url('/usuario/consultar'); ?>" class="form-inline" method="GET">
+                        <div class="form-group">
+                            <input name="nome" type="text" class="form-control" placeholder="Filtrar por nome">
                         </div>
-                    </div>
-                </div>
-            </div>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+                        <div class="form-group">
+                            <input name="login" type="text" class="form-control" placeholder="Filtrar por login">
+                        </div>
 
-            <!-- Latest compiled and minified JavaScript -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-            <script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();
-});
-</script>
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+                    </form>
+                    <!--Fitro-->
+                    <hr>
+                    <div id="conteudo" class="col-xs-12 col-sm-8 col-md-9">
+                        <?php
+                            if(isset($usuarios)){
+                                foreach ($usuarios->result() as $usuario) {
+                            ?>
+                            <div class="artigo" role="article">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-4 col-md-4">
+                                        <a href="#" title="">
+                                            <img src="http://st2.depositphotos.com/1104517/9917/v/450/depositphotos_99176964-Vector-user-icon-of-man.jpg" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-8 col-md-8">
+                                        <h2><a href="<?php echo base_url("/usuario/ver_usuario/$usuario->login") ?>"><?php echo $usuario->login ?></a></h2>
+                                        <h4>
+                                            <?php echo $usuario->nome ?>
+                                        </h4>
+                                        <span><b>Status:</b>
+                                            <?php
+                                                if($usuario->del=='0') echo '<span class="alert-success text-center"><b>ATIVO</b></span>'; if($usuario->del=='1') echo '<span class="alert-danger text-center"><b>INATIVO</b></span>';
+                                        ?>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                                }
+                            }
+                            ?>
+                    </div>
+                    <!-- CRUD e-mail de noticias, Barra Lateral -->
+                    <div id="sidebar" class="col-xs-12 col-sm-4 col-md-3">
+                        <div class="widget">
+                            <h3>Receba as novidades no E-mail</h3>
+                            <form class="form" role="form">
+                                <div class="form-group">
+                                    <label class="sr-only" for="exampleInputEmail2">Entre com seu email</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Entre com seu email">
+                                </div>
+                                <button type="submit" class="btn btn-success">Cadastrar </button>
+                            </form>
+                        </div>
+                        <div class="widget">
+                            <h3>Financiadores e Apoio</h3>
+                            <ul>
+                                <li><a href="">UNIFEI: unifei.edu.br</a></li>
+                                <li><a href="">CATS: familiacats.com.br</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <!--Footer-->
+        <?php $this->load->view("footer");?>
+        <!--Footer-->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+
+        <!-- Latest compiled and minified JavaScript -->
+        <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>-->
 
 </body>
 

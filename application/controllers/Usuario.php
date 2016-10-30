@@ -5,8 +5,8 @@ class Usuario extends CI_Controller {
 
 	#Index do controller
 	public function index() {
-	   //Carrega a view da index do projeto
-	   $this->load->view('CRUD_usuario/indexUSUARIO_fim'); 
+	   //Redirenciona para a consulta
+	   redirect('/usuario/consultar','refresh');
 	 }
 	
 	#Cria um novo usuario no banco
@@ -131,18 +131,23 @@ class Usuario extends CI_Controller {
 			}
 		}
 		
-		//Carrega a model
-		$this->load->model('usuario_model');
+		if(!empty($log)){
+			//Carrega a model
+			$this->load->model('usuario_model');
+				
+			//Cria um novo objeto projeto
+			$usuario = new Usuario_model();
 			
-		//Cria um novo objeto projeto
-		$usuario = new Usuario_model();
-		
-		//$consulta o projeto pelo codigo
-		$filtro['login']=$log;
-		$data['usuario']=$usuario->select($filtro);
-		
-		//Carrega a view 
-		$this->load->view('CRUD_usuario/editUSUARIO',$data); 
+			//$consulta o projeto pelo codigo
+			$filtro['login']=$log;
+			$data['usuario']=$usuario->select($filtro);
+			
+			//Carrega a view 
+			$this->load->view('CRUD_usuario/editUSUARIO',$data); 
+		}else{
+			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+			redirect('/usuario/consultar/alt_falha', 'refresh');
+		}
 	}
 	
 	#Desativar o usuario
@@ -263,5 +268,23 @@ class Usuario extends CI_Controller {
 			//Carrega a view 
 			$this->load->view('CRUD_usuario/regUSUARIO.php'); 
 		}
+	}
+	
+	#Visaliza o projeto individudal
+	public function ver_usuario($login=''){
+		//Recebe o código
+		$filtro['login']=$login;
+		
+		//Carrega a model
+		$this->load->model('usuario_model');
+			
+		//Cria um novo objeto projeto
+		$usuario = new Usuario_model();
+		
+		//$consulta o projeto
+		$data['usuarios']=$usuario->select($filtro);
+		
+		//Carrega a view 
+		$this->load->view('CRUD_usuario/readUSUARIO',$data); 
 	}
 }

@@ -125,24 +125,6 @@ class Projeto extends CI_Controller {
 		$this->load->view('CRUD_projeto/viewPROJETO',$data); 
 	}
 	
-	#Visaliza o projeto individudal
-	public function ver_projeto($codigo=''){
-		//Recebe o código
-		$filtro['codigo']=$codigo;
-		
-		//Carrega a model
-		$this->load->model('projeto_model');
-			
-		//Cria um novo objeto projeto
-		$projeto = new Projeto_model();
-		
-		//$consulta o projeto
-		$data['projetos']=$projeto->select($filtro);
-		
-		//Carrega a view 
-		$this->load->view('CRUD_projeto/readPROJETO',$data); 
-	}
-	
 	#Altera o projeto
 	public function alterar($cod=''){
 	
@@ -223,4 +205,21 @@ class Projeto extends CI_Controller {
 		}
 	}
 
+	#Visaliza o projeto individudal
+	public function ver_projeto($codigo=''){
+		//Recebe o código
+		$filtro['codigo']=$codigo;
+		
+		//Carrega a model
+		$this->load->model('projeto_model');
+			
+		//Cria um novo objeto projeto
+		$projeto = new Projeto_model();
+		
+		//$consulta o projeto
+		$data['projetos']=$projeto->select($filtro);
+		
+		//Carrega a view 
+		$this->load->view('CRUD_projeto/readPROJETO',$data); 
+	}
 }
