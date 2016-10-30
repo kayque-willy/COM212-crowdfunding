@@ -57,64 +57,28 @@
             <div class="container">
                 <div class="row">
                     <div id="conteudo" class="col-xs-12 col-sm-8 col-md-9">
+                    <?php    
+                    if(isset($projetos)){
+                          foreach ($projetos->result() as $projeto) {
+                        
+                    ?>
                         <div class="artigo" role="article">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4 col-md-4">
                                     <a href="#" title="">
-                                        <img src="http://speaking.com.br/img/sponsored/sponsored_uairrior.png" alt="">
+                                        <?php echo '<td><img src="data:;base64,'.base64_encode($projeto->imagem).'" height="200" width="50" /></td>' ?>
                                     </a>
                                 </div>
                                 <div class="col-xs-12 col-sm-8 col-md-8">
-                                    <h2><a href="#">Projeto equipe Uairrior 24hrs</a></h2>
-                                    <p>
-                                        O intuito do projeto é desenvolver máquinas para competições de combate de robôs, em várias modalidades. 
-                                        Os robôs são desenvolvidos a partir de projetos totalmente elaborados pelos estudantes e supervisionados
-                                        pelo professor, utilizando toda a infra-estrutura cedida pela Universidade e pelas empresas que apoiam o projeto.
-                                    </p>
-                                    <a href="#">http://www.uairrior.com.br/</a>
+                                    <h2><a href="<?php echo base_url("/projeto/ver_projeto/$projeto->codigo") ?>"><?php echo $projeto->nome ?></a></h2>
+                                    <p><?php echo $projeto->descricao ?></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="artigo" role="article">
-                            <div class="row">                                                 
-                                <div class="col-xs-12 col-sm-4 col-md-4">
-                                    <a href="#" title="">  
-                                        <img src="https://hubstaff-talent.s3.amazonaws.com/avatars/8bbf3a48d010aad1169795acb8e41aa6" alt="">
-                                    </a>
-                                </div>
-                                <div class="col-xs-12 col-sm-8 col-md-8">
-                                    <h2><a href="#">Projeto programando com a Epic Coders</a></h2>
-                                    <p>
-                                        Este projeto de programação visa a prática e a competitividade elevando o nome da faculdade e também
-                                        guia você durante sua trajetória universitária. Nossos horários de aula e Simulados Oficiais acontecem: 
-                                        Terças-Feiras às 19:00 (LASER I) com Prof. João Paulo Leite
-                                        Monitoria: Segundas-Feiras às 17:00 no IMC.
-                                        Qualquer aluno pode ir em qualquer dos dias. Não é necessária matrícula.
-                                    </p>
-                                    <a href="#">https://sites.google.com/site/unifeimaratona/</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="artigo" role="article"> 
-                            <div class="row">
-                                <div class="col-xs-12 col-sm-4 col-md-4">
-                                    <a href="#" title="">
-                                        <img src="http://www.droneshowla.com/wp-content/uploads/LOGO-BLACK-BEE-2016-400x400.png" alt="" >
-                                    </a>
-                                </div>
-                                <div class="col-xs-12 col-sm-8 col-md-8" >
-                                    <h2><a href="#">Black Bee Drones</a></h2>
-                                    <p>
-                                        A equipe hoje projeta e desenvolve seus drones para participar de competições internacionais. 
-                                        A competição a qual a equipe compete é denominada IMAV (International Micro Air Vehicle Conference and Competition). 
-                                        O IMAV é um evento anual que combina conferência científica com uma competição tecnológica envolvendo Micro Veículos Aéreos(MAVs).
-                                        Essa combinação permite que grupos de pesquisa de todo o mundo partilhe seus conhecimentos, e os estimula a se concentrarem em 
-                                        pesquisas que podem ser aplicadas em cenários da vida real. 
-                                    </p>
-                                    <a href="#">http://blackbee.unifei.edu.br/</a>
-                                </div>
-                            </div> 
-                        </div>
+                    <?php
+                          }
+                    }
+                    ?>
                     </div>
 
                     <!-- CRUD e-mail de noticias, Barra Lateral -->

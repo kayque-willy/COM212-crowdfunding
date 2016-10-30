@@ -77,6 +77,30 @@
         <!-- Inicio de um CRUD --> 
         <div id="main" class="container-fluid">
            <h3 class="page-header">Projetos candidatos</h3>
+            <?php 
+                if (isset($sucesso)){ 
+            ?>
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Operação realizada com sucesso!</strong>
+                <p>
+                    <?php echo $msg; ?>
+                </p>
+            </div>
+            <?php } ?>
+            <?php 
+                
+            if (isset($falha)){ 
+            ?>
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Falha ao realizar operação!</strong>
+                <p>
+                    <?php echo $msg; ?>
+                </p>
+            </div>
+            <?php } ?>
+           
            <a href="<?php echo base_url('/projeto/cadastrar'); ?>" class="btn btn-success">Cadastrar novo projeto</a><br><br>
            <form action="<?php echo base_url('/projeto/consultar'); ?>" class="form-inline" method="GET">
                  <div class="form-group">

@@ -57,7 +57,6 @@
             <div class="container">
                 <div class="row">
                     <div id="conteudo" class="col-xs-12 col-sm-8 col-md-9">
-                    
                     <?php    
                     if(isset($projetos)){
                           foreach ($projetos->result() as $projeto) {

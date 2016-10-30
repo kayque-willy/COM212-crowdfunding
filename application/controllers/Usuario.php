@@ -165,8 +165,6 @@ class Usuario extends CI_Controller {
 			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 			redirect('/usuario/consultar/des_falha', 'refresh');
 		}
-		//Redireciona para a consulta de usuarios
-		redirect('/usuario/consultar', 'refresh');
 	}
 
 	/*----MÉTODOS DE LOGIN E REGISTRO DE FINANCIADOR EXTERNO----*/

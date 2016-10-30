@@ -5,8 +5,18 @@ class Projeto extends CI_Controller {
 
 	#Index do controller
 	public function index() {
+	   	
+		//Carrega a model
+		$this->load->model('projeto_model');
+			
+		//Cria um novo objeto projeto
+		$projeto = new Projeto_model();
+		
+		//$consulta o projeto
+		$data['projetos']=$projeto->select();
+		
 	   //Carrega a view da index do projeto
-	   $this->load->view('CRUD_projeto/indexPROJETO_fim'); 
+	   $this->load->view('CRUD_projeto/indexPROJETO_fim',$data); 
 	 }
 	
 	#Cria um novo projeto
@@ -45,21 +55,57 @@ class Projeto extends CI_Controller {
 			$projeto = new Projeto_model(null,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem);
 			
 			//Insere o projeto no banco
-			$projeto->insert();
-			
-			//Limpa a imagem temporaria
-			if(!empty($imagem)) unlink($imagem['full_path']);
-			
-			//Redireciona para a consulta de projetos
-			redirect('/projeto/consultar', 'refresh');
+			if($projeto->insert()){
+				//Limpa a imagem temporaria
+				if(!empty($imagem)) unlink($imagem['full_path']);
+				
+				//Se a operação for bem sucedida, redireciona com mensagem de sucesso
+				redirect('/projeto/consultar/cad_sucesso', 'refresh');
+			}else{
+				//Limpa a imagem temporaria
+				if(!empty($imagem)) unlink($imagem['full_path']);
+				
+				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+				redirect('/projeto/consultar/cad_falha', 'refresh');
+			}
 		}
 		
 		//Carrega a view 
-		$this->load->view('CRUD_projeto/addPROJETO'); 
+		$this->load->view('CRUD_projeto/addPROJETO'); 	
 	}
 	
 	#Lista os projetos
-	public function consultar(){
+	public function consultar($result=''){
+		
+		//Mensagem de resultado de alguma operação
+		if(isset($result)){
+			switch ($result){
+				case 'cad_sucesso': 
+					$data['sucesso']=true;
+					$data['msg'] = 'Projeto cadastrado com sucesso!';
+					break;
+				case 'cad_falha': 
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao cadastrar o projeto!';
+					break;
+				case 'alt_sucesso':
+					$data['sucesso']=true;
+					$data['msg'] = 'Projeto atualizado com sucesso!';
+					break;
+				case 'alt_falha': 
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao atualizar o projeto!';
+					break;
+				case 'des_sucesso':
+					$data['sucesso']=true;
+					$data['msg'] = 'Projeto desativado com sucesso!';
+					break;
+				case 'des_falha':
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao remover o projeto!';
+					break;
+			}
+		}
 		
 		//Recebe o filtro
 		$filtro['codigo'] = (empty($_GET['codigo'])) ? '' : $_GET['codigo'];
@@ -132,11 +178,14 @@ class Projeto extends CI_Controller {
 			//Cria um novo projeto com os dados do POST
 			$projeto = new Projeto_model(NULL,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem);
 			
-			//Atualiza o usuario no banco
-			$projeto->update($codigo);	
-				
-			//Redireciona para a consulta de projetos
-			redirect('/projeto/consultar', 'refresh');
+			//Atualiza o projeto no banco
+			if($projeto->update($codigo)){
+				//Se a operação for bem sucedida, redireciona com mensagem de sucesso
+				redirect('/projeto/consultar/alt_sucesso', 'refresh');
+			}else{
+				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+				redirect('/projeto/consultar/alt_falha', 'refresh');
+			}
 		}
 		
 		//Carrega a model
@@ -165,10 +214,13 @@ class Projeto extends CI_Controller {
 		$projeto = new Projeto_model($codigo);
 		
 		//Remove o projeto do banco
-		$projeto->remove($codigo);
-		
-	    //Redireciona para a consulta de projetos
-		redirect('/projeto/consultar', 'refresh');
+		if($projeto->remove($codigo)){
+			//Se a operação for bem sucedida, redireciona com mensagem de sucesso
+			redirect('/projeto/consultar/des_sucesso', 'refresh');
+		}else{
+			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+			redirect('/projeto/consultar/des_falha', 'refresh');
+		}
 	}
 
 }
