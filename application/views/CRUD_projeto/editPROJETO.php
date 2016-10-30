@@ -21,9 +21,9 @@
     <div id="main" class="container-fluid">
         <h3 class="page-header">Editar Projeto</h3>
 
-        <?php echo form_open_multipart('projeto/alterar');?>
-        <?php
-                    if(isset($projeto)){
+            <?php echo form_open_multipart('projeto/alterar');?>
+            <?php
+                if(isset($projeto)){
                         foreach ($projeto->result() as $proj) {
                     ?>
             <input type="hidden" name="codigo" value='<?php echo $proj->codigo; ?>'>
@@ -37,23 +37,23 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label class="control-label">Nome do projeto</label>
-                    <input name="nome" class="form-control" type="text" placeholder="Nome do projeto" value='<?php echo $proj->nome; ?>'>
+                    <input required name="nome" class="form-control" type="text" placeholder="Nome do projeto" value='<?php echo $proj->nome; ?>'>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Duração prevista</label>
-                    <input type="number" class="form-control" id="campo2" name="duracao" placeholder="Duração prevista do projeto" value='<?php echo $proj->duracao; ?>'>
+                    <input required type="number" class="form-control" id="campo2" name="duracao" placeholder="Duração prevista do projeto" value='<?php echo $proj->duracao; ?>'>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Valor previsto</label>
                     <div class="input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="valor" placeholder="Valor previsto do projeto" value='<?php echo $proj->valor; ?>'>
+                        <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="valor" placeholder="Valor previsto do projeto" value='<?php echo $proj->valor; ?>'>
                         <span class="input-group-addon">.00</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Categoria</label>
-                    <select name="categoria" class="form-control">
+                    <select required name="categoria" class="form-control">
                                 <option <?php if($proj->categoria=='Pesquisa') echo 'select'; ?>>Pesquisa</option>
                                 <option <?php if($proj->categoria=='Competição Tecnológica') echo 'select'; ?>>Competição Tecnológica</option>
                                 <option <?php if($proj->categoria=='Inovação no Ensino') echo 'select'; ?>>Inovação no Ensino</option>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label">Descrição</label>
-                    <textarea name="descricao" class="form-control" placeholder="Descrição de até 250 caracteres" rows="5" style="resize:none;" maxlength="250"><?php echo $proj->descricao; ?></textarea>
+                    <textarea required name="descricao" class="form-control" placeholder="Descrição de até 250 caracteres" rows="5" style="resize:none;" maxlength="250"><?php echo $proj->descricao; ?></textarea>
                 </div>
             </div>
 

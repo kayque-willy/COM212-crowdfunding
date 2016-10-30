@@ -31,23 +31,23 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label" for="exampleInputEmail1">Login</label>
-                            <input name="login" class="form-control" id="exampleInputEmail1" placeholder="text" type="Login" value='<?php echo $user->login; ?>'>
+                            <input required name="login" class="form-control" id="exampleInputEmail1" placeholder="text" type="Login" value='<?php echo $user->login; ?>'>
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="exampleInputPassword1">Email:</label>
-                            <input name="email" class="form-control" type="email" id="exampleInputPassword1" placeholder="Senha" value='<?php echo $user->email; ?>'>
+                            <input required name="email" class="form-control" type="email" id="exampleInputPassword1" placeholder="Senha" value='<?php echo $user->email; ?>'>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Senha:&nbsp;</label>
-                            <input name="senha" class="form-control" type="password" value='<?php echo $user->senha; ?>'>
+                            <input required name="senha" class="form-control" type="password" value='<?php echo $user->senha; ?>'>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Confirmar senha:</label>
-                            <input class="form-control" type="password" value='<?php echo $user->senha; ?>'>
+                            <input required class="form-control" type="password" value='<?php echo $user->senha; ?>'>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Categoria do usuário</label>
-                            <select name="categoria" class="form-control">
+                            <select required name="categoria" class="form-control">
                                 <option value="" disabled selected>Selecione</option>
                                 <option <?php  if($user->categoria=='Pesquisa') select ?>>Pesquisa</option>
                                 <option <?php  if($user->categoria=='Competição Tecnológica') select ?>>Competição Tecnológica</option>
@@ -60,35 +60,39 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">País</label>
-                            <select name="pais" class="form-control">
-                          <option><?php echo $user->pais; ?></option>
+                            <input required name="pais" class="form-control" type="text">
+                            <!--<select name="pais" class="form-control">
+                          <option>1</option>
                           <option>2</option>
-                        </select>
+                        </select>-->
                         </div>
                         <div class="form-group">
                             <label class="control-label">Estado</label>
-                            <select name="estado" class="form-control">
-                          <option><?php echo $user->estado; ?></option>
+                            <input required name="estado" class="form-control" type="text">
+                            <!--<select  name="estado" class="form-control">
+                          <option>1</option>
                           <option>2</option>
-                        </select>
+                        </select>-->
                         </div>
                         <div class="form-group">
                             <label class="control-label">Cidade</label>
-                            <select name="cidade" class="form-control">
-                              <option><?php echo $user->cidade; ?></option>
-                              <option>2</option>
-                            </select>
+                            <input required name="cidade" class="form-control" type="text">
+                            <!--<select  name="cidade" class="form-control">
+                      <option>1</option>
+                      <option>2</option>
+                    </select>-->
                         </div>
                         <div class="form-group">
                             <label class="control-label">Endereço</label>
-                            <select name="endereco" class="form-control">
-                              <option><?php echo $user->endereco; ?></option>
-                              <option>2</option>
-                            </select>
+                            <input required name="endereco" class="form-control" type="text">
+                            <!--<select  name="endereco" class="form-control">
+                      <option>1</option>
+                      <option>2</option>
+                    </select>-->
                         </div>
-                         <a href="<?php echo base_url("/usuario/desativar/".$_SESSION['login']) ?>" type="" class="btn btn-danger">Desativar perfil</a>
+                        <a href="<?php echo base_url("/usuario/desativar/".$_SESSION['login']) ?>" type="" class="btn btn-danger">Desativar perfil</a>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-primary">Atualizar</button>

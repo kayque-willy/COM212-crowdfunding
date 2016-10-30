@@ -24,24 +24,24 @@
             <?php echo form_open_multipart('projeto/cadastrar');?>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label class="control-label">Nome do rpojeto</label>
+                        <label required class="control-label">Nome do rpojeto</label>
                         <input name="nome" class="form-control" type="text" placeholder="Nome do projeto">
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Duração prevista</label>
+                        <label required class="control-label">Duração prevista</label>
                         <input type="number" class="form-control" id="campo2" name="duracao" placeholder="Duração prevista do projeto">
                     </div>
                     <div class="form-group">
                         <label class="control-label">Valor previsto</label>
                         <div class="input-group">
                             <span class="input-group-addon">$</span>
-                            <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="valor" placeholder="Valor previsto do projeto">
+                            <input required type="number" class="form-control" aria-label="Amount (to the nearest dollar)" name="valor" placeholder="Valor previsto do projeto">
                             <span class="input-group-addon">.00</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Categoria</label>
-                        <select name="categoria" class="form-control">
+                        <select required name="categoria" class="form-control">
                             <option value="" disabled selected>Selecione</option>
                             <option>Pesquisa</option>
                             <option>Competição Tecnológica</option>
@@ -55,7 +55,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label class="control-label">Imagem</label>
-                        <input name="imagem" type="file">
+                        <input required name="imagem" type="file">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="exampleInputEmail1">Link de video descritivo</label>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label class="control-label">Descrição</label>
-                        <textarea name="descricao" class="form-control" placeholder="Descrição de até 250 caracteres" rows="5" style="resize:none;"  maxlength="250"></textarea>
+                        <textarea required name="descricao" class="form-control" placeholder="Descrição de até 250 caracteres" rows="5" style="resize:none;"  maxlength="250"></textarea>
                     </div>
                 </div>
                 <div id="actions" class="row">

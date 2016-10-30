@@ -34,14 +34,29 @@ class Usuario_model extends CI_Model{
   
   #insere um novo usuario
   public function insert(){
-   return $this->db->insert('usuario',$this);
+     //Cria um vetor de valores para inserção
+     $data = [];
+     if(isset($this->login)) $data['login'] = $this->login;
+     if(isset($this->senha)) $data['senha'] = $this->senha;
+     if(isset($this->nome)) $data['nome'] = $this->nome;
+     if(isset($this->cpf)) $data['cpf'] = $this->cpf;
+     if(isset($this->pais)) $data['pais'] = $this->pais;
+     if(isset($this->cidade)) $data['cidade'] = $this->cidade;
+     if(isset($this->estado)) $data['estado'] = $this->estado;
+     if(isset($this->endereco)) $data['endereco'] = $this->endereco;
+     if(isset($this->data_nascimento)) $data['data_nascimento'] = $this->data_nascimento;
+     if(isset($this->email)) $data['email'] = $this->email;
+     if(isset($this->tipo)) $data['tipo'] = $this->tipo;
+     if(isset($this->categoria)) $data['categoria'] = $this->categoria;
+     if(isset($this->del)) $data['del'] = $this->del;
+     return $this->db->insert('usuario',$data);
   }
   
   #Desativa um usuario de acordo com a chave primária
   public function remove($login) {
     //Cria um vetor de valores para atualização
     $data = [];
-    if(isset($this->del)) $data['del'] = '1';
+    $data['del'] = '1';
     
     //Cria um vetor com a chave primaria
     $where['login']=$login;

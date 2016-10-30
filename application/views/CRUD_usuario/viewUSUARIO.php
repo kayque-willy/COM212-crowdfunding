@@ -130,7 +130,7 @@
                             </ul>
                         </div>
                     </div>
-
+                    <!-- CRUD e-mail de noticias, Barra Lateral -->
                 </div>
             </div>
         </div>

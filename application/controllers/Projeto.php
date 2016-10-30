@@ -127,9 +127,8 @@ class Projeto extends CI_Controller {
 	
 	#Altera o projeto
 	public function alterar($cod=''){
-	
+		//Recebe os dados do formulario para atualização
 		if(!empty($_POST)){
-			//Recebe os dados do formulario
 			$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
 			$nome = (empty($_POST['nome'])) ? '' : $_POST['nome'];
 			$descricao = (empty($_POST['descricao'])) ? '' : $_POST['descricao'];
@@ -170,17 +169,26 @@ class Projeto extends CI_Controller {
 			}
 		}
 		
-		//Carrega a model
-		$this->load->model('projeto_model');
+		//Recupera os dados
+		if(!empty($cod)){
+			$filtro['codigo']=$cod;
 			
-		//Cria um novo objeto projeto
-		$projeto = new Projeto_model();
+			//Carrega a model
+			$this->load->model('projeto_model');
+				
+			//Cria um novo objeto projeto
+			$projeto = new Projeto_model();
+			
+			//consulta o projeto pelo codigo
+			$data['projeto']=$projeto->select($filtro);
+			
+			//Carrega a view 
+			$this->load->view('CRUD_projeto/editPROJETO',$data); 
+		}else{
+			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+			redirect('/projeto/consultar/alt_falha', 'refresh');
+		}
 		
-		//$consulta o projeto pelo codigo
-		$data['projeto']=$projeto->select($cod);
-		
-		//Carrega a view 
-		$this->load->view('CRUD_projeto/editPROJETO',$data); 
 	}
 	
 	#Deletea o projeto 

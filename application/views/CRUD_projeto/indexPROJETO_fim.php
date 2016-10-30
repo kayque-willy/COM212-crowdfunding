@@ -31,12 +31,12 @@
                     <div class="artigo" role="article">
                         <div class="row">
                             <div class="col-xs-12 col-sm-4 col-md-4">
-                                <a href="#" title="">
-                                        <?php echo '<td><img src="data:;base64,'.base64_encode($projeto->imagem).'" height="200" width="50" /></td>' ?>
-                                    </a>
+                                <div href="#" class="thumbnail col-md-12">
+                                    <img src='<?php echo "data:;base64,".base64_encode($projeto->imagem); ?>' height="500" width="500" />
+                                </div>
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8">
-                                <h2><a href="<?php echo base_url(" /projeto/ver_projeto/$projeto->codigo") ?>"><?php echo $projeto->nome ?></a></h2>
+                                <h2><a href="#"><?php echo $projeto->nome ?></a></h2>
                                 <p>
                                     <?php echo $projeto->descricao ?>
                                 </p>

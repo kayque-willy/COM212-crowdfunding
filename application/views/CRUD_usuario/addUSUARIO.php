@@ -27,39 +27,40 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="control-label" for="exampleInputEmail1">Login</label>
-                            <input name="login" class="form-control" id="exampleInputEmail1" placeholder="Login (Nickname)" type="Login">
+                            <input required name="login" class="form-control" id="exampleInputEmail1" placeholder="Login (Nickname)" type="Login">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="exampleInputPassword1">Email:</label>
-                            <input name="email" class="form-control" type="email" id="exampleInputPassword1" placeholder="Email">
+                            <input required name="email" class="form-control" type="email" id="exampleInputPassword1" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Senha:&nbsp;</label>
-                            <input name="senha" class="form-control" type="password"  placeholder="Senha">
+                            <input required name="senha" class="form-control" type="password"  placeholder="Senha">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Confirmar senha:</label>
-                            <input class="form-control" type="password" placeholder="Confirmar senha">
+                            <input required class="form-control" type="password" placeholder="Confirmar senha">
                         </div>  
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="control-label">CPF:</label>
-                            <input name="cpf" class="form-control" type="text" onkeypress="formatar('###.###.###-##', this);" placeholder="CPF">
+                            <input required name="cpf" class="form-control" type="text" onkeypress="formatar('###.###.###-##', this);" placeholder="CPF">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Nome completo:</label>
-                            <input name="nome" class="form-control" type="text" placeholder="Nome completo">
+                            <input required name="nome" class="form-control" type="text" placeholder="Nome completo">
                         </div>
                         <div class="form-group">
                             <label class="control-label">Data de nascimento:</label>
-                            <input name="data" class="form-control" type="date" placeholder="Data de nascimento">
+                            <input required name="data" class="form-control" type="date" placeholder="Data de nascimento">
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label class="control-label">Tipo de usuario</label>
-                            <select name="tipo" class="form-control">
+                            <select required name="tipo" class="form-control">
+                               <option value="" disabled selected>Selecione</option>
                                <option>Administrativo</option>
                                 <option>Usuário Público</option>
                                 <option>Gestor de Projetos</option>
@@ -69,8 +70,8 @@
                         </div>
                             <div class="form-group">
                                 <label class="control-label">Categoria do usuário</label>
-                                <select name="categoria" class="form-control">
-                                    <option></option>
+                                <select required name="categoria" class="form-control">
+                                    <option value="" disabled selected>Selecione</option>
                                     <option>Pesquisa</option>
                                     <option>Competição Tecnológica</option>
                                     <option>Inovação no Ensino</option>
@@ -82,36 +83,40 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="control-label">País</label>
-                        <select name="pais" class="form-control">
+                        <input required name="pais" class="form-control" type="text">
+                        <!--<select name="pais" class="form-control">
                           <option>1</option>
                           <option>2</option>
-                        </select>   
+                        </select>-->
                     </div>
                     <div class="form-group">
                         <label class="control-label">Estado</label>
-                        <select  name="estado" class="form-control">
+                        <input required name="estado" class="form-control" type="text">
+                        <!--<select  name="estado" class="form-control">
                           <option>1</option>
                           <option>2</option>
-                        </select>
+                        </select>-->
                    </div>
                    <div class="form-group">
                     <label class="control-label">Cidade</label>
-                    <select  name="cidade" class="form-control">
+                    <input required name="cidade" class="form-control" type="text">
+                    <!--<select  name="cidade" class="form-control">
                       <option>1</option>
                       <option>2</option>
-                    </select>
+                    </select>-->
                    </div>
                    <div class="form-group">
                     <label class="control-label">Endereço</label>
-                    <select  name="endereco" class="form-control">
+                    <input required name="endereco" class="form-control" type="text">
+                    <!--<select  name="endereco" class="form-control">
                       <option>1</option>
                       <option>2</option>
-                    </select>
+                    </select>-->
                  </div>
                 </div>
                <div class="form-group text-center">
-                   <button type="" class="btn btn-success">Cadastrar</button>
-                   <button type="" class="btn btn-default">Cancelar</button>
+                   <button type="submit" class="btn btn-success">Cadastrar</button>
+                   <a href="<?php echo base_url('/usuario/') ?>" type="" class="btn btn-default">Cancelar</a>
                </div>
             </form>
             <!--FORMULARIO DO USUARIO-->
