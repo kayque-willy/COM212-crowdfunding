@@ -41,8 +41,8 @@ class Projeto extends CI_Controller {
 				$config['allowed_types'] = 'gif|jpg|png';
 				$config['overwrite']=TRUE;
 				$config['max_size']  = '10048000';
-				//$config['max_width'] = '10000';
-				//$config['max_height'] = '10000';
+				$config['max_width'] = '10000';
+				$config['max_height'] = '10000';
 				$this->load->library('upload', $config);
 				$this->upload->do_upload('imagem');
 				$imagem=$this->upload->data();

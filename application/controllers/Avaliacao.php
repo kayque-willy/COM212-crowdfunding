@@ -134,6 +134,7 @@ class Avaliacao extends CI_Controller {
 		$filtro['categoria_projeto'] = (empty($_GET['categoria'])) ? '' : $_GET['categoria'];
 
 		//Carrega a model
+		$data=null;
 		$this->load->model('avaliacao_model');
 		$this->load->model('nota_avaliacao_model');
 			

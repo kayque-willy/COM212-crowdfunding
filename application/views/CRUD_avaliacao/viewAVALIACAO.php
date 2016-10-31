@@ -46,7 +46,7 @@
                     <input name="codigo" type="number" class="form-control" placeholder="Filtrar por codigo">
                 </div>
                 <div class="form-group">
-                    <input name="nome" type="number" class="form-control" placeholder="Filtrar por nome">
+                    <input name="nome" type="text" class="form-control" placeholder="Filtrar por nome">
                 </div>
                 <div class="form-group">
                     <select name="categoria" type="text" class="form-control" placeholder="Filtrar por categoria">
