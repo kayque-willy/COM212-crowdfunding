@@ -50,6 +50,7 @@ class Criterio_avaliacao_model extends CI_Model{
   #Retorna o objeto
   public function select($filtro='') {
    //Adiciona clausula where
+   if(!empty($filtro['status'])) $this->db->where('status', $filtro['status']);
    if(!empty($filtro['id'])) $this->db->where('id', $filtro['id']);
    if(!empty($filtro['criterio'])) $this->db->where('criterio', $filtro['criterio']);
    if(!empty($filtro['categoria_projeto'])) $this->db->where('categoriaProjeto', $filtro['categoria_projeto']);

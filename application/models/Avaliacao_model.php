@@ -8,7 +8,7 @@ class Avaliacao_model extends CI_Model{
   public $data;
  
   #constroi o objeto
-  public function __construct($id='', $codigoAvaliador='',$codigoProjeto='',$codAvaliador='',$nomeAvaliador='',$data=''){
+  public function __construct($id='', $codigoAvaliador='',$codigoProjeto='',$nomeAvaliador='',$data=''){
      if(isset($id)) $this->id=$id;
      if(isset($codigoAvaliador)) $this->codigoAvaliador=$codigoAvaliador;
      if(isset($codigoProjeto)) $this->codigoProjeto=$codigoProjeto;
@@ -20,8 +20,8 @@ class Avaliacao_model extends CI_Model{
   public function insert(){
     //Cria um vetor de valores para atualização
      $data = []; 
-     if(isset($this->codigoAvaliador)) $data['codigoAvaliador'] = $this->codigoAvaliador;
-     if(isset($this->codigoProjeto)) $data['codigoProjeto'] = $this->codigoProjeto;
+     if(isset($this->codigoAvaliador)) $data['codAvaliador'] = $this->codigoAvaliador;
+     if(isset($this->codigoProjeto)) $data['codProjeto'] = $this->codigoProjeto;
      if(isset($this->nomeAvaliador)) $data['nomeAvaliador'] = $this->nomeAvaliador;
      if(isset($this->data)) $data['data'] = $this->data;
      return $this->db->insert('avaliacao',$data);
@@ -54,12 +54,12 @@ class Avaliacao_model extends CI_Model{
   #Retorna o objeto
   public function select($filtro='') {
    //Adiciona clausula where
-   if(!empty($filtro['codigo_projeto'])) $this->db->where('avaliacao.codProjeto', $filtro['codigo']);
+   if(!empty($filtro['codigo_projeto'])) $this->db->where('avaliacao.codProjeto', $filtro['codigo_projeto']);
    if(!empty($filtro['nome_projeto'])) $this->db->where('projeto.nome', $filtro['nome_projeto']);
    if(!empty($filtro['categoria_projeto'])) $this->db->where('projeto.categoria', $filtro['categoria_projeto']);
    
    //Consultar inner join
-   $this->db->select('*');    
+   $this->db->select('avaliacao.id as id, avaliacao.codAvaliador as codAvaliador, avaliacao.nomeAvaliador as nomeAvaliador, projeto.nome as projetoNome, projeto.categoria as projetoCategoria');    
    $this->db->from('avaliacao');
    $this->db->join('projeto', 'avaliacao.codProjeto = projeto.codigo','inner');
    return $this->db->get();
