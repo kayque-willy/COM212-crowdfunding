@@ -78,11 +78,11 @@ INSERT INTO `criterio` (`id`, `criterio`, `status`, `peso`, `categoriaProjeto`) 
 
 CREATE TABLE IF NOT EXISTS `nota` (
   `id_criterio` int(11) NOT NULL,
-  `id_avalicao` int(11) NOT NULL,
+  `id_avaliacao` int(11) NOT NULL,
   `nota` int(11) NOT NULL,
   `sugestoes` varchar(1000) NOT NULL,
-  PRIMARY KEY (`id_criterio`,`id_avalicao`),
-  KEY `avaliacao_notas_fk` (`id_avalicao`)
+  PRIMARY KEY (`id_criterio`,`id_avaliacao`),
+  KEY `avaliacao_notas_fk` (`id_avaliacao`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -156,7 +156,7 @@ ALTER TABLE `avaliacao`
 -- Limitadores para a tabela `nota`
 --
 ALTER TABLE `nota`
-  ADD CONSTRAINT `avaliacao_notas_fk` FOREIGN KEY (`id_avalicao`) REFERENCES `avaliacao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `avaliacao_notas_fk` FOREIGN KEY (`id_avaliacao`) REFERENCES `avaliacao` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `criterios_notas_fk` FOREIGN KEY (`id_criterio`) REFERENCES `criterio` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
   
   ALTER TABLE  `avaliacao` ADD UNIQUE (

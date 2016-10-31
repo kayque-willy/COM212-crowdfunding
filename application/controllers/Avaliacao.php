@@ -47,19 +47,46 @@ class Avaliacao extends CI_Controller {
 				$filtro['status'] ='1';
 				
 				//Realiza a consulta
-				$criterios = $criterio->select($filtro);
+				$data['criterios'] = $criterio->select($filtro);
 				
-				var_dump($data['avaliacao'],$criterios->result());
+				var_dump($data['avaliacao'],$data['criterios']->result());
 				
 				//Carrega a view das notas
-				//$this->load->view('CRUD_nota/addNOTA',$data); 
+				$this->load->view('CRUD_nota/addNOTA',$data); 
 			}else{
 				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 				redirect('/avaliacao/consultar/cad_falha', 'refresh');
 			}
 		}
 		//Carrega a view 
-		$this->load->view('CRUD_avaliacao/addAVALIACAO'); 	
+		$this->load->view('CRUD_avaliacao/addAVALIACAO'); 
+		//$this->load->view('CRUD_nota/addNOTA');
+	}
+	
+	#Cadastra as notas de avaliação do projeto
+	public function avaliar(){
+		if(!empty($_POST['id_criterio']) and !empty($_POST['nota_criterio']) and !empty($_POST['id_avaliacao'])){
+			
+			//Recebe os dados do formulario
+			$id_avaliacao = (empty($_POST['id_avaliacao'])) ? '' : $_POST['id_avaliacao'];
+			$id_criterio = (empty($_POST['id_criterio'])) ? '' : $_POST['id_criterio'];
+			$nota_criterio = (empty($_POST['nota_criterio'])) ? '' : $_POST['nota_criterio'];
+			$sugestoes = (empty($_POST['sugestoes'])) ? '' : $_POST['sugestoes'];
+			
+			//Carrega a model
+			$this->load->model('nota_avaliacao_model');
+			
+			for ($i = 0; $i < sizeof($id_criterio); $i++) {
+				$nota = new Nota_avaliacao_model($id_criterio[$i], $id_avaliacao,$nota_criterio[$i],$sugestoes);
+				$nota->insert();
+			}
+			
+			//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
+			redirect('/avaliacao/consultar/cad_sucesso', 'refresh');
+		}else{
+			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+			redirect('/avaliacao/consultar/cad_falha', 'refresh');
+		}
 	}
 	
 	#Lista os avaliacaos
@@ -108,19 +135,16 @@ class Avaliacao extends CI_Controller {
 		$filtro['categoria_projeto'] = (empty($_GET['categoria'])) ? '' : $_GET['categoria'];
 
 		//Carrega a model
-		$this->load->model('avaliacao_avaliacao_model');
+		$this->load->model('avaliacao_model');
 			
 		//Cria um novo objeto avaliacao
-		$avaliacao = new avaliacao_avaliacao_model();
+		$avaliacao = new Avaliacao_model();
 		
 		//$consulta o avaliacao
-		$data['avaliacaos']=$avaliacao->select($filtro);
-		
-		//Adiciona a categoria selecionada na view
-		$data['categoria'] = $filtro['categoria_projeto'];
+		$data['avaliacoes']=$avaliacao->select($filtro);
 		
 		//Carrega a view 
-		$this->load->view('CRUD_avaliacao/viewavaliacao',$data); 
+		$this->load->view('CRUD_avaliacao/viewAVALIACAO',$data); 
 	}
 	
 	#Altera o avaliacao

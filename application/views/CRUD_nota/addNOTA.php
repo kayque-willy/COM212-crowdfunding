@@ -25,10 +25,10 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <ul class="list-group">
-                                <a href="<?php echo base_url('/criterio/cadastrar'); ?>">
+                                <a href="<?php echo base_url('/avaliacao/cadastrar'); ?>">
                                     <li class="list-group-item list-group-item-info">Avaliar projeto</li>
                                 </a>
-                                <a href="<?php echo base_url('/criterio/consultar'); ?>">
+                                <a href="<?php echo base_url('/avaliacao/consultar'); ?>">
                                     <li class="list-group-item">Consultar avaliações</li>
                                 </a>
                             </ul>
@@ -38,33 +38,56 @@
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <!--Formulario de cadastro-->
-                        <form action="<?php echo base_url('/avaliacao/cadastrar'); ?>" method="POST" class="form-horizontal" role="form">
-                            <legend>Ficha de avaliação</legend>
+                        <form action="<?php echo base_url('/avaliacao/avaliar'); ?>" method="POST" class="form-horizontal" role="form">
+                            <!-- ID da avaliação -->
+                            <input type="hidden" name="id_avaliacao" value="<?php echo $avaliacao->id ?>">
+                            <!-- ID da avaliação -->
+                            <!-- Informaçõse do projeto -->
+                            <legend>Avaliação <?php echo $avaliacao->projetoNome ?></legend><br>
+                            <label>Categoria do projeto: <?php echo $avaliacao->projetoCategoria ?></label><br>
+                            <label>Avaliador: <?php echo $avaliacao->codAvaliador ?> | <?php echo $avaliacao->nomeAvaliador ?></label>
+                            <!-- Informaçõse do projeto -->
+                            <!--Critérios-->
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Criterio</th>
+                                        <th>Peso</th>
+                                        <th>Nota</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                 if(isset($criterios)){
+                                    foreach ($criterios->result() as $criterio){
+                                 ?>
+                                    <tr>
+                                        <td><?php echo $criterio->criterio ?></td>
+                                        <td><?php echo $criterio->peso ?></td>
+                                        <td>
+                                            <input required name="id_criterio[]" type="hidden" value="<?php echo $criterio->id ?>">
+                                            <input required name="nota_criterio[]" type="number" class="form-control" placeholder="Nota">
+                                        </td>
+                                    </tr>
+                                <?php
+                                    }
+                                 }
+                                ?>
+                                <tr>
+                                    <td>Total</td>
+                                    <td></td>
+                                    <td><input type="number" class="form-control" id="criterio" placeholder="Total"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <!--Critérios-->
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
-                                    <label>Codigo do projeto</label>
-                                    <input required name="codProjeto" type="text" class="form-control" id="criterio" placeholder="Código do projeto">
+                                    <label>Sugestões</label>
+                                    <textarea required name="sugestoes" class="form-control" placeholder="Sugestões para melhoria" rows="5" style="resize:none;" maxlength="250"></textarea>
                                 </div>
                             </div>
-                            <div class="form-group hidden-xs has-feedback">
-                                <div class="col-sm-10">
-                                    <label>Codigo do avaliador</label>
-                                    <input required name="codAvaliador" type="text" class="form-control" id="criterio" placeholder="Código do avaliador">
-                                </div>
-                            </div>
-                            <div class="form-group hidden-xs has-feedback">
-                                <div class="col-sm-10">
-                                    <label>Nome do avaliador</label>
-                                    <input required name="nomeAvaliador" type="text" class="form-control" id="criterio" placeholder="Nome do avaliador">
-                                </div>
-                            </div>
-                           <div class="form-group hidden-xs has-feedback">
-                                <div class="col-sm-10">
-                                    <label>Data da avaliação</label>
-                                    <input required name="data" type="date" class="form-control" id="criterio">
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Avaliar projeto</button>
+                            <button type="submit" class="btn btn-primary">Salvar avaliação</button>
                         </form>
                         <!--Formulario de cadastro-->
                     </div>

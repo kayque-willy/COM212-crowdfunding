@@ -25,10 +25,10 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <ul class="list-group">
-                                <a href="<?php echo base_url('/criterio/cadastrar'); ?>">
+                                <a href="<?php echo base_url('/avaliacao/cadastrar'); ?>">
                                     <li class="list-group-item list-group-item-info">Avaliar projeto</li>
                                 </a>
-                                <a href="<?php echo base_url('/criterio/consultar'); ?>">
+                                <a href="<?php echo base_url('/avaliacao/consultar'); ?>">
                                     <li class="list-group-item">Consultar avaliações</li>
                                 </a>
                             </ul>
