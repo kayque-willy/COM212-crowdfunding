@@ -1,36 +1,40 @@
-
-CREATE TABLE Notas (
-                criterios VARCHAR(255) NOT NULL,
-                notas INTEGER NOT NULL,
-                sugestoes VARCHAR(1000) NOT NULL,
-                CONSTRAINT criterios PRIMARY KEY (criterios)
-);
-
-
-CREATE TABLE Criterios (
-                Notas_criterios VARCHAR(255) NOT NULL,
-                criterios VARCHAR(1000) NOT NULL,
+CREATE TABLE criterio (
+                id INT AUTO_INCREMENT NOT NULL,
+                criterio VARCHAR(1000) NOT NULL,
                 status BOOLEAN NOT NULL,
-                peso INTEGER NOT NULL,
+                peso INT NOT NULL,
                 categoriaProjeto VARCHAR(255) NOT NULL,
-                CONSTRAINT id PRIMARY KEY (Notas_criterios)
+                PRIMARY KEY (id)
 );
 
 
-CREATE TABLE Avaliacao (
-                codigo INTEGER NOT NULL,
-                nome VARCHAR(255) NOT NULL,
-                categoria VARCHAR(100) NOT NULL,
-                codAvaliador INTEGER NOT NULL,
-                nomeAvaliador VARCHAR(255) NOT NULL,
+CREATE TABLE avaliacao (
+                id INT AUTO_INCREMENT NOT NULL,
+                codAvaliador INT NOT NULL,
+                codProjeto INT NOT NULL,
+                nomeAvaliador VARCHAR NOT NULL,
                 data DATE NOT NULL,
-                CONSTRAINT codigo PRIMARY KEY (codigo)
+                PRIMARY KEY (id)
 );
 
 
-ALTER TABLE Criterios ADD CONSTRAINT Notas_Criterios_fk
-FOREIGN KEY (Notas_criterios)
-REFERENCES Notas (criterios)
+CREATE TABLE nota (
+                id_criterio INT NOT NULL,
+                id_avalicao INT NOT NULL,
+                notas INT NOT NULL,
+                sugestoes VARCHAR(1000) NOT NULL,
+                PRIMARY KEY (id_criterio, id_avalicao)
+);
+
+
+ALTER TABLE nota ADD CONSTRAINT criterios_notas_fk
+FOREIGN KEY (id_criterio)
+REFERENCES criterio (id)
 ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
+ON UPDATE NO ACTION;
+
+ALTER TABLE nota ADD CONSTRAINT avaliacao_notas_fk
+FOREIGN KEY (id_avalicao)
+REFERENCES avaliacao (id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION;
