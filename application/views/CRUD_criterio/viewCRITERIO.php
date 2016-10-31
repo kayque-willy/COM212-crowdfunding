@@ -96,11 +96,11 @@
                                 <?php
                                     if($criterio->status=='1'){
                                 ?> 
-                                    <a class="btn btn-block btn-primary btn-xs disabled" data-toggle="button">Ativo</a><br>
+                                    <a class="btn btn-block btn-success btn-xs disabled" data-toggle="button">Ativo</a><br>
                                 <?php
                                     }else{
                                 ?> 
-                                     <a class="btn btn-block btn-success btn-xs disabled" data-toggle="button">Desativado</a><br>
+                                     <a class="btn btn-block btn-danger btn-xs disabled" data-toggle="button">Desativado</a><br>
                                 <?php
                                     }
                                 ?> 

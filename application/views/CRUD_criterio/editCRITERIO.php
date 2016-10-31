@@ -37,24 +37,33 @@
                 </div>
                 <div class="col-md-8">
                     <div class="col-md-12">
+                        <?php
+                        if(isset($criterio)){
+                            foreach ($criterio->result() as $crit) {
+                        ?>
                         <!--Formulario de cadastro-->
                         <form action="<?php echo base_url('/criterio/alterar'); ?>" method="POST" class="form-horizontal" role="form">
+                            <input type="hidden" name="id" value='<?php echo $crit->id; ?>'>
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
                                     <label>Critério</label>
-                                    <input required name="criterio" type="text" class="form-control" id="criterio" placeholder="Critério de avaliação de projeto">
+                                    <input required name="criterio" type="text" class="form-control" id="criterio" placeholder="Critério de avaliação de projeto" value='<?php echo $crit->criterio; ?>'>
                                 </div>
                             </div>
                             <label>Peso</label>
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
-                                    <input required name="peso" type="number" class="form-control" id="peso" placeholder="0 a 10" max="10" min="0">
+                                    <input required name="peso" type="number" class="form-control" id="peso" placeholder="0 a 10" max="10" min="0" value='<?php echo $crit->peso; ?>'>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Atualizar critério</button>
                             <a href="<?php echo base_url('/criterio/consultar'); ?>" class="btn btn-default">Cancelar</a>
                         </form>
                         <!--Formulario de cadastro-->
+                         <?php
+                            }
+                        }
+                        ?>
                     </div>
                 </div>
             </div>

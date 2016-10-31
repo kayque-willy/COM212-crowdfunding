@@ -38,8 +38,8 @@ class Criterio_avaliacao_model extends CI_Model{
   public function update ($id='') {
      //Cria um vetor de valores para atualização
      $data = [];
-     if(isset($this->status)) $data['status'] = $this->status;
-     if(isset($this->categoriaProjeto)) $data['categoriaProjeto'] = $this->categoriaProjeto;
+     if(isset($this->criterio)) $data['criterio'] = $this->criterio;
+     if(isset($this->peso)) $data['peso'] = $this->peso;
   
      //Cria um vetor com a chave primária 
      $where['id']=$id;

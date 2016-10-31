@@ -69,6 +69,14 @@ class Criterio extends CI_Controller {
 					$data['falha']=true;
 					$data['msg'] = 'Falha ao remover o criterio!';
 					break;
+				case 'ativ_sucesso':
+					$data['sucesso']=true;
+					$data['msg'] = 'Criterio ativado com sucesso!';
+					break;
+				case 'ativ_falha':
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao ativar o criterio!';
+					break;
 			}
 		}
 		
@@ -104,7 +112,7 @@ class Criterio extends CI_Controller {
 			$this->load->model('criterio_avaliacao_model');
 				
 			//Cria um novo criterio com os dados do POST
-			$criterio = new Criterio_avaliacao_model(null,$criterio,$status,$peso,$categoriaProjeto);
+			$criterio = new Criterio_avaliacao_model(null,$criterio,null,$peso,null);
 
 			//Atualiza o criterio no banco
 			if($criterio->update($id)){
@@ -153,6 +161,25 @@ class Criterio extends CI_Controller {
 		}else{
 			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 			redirect('/criterio/consultar/des_falha', 'refresh');
+		}
+	}
+	
+	#Ativar o criterio 
+	public function ativar($id=''){
+		
+		//Carrega a model
+		$this->load->model('criterio_avaliacao_model');
+			
+		//Cria um novo criterio com os dados do POST
+		$criterio = new Criterio_avaliacao_model($id);
+		
+		//Desativa o criterio
+		if($criterio->ativar()){
+			//Se a operação for bem sucedida, redireciona com mensagem de sucesso
+			redirect('/criterio/consultar/ativ_sucesso', 'refresh');
+		}else{
+			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+			redirect('/criterio/consultar/ativ_falha', 'refresh');
 		}
 	}
 }
