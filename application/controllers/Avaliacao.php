@@ -49,8 +49,6 @@ class Avaliacao extends CI_Controller {
 				//Realiza a consulta
 				$data['criterios'] = $criterio->select($filtro);
 				
-				var_dump($data['avaliacao'],$data['criterios']->result());
-				
 				//Carrega a view das notas
 				$this->load->view('CRUD_nota/addNOTA',$data); 
 			}else{
@@ -159,48 +157,65 @@ class Avaliacao extends CI_Controller {
 	}
 	
 	#Altera o avaliacao
-	public function alterar($id=''){
-		//Recebe os dados do formulario para atualização
+	public function alterar($codProjeto=''){
+			
 		if(!empty($_POST)){
-			$id = (empty($_POST['id'])) ? '' : $_POST['id'];
-			$avaliacao = (empty($_POST['avaliacao'])) ? '' : $_POST['avaliacao'];
-			$peso = (empty($_POST['peso'])) ? '' : $_POST['peso'];
-		
-			//Carrega a model
-			$this->load->model('avaliacao_avaliacao_model');
+			if(!empty($_POST['id_criterio']) and !empty($_POST['nota_criterio']) and !empty($_POST['id_avaliacao'])){
+				//Recebe os dados do formulario
+				$id_avaliacao = (empty($_POST['id_avaliacao'])) ? '' : $_POST['id_avaliacao'];
+				$id_criterio = (empty($_POST['id_criterio'])) ? '' : $_POST['id_criterio'];
+				$nota_criterio = (empty($_POST['nota_criterio'])) ? '' : $_POST['nota_criterio'];
+				$sugestoes = (empty($_POST['sugestoes'])) ? '' : $_POST['sugestoes'];
 				
-			//Cria um novo avaliacao com os dados do POST
-			$avaliacao = new avaliacao_avaliacao_model(null,$avaliacao,null,$peso,null);
-
-			//Atualiza o avaliacao no banco
-			if($avaliacao->update($id)){
-				//Se a operação for bem sucedida, redireciona com mensagem de sucesso
-				redirect('/avaliacao/consultar/alt_sucesso', 'refresh');
+				//Carrega a model
+				$this->load->model('nota_avaliacao_model');
+				
+				for ($i = 0; $i < sizeof($id_criterio); $i++) {
+					$nota = new Nota_avaliacao_model(null,null,$nota_criterio[$i]);
+					$nota->update($id_criterio[$i],$id_avaliacao);
+				}
+				
+				//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
+				redirect('/avaliacao/consultar/edit_sucesso', 'refresh');
 			}else{
 				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
-				redirect('/avaliacao/consultar/alt_falha', 'refresh');
+				redirect('/avaliacao/consultar/edit_falha', 'refresh');
 			}
+			
 		}
 		
-		//Recupera os dados
-		if(!empty($id)){
-			$filtro['id']=$id;
-			
-			//Carrega a model
-			$this->load->model('avaliacao_avaliacao_model');
+		//Insere o avaliacao no banco
+		if(!empty($codProjeto)){
+			//Se a operação for bem sucedida, consulta o ID da avaliação conforme o codigo do projeto
+			$filtro['codigo_projeto']=$codProjeto;
 				
-			//Cria um novo avaliacao com os dados do POST
-			$avaliacao = new avaliacao_avaliacao_model();
-
-			//consulta o projeto pelo codigo
-			$data['avaliacao']=$avaliacao->select($filtro);
+			//Carrega a model
+			$this->load->model('avaliacao_model');
+			$this->load->model('nota_avaliacao_model');
+				
+			//Cria um novo objeto avaliacao
+			$avaliacao = new Avaliacao_model();
 			
-			//Carrega a view 
-			$this->load->view('CRUD_avaliacao/editavaliacao',$data); 
+			//consulta avaliacao e notas
+			$result=$avaliacao->select($filtro);
+			$avaliacoes=[];
+			foreach ($result->result() as $avaliacao){
+				$filtro['id_avaliacao']=$avaliacao->id;
+				$notas = new Nota_avaliacao_model();
+				$avaliacoes['avaliacao'] = $avaliacao;
+				$avaliacoes['notas'] = $notas->select($filtro);
+				$avaliacoes['notas'] = $avaliacoes['notas']->result();
+				$data['avaliacao'][]=$avaliacoes;
+			}
+				
+			//Organiza os resultados
+			$data['avaliacao']=$data['avaliacao'][0];
+				
+			//Carrega a view das notas
+			$this->load->view('CRUD_nota/editNOTA',$data); 
 		}else{
 			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
-			redirect('/avaliacao/consultar/alt_falha', 'refresh');
+			redirect('/avaliacao/consultar/cad_falha', 'refresh');
 		}
 	}
-	
 }

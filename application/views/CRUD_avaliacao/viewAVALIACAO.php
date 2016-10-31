@@ -118,7 +118,7 @@
                                 </tbody>
                             </table>
                             <div class="text-right">
-                                    <a href="<?php echo base_url('/avaliacao/alterar/'.$avaliacao['avaliacao']->id); ?>" class="active btn btn-primary hidden-xs">
+                                    <a href="<?php echo base_url('/avaliacao/alterar/'.$avaliacao['avaliacao']->codProjeto); ?>" class="active btn btn-primary hidden-xs">
                                         Alterar
                                     </a>
                                 </div>

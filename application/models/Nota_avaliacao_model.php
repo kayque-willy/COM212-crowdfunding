@@ -38,7 +38,6 @@ class Nota_avaliacao_model extends CI_Model{
      //Cria um vetor de valores para atualização
      $data = [];
      if(isset($this->nota)) $data['nota'] = $this->nota;
-     if(isset($this->sugestoes)) $data['sugestoes'] = $this->sugestoes;
     
      //Cria um vetor com a chave primária 
      $where['id_criterio']=$id_criterio;
@@ -53,7 +52,7 @@ class Nota_avaliacao_model extends CI_Model{
    if(!empty($filtro['id_avaliacao'])) $this->db->where('nota.id_avaliacao', $filtro['id_avaliacao']);
   
    //Consultar inner join
-   $this->db->select('nota.nota as nota, nota.sugestoes as sugestoes, criterio.criterio as criterio, criterio.peso as peso');    
+   $this->db->select('nota.nota as nota, nota.sugestoes as sugestoes, criterio.criterio as criterio, criterio.peso as peso, criterio.id as idCriterio');    
    $this->db->from('nota');
    $this->db->join('criterio', 'nota.id_criterio = criterio.id','inner');
    return $this->db->get();
