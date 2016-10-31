@@ -40,9 +40,7 @@
     <!-- Inicio de um CRUD -->
     <div id="main" class="container-fluid">
         <h3 class="page-header">Projetos candidatos</h3>
-        <?php 
-                if (isset($sucesso)){ 
-            ?>
+        <?php if (isset($sucesso)){  ?>
         <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <strong>Operação realizada com sucesso!</strong>
@@ -51,10 +49,7 @@
             </p>
         </div>
         <?php } ?>
-        <?php 
-                
-            if (isset($falha)){ 
-            ?>
+        <?php if (isset($falha)){ ?>
         <div class="alert alert-danger">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             <strong>Falha ao realizar operação!</strong>

@@ -5,18 +5,8 @@ class Criterio extends CI_Controller {
 
 	#Index do controller
 	public function index() {
-	   	
-		//Carrega a model
-		$this->load->model('criterio_avaliacao_model');
-			
-		//Cria um novo objeto criterio
-		$criterio = new Criterio_avaliacao_model();
-		
-		//$consulta o criterio
-		$data['criterios']=criterio->select();
-		
-	   //Carrega a view da index do projeto
-	   $this->load->view('CRUD_criterio/indexCRITERIO_fim',$data); 
+	   //Redirenciona para a consulta
+	   redirect('/criterio/consultar','refresh');
 	 }
 	
 	#Cria um novo criterio
