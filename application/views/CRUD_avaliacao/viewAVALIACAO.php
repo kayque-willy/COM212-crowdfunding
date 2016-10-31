@@ -80,43 +80,51 @@
                     <br>
                     <ul class="media-list">
                         <?php 
-                            if(!empty($categoria)){
+                        if(!empty($avaliacoes)){
+                            foreach($avaliacoes as $avaliacao){
                         ?>
-                            <h3 class="page-header"><?php echo $categoria ?></h3>
-                        <?php 
-                            }
-                        ?>
-                        <?php 
-                        if(!empty($criterios)){
-                            foreach($criterios->result() as $criterio){
-                        ?>
-                       
                         <li class="media">
                             <div class="media-body">
-                                <h4 class="media-heading"><?php echo $criterio->criterio ?></h4>
-                                <span><b>Categoria:</b> <?php echo $criterio->categoriaProjeto ?></span><br>
-                                <span><b>Peso:</b> <?php echo $criterio->peso ?></span>
+                                <h4 class="page-header"><?php echo $avaliacao['avaliacao']->projetoNome ?></h4>
+                                <span><b>Codigo:</b> <?php echo $avaliacao['avaliacao']->codProjeto ?></span><br>
+                                <span><b>Categoria:</b> <?php echo $avaliacao['avaliacao']->projetoCategoria ?></span><br>
+                                <span><b>ID da avaliação:</b> <?php echo $avaliacao['avaliacao']->id ?></span><br>
+                                <span><b>Avaliador:</b> <?php echo $avaliacao['avaliacao']->codAvaliador ?> - <?php echo $avaliacao['avaliacao']->nomeAvaliador ?></span>
+                                
+                            </div>
+                            <!--Critérios-->
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Criterio</th>
+                                        <th>Peso</th>
+                                        <th>Nota</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                 <?php
-                                    if($criterio->status=='1'){
-                                ?> 
-                                    <a class="btn btn-block btn-success btn-xs disabled" data-toggle="button">Ativo</a><br>
-                                <?php
-                                    }else{
-                                ?> 
-                                     <a class="btn btn-block btn-danger btn-xs disabled" data-toggle="button">Desativado</a><br>
+                                 if(isset($avaliacao['notas'])){
+                                    foreach ($avaliacao['notas'] as $nota){
+                                 ?>
+                                    <tr>
+                                        <td><?php echo $nota->criterio ?></td>
+                                        <td><?php echo $nota->peso ?></td>
+                                        <td><?php echo $nota->nota ?></td>
+                                    </tr>
                                 <?php
                                     }
-                                ?> 
-                                <div class="text-center">
-                                    <a href="<?php echo base_url('/criterio/alterar/'.$criterio->id); ?>" class="active btn btn-primary hidden-xs">
+                                 }
+                                ?>
+                                </tbody>
+                            </table>
+                            <div class="text-right">
+                                    <a href="<?php echo base_url('/avaliacao/alterar/'.$avaliacao['avaliacao']->id); ?>" class="active btn btn-primary hidden-xs">
                                         Alterar
-                                        <br>
                                     </a>
-                                    <a href="<?php echo base_url('/criterio/ativar/'.$criterio->id); ?>" class="btn btn-primary">Ativar</a>
-                                    <a href="<?php echo base_url('/criterio/desativar/'.$criterio->id); ?>" class="btn btn-default">Desativar</a> 
                                 </div>
-                            </div>
+                            <!--Critérios-->
                         </li>
+                         <hr>
                         <?php 
                             }
                         }

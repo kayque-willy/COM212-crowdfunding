@@ -131,17 +131,28 @@ class Avaliacao extends CI_Controller {
 		}
 		
 		//Recebe o filtro
-		$filtro['avaliacao'] = (empty($_GET['avaliacao'])) ? '' : $_GET['avaliacao'];
+		$filtro['codigo_projeto'] = (empty($_GET['codigo'])) ? '' : $_GET['codigo'];
+		$filtro['nome_projeto'] = (empty($_GET['nome'])) ? '' : $_GET['nome'];
 		$filtro['categoria_projeto'] = (empty($_GET['categoria'])) ? '' : $_GET['categoria'];
 
 		//Carrega a model
 		$this->load->model('avaliacao_model');
+		$this->load->model('nota_avaliacao_model');
 			
 		//Cria um novo objeto avaliacao
 		$avaliacao = new Avaliacao_model();
 		
-		//$consulta o avaliacao
-		$data['avaliacoes']=$avaliacao->select($filtro);
+		//consulta avaliacao e notas
+		$result=$avaliacao->select($filtro);
+		$avaliacoes=[];
+		foreach ($result->result() as $avaliacao){
+			$filtro['id_avaliacao']=$avaliacao->id;
+			$notas = new Nota_avaliacao_model();
+			$avaliacoes['avaliacao'] = $avaliacao;
+			$avaliacoes['notas'] = $notas->select($filtro);
+			$avaliacoes['notas'] = $avaliacoes['notas']->result();
+			$data['avaliacoes'][]=$avaliacoes;
+		}
 		
 		//Carrega a view 
 		$this->load->view('CRUD_avaliacao/viewAVALIACAO',$data); 

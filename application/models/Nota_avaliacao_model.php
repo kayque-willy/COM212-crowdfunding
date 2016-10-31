@@ -50,8 +50,13 @@ class Nota_avaliacao_model extends CI_Model{
   #Retorna o objeto
   public function select($filtro='') {
    //Adiciona clausula where
-   if(!empty($filtro['categoria'])) $this->db->where('codigo', $filtro['codigo']);
-   if(!empty($filtro['criterio'])) $this->db->where('nome', $filtro['nome']);
-   return $this->db->get('projeto');
+   if(!empty($filtro['id_avaliacao'])) $this->db->where('nota.id_avaliacao', $filtro['id_avaliacao']);
+  
+   //Consultar inner join
+   $this->db->select('nota.nota as nota, nota.sugestoes as sugestoes, criterio.criterio as criterio, criterio.peso as peso');    
+   $this->db->from('nota');
+   $this->db->join('criterio', 'nota.id_criterio = criterio.id','inner');
+   return $this->db->get();
+   
   }
 }
