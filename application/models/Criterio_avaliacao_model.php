@@ -20,7 +20,6 @@ class Criterio_avaliacao_model extends CI_Model{
   public function insert(){
      //Cria um vetor de valores para atualização
      $data = []; 
-     if(isset($this->id)) $data['id'] = $this->id;
      if(isset($this->criterio)) $data['criterio'] = $this->criterio;
      if(isset($this->status)) $data['status'] = $this->status;
      if(isset($this->peso)) $data['peso'] = $this->peso;
@@ -51,6 +50,7 @@ class Criterio_avaliacao_model extends CI_Model{
   #Retorna o objeto
   public function select($filtro='') {
    //Adiciona clausula where
+   if(!empty($filtro['id'])) $this->db->where('id', $filtro['id']);
    if(!empty($filtro['criterio'])) $this->db->where('criterio', $filtro['criterio']);
    if(!empty($filtro['categoria_projeto'])) $this->db->where('categoria_projeto', $filtro['categoria_projeto']);
    return $this->db->get('criterio');

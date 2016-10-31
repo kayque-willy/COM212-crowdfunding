@@ -3,14 +3,14 @@ class Nota_avaliacao_model extends CI_Model{
  
   public $id_criterio;
   public $id_avaliacao;
-  public $notas;
+  public $nota;
   public $sugestoes;
   
   #constroi o objeto
-  public function __construct($id_criterio='', $id_avaliacao='',$notas='',$sugestoes=''){
+  public function __construct($id_criterio='', $id_avaliacao='',$nota='',$sugestoes=''){
      if(isset($id_criterio)) $this->id_criterio=$id_criterio;
      if(isset($id_avaliacao)) $this->id_avaliacao=$id_avaliacao;
-     if(isset($notas)) $this->notas=$notas;
+     if(isset($nota)) $this->nota=$nota;
      if(isset($sugestoes)) $this->sugestoes=$sugestoes;
   }
   
@@ -20,7 +20,7 @@ class Nota_avaliacao_model extends CI_Model{
      $data = []; 
      if(isset($this->id_criterio)) $data['id_criterio'] = $this->id_criterio;
      if(isset($this->id_avaliacao)) $data['id_avaliacao'] = $this->id_avaliacao;
-     if(isset($this->notas)) $data['notas'] = $this->notas;
+     if(isset($this->nota)) $data['nota'] = $this->nota;
      if(isset($this->sugestoes)) $data['sugestoes'] = $this->sugestoes;
      return $this->db->insert('nota',$data);
   }
@@ -37,7 +37,7 @@ class Nota_avaliacao_model extends CI_Model{
   public function update ($id_criterio='',$id_avaliacao='') {
      //Cria um vetor de valores para atualização
      $data = [];
-     if(isset($this->notas)) $data['notas'] = $this->notas;
+     if(isset($this->nota)) $data['nota'] = $this->nota;
      if(isset($this->sugestoes)) $data['sugestoes'] = $this->sugestoes;
     
      //Cria um vetor com a chave primária 

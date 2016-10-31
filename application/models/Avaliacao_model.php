@@ -44,7 +44,6 @@ class Avaliacao_model extends CI_Model{
      if(isset($this->nomeAvaliador)) $data['nomeAvaliador'] = $this->nomeAvaliador;
      if(isset($this->data)) $data['data'] = $this->data;
      
-  
      //Cria um vetor com a chave primária 
      $where['id']=$id;
      
