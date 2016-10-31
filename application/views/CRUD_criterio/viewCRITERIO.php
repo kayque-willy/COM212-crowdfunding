@@ -41,7 +41,7 @@
             <?php } ?>
             <!--mensagem-->
             <!--filtro-->
-            <form action="<?php echo base_url('/projeto/consultar'); ?>" class="form-inline pull-right" method="GET">
+            <form action="<?php echo base_url('/criterio/consultar'); ?>" class="form-inline pull-right" method="GET">
                 <div class="form-group">
                     <input name="criterio" type="text" class="form-control" placeholder="Filtrar por criterio">
                 </div>
@@ -74,37 +74,50 @@
                     </div>
                 </div>
                 <div class="col-md-8">
+                    <br>
                     <ul class="media-list">
+                        <?php 
+                            if(!empty($categoria)){
+                        ?>
+                            <h3 class="page-header"><?php echo $categoria ?></h3>
+                        <?php 
+                            }
+                        ?>
+                        <?php 
+                        if(!empty($criterios)){
+                            foreach($criterios->result() as $criterio){
+                        ?>
+                       
                         <li class="media">
                             <div class="media-body">
-                                <h4 class="media-heading">Criterio 1</h4>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                                <a class="btn btn-block btn-primary btn-xs disabled" data-toggle="button">Ativo</a><br>
+                                <h4 class="media-heading"><?php echo $criterio->criterio ?></h4>
+                                <span><b>Categoria:</b> <?php echo $criterio->categoriaProjeto ?></span><br>
+                                <span><b>Peso:</b> <?php echo $criterio->peso ?></span>
+                                <?php
+                                    if($criterio->status=='1'){
+                                ?> 
+                                    <a class="btn btn-block btn-primary btn-xs disabled" data-toggle="button">Ativo</a><br>
+                                <?php
+                                    }else{
+                                ?> 
+                                     <a class="btn btn-block btn-success btn-xs disabled" data-toggle="button">Desativado</a><br>
+                                <?php
+                                    }
+                                ?> 
                                 <div class="text-center">
-                                    <a href="<?php echo base_url('/criterio/alterar'); ?>" class="active btn btn-primary hidden-xs">
-                                        <span style="font-size: 18.6667px; line-height: 14px;">Alterar</span>
+                                    <a href="<?php echo base_url('/criterio/alterar/'.$criterio->id); ?>" class="active btn btn-primary hidden-xs">
+                                        Alterar
                                         <br>
                                     </a>
-                                    <a href="<?php echo base_url('/criterio/desativar'); ?>" class="btn btn-primary">Ativar</a>
-                                    <a href="<?php echo base_url('/criterio/desativar'); ?>" class="btn btn-default">Desativar</a> 
+                                    <a href="<?php echo base_url('/criterio/ativar/'.$criterio->id); ?>" class="btn btn-primary">Ativar</a>
+                                    <a href="<?php echo base_url('/criterio/desativar/'.$criterio->id); ?>" class="btn btn-default">Desativar</a> 
                                 </div>
                             </div>
                         </li>
-                        <li class="media">
-                            <div class="media-body">
-                                <h4 class="media-heading">Criterio 1</h4>
-                                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
-                                <a class="btn btn-block btn-success btn-xs disabled" data-toggle="button">Desativado</a><br>
-                                 <div class="text-center">
-                                    <a href="<?php echo base_url('/criterio/alterar'); ?>" class="active btn btn-primary hidden-xs">
-                                        <span style="font-size: 18.6667px; line-height: 14px;">Alterar</span>
-                                        <br>
-                                    </a>
-                                    <a href="<?php echo base_url('/criterio/desativar'); ?>" class="btn btn-primary">Ativar</a>
-                                    <a href="<?php echo base_url('/criterio/desativar'); ?>" class="btn btn-default">Desativar</a> 
-                                </div>
-                            </div>
-                        </li>
+                        <?php 
+                            }
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>

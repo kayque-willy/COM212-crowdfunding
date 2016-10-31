@@ -52,7 +52,7 @@ class Criterio_avaliacao_model extends CI_Model{
    //Adiciona clausula where
    if(!empty($filtro['id'])) $this->db->where('id', $filtro['id']);
    if(!empty($filtro['criterio'])) $this->db->where('criterio', $filtro['criterio']);
-   if(!empty($filtro['categoria_projeto'])) $this->db->where('categoria_projeto', $filtro['categoria_projeto']);
+   if(!empty($filtro['categoria_projeto'])) $this->db->where('categoriaProjeto', $filtro['categoria_projeto']);
    return $this->db->get('criterio');
   }
   
@@ -66,6 +66,19 @@ class Criterio_avaliacao_model extends CI_Model{
     if(isset($this->id)) $where['id'] = $this->id;   
    
     //$this->db->update(nome da tabela,valores de atualização,referência)
-    return $this->db->update('usuario',$data,$where);
+    return $this->db->update('criterio',$data,$where);
+  }
+  
+  #Ativa o critério de acord com a chave primaria
+  public function ativar(){
+    //Cria um vetor de valores para atualização
+    $data = [];
+    $data['status'] = '1';
+    
+    //Cria um vetor com a chave primaria
+    if(isset($this->id)) $where['id'] = $this->id;   
+   
+    //$this->db->update(nome da tabela,valores de atualização,referência)
+    return $this->db->update('criterio',$data,$where);
   }
 }

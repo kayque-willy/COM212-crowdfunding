@@ -85,6 +85,9 @@ class Criterio extends CI_Controller {
 		//$consulta o criterio
 		$data['criterios']=$criterio->select($filtro);
 		
+		//Adiciona a categoria selecionada na view
+		$data['categoria'] = $filtro['categoria_projeto'];
+		
 		//Carrega a view 
 		$this->load->view('CRUD_criterio/viewCRITERIO',$data); 
 	}

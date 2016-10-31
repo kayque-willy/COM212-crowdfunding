@@ -38,39 +38,11 @@
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <!--Formulario de cadastro-->
-                        <form action="<?php echo base_url('/criterio/cadastrar'); ?>" method="POST" class="form-horizontal" role="form">
+                        <form action="<?php echo base_url('/criterio/alterar'); ?>" method="POST" class="form-horizontal" role="form">
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
                                     <label>Critério</label>
                                     <input required name="criterio" type="text" class="form-control" id="criterio" placeholder="Critério de avaliação de projeto">
-                                </div>
-                            </div>
-                            <label>Categoria do Projeto</label>
-                            <div class="form-group hidden-xs has-feedback">
-                                <div class="col-sm-10">
-                                    <select required name="categoria" type="text" class="form-control" id="categoria">
-                                        <option value="" disabled selected>Categoria do projeto</option>
-                                        <option>Pesquisa</option>
-                                        <option>Competição Tecnológica</option>
-                                        <option>Inovação no Ensino</option>
-                                        <option>Manutenção e Reforma</option>
-                                        <option>Pequenas Obras</option>
-                                     </select>
-                                </div>
-                            </div>
-                            <label>Status</label>
-                            <div class="form-group hidden-xs has-feedback">
-                                <div class="col-sm-10">
-                                    <div class="radio">
-                                        <label>
-                                              <input type="radio" name="status" id="status1" value="1" checked="">
-                                              Ativado
-                                        </div>
-                                        <div class="radio">
-                                            <label>
-                                              <input type="radio" name="status" id="status2" value="0" checked="">
-                                              Desativado</label>
-                                    </div>
                                 </div>
                             </div>
                             <label>Peso</label>
@@ -79,7 +51,8 @@
                                     <input required name="peso" type="number" class="form-control" id="peso" placeholder="0 a 10" max="10" min="0">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <button type="submit" class="btn btn-primary">Atualizar critério</button>
+                            <a href="<?php echo base_url('/criterio/consultar'); ?>" class="btn btn-default">Cancelar</a>
                         </form>
                         <!--Formulario de cadastro-->
                     </div>
