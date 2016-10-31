@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <link rel="stylesheet" type="text/css" href="/assets/fonts/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css">
         <link rel="stylesheet" href="/assets/css/estilo.css">
+        <link href="//pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css" rel="stylesheet" type="text/css">
     </head>
 
     <body>
@@ -81,5 +82,57 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </nav>
         <!--Menu superior-->
+        <!--Conteudo-->
+        <div class="cover">
+            <div class="cover-image" style="background-image : url('http://www.ongsnobrasil.com.br/wp-content/uploads/2015/12/crowdfunding-2.jpg')"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1 class="text-inverse">Crowdfunding
+                            <br>UNIFEI</h1>
+                        <p class="text-inverse">Projeto desenvolvido para a disciplina de Gerencia de Projetos (COM212)</p>
+                        <br>
+                        <br>
+                        <a class="btn btn-lg btn-primary">Projetos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="https://www.unifei.edu.br/files/imagens_site/prceu/Logo%20Cheetah%20E-Racing.png" class="img-responsive">
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="text-primary">Projeto</h1>
+                        <h3>A subtitle</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
+                            eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis
+                            pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img class="img-responsive" src="https://yt3.ggpht.com/-lVQum5ud-ZI/AAAAAAAAAAI/AAAAAAAAAAA/wfFo2xNrMxA/s900-c-k-no-mo-rj-c0xffffff/photo.jpg">
+                    </div>
+                    <div class="col-md-6">
+                        <h1 class="text-primary">A title</h1>
+                        <h3>A subtitle</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque
+                            eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis
+                            pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Conteudo-->
+        <!--Footer-->
+        <?php $this->load->view("footer");?>
+        <!--Footer-->
     </body>
-    </html>
+</html>
