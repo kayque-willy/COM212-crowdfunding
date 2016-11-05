@@ -39,7 +39,8 @@
     <!--Header-->
     <!-- Inicio de um CRUD -->
     <div id="main" class="container-fluid">
-        <h3 class="page-header">Projetos candidatos</h3>
+        <h3 class="page-header text-center">Projetos candidatos</h3>
+        <!-- Mensagem -->
         <?php if (isset($sucesso)){  ?>
         <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -58,9 +59,9 @@
             </p>
         </div>
         <?php } ?>
-
-        <a href="<?php echo base_url('/projeto/cadastrar'); ?>" class="btn btn-success">Cadastrar novo projeto</a><br><br>
-        <form action="<?php echo base_url('/projeto/consultar'); ?>" class="form-inline" method="GET">
+        <!-- Mensagem -->
+        <!--Filtro -->
+        <form action="<?php echo base_url('/projeto/consultar'); ?>" class="form-inline pull-right" method="GET">
             <div class="form-group">
                 <input name="codigo" type="text" class="form-control" placeholder="Filtrar por codigo">
             </div>
@@ -79,7 +80,26 @@
             </div>
             <button type="submit" class="btn btn-primary">Filtrar</button>
         </form>
-        <div class="center-block">
+        <!--Filtro -->
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-primary">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a href="<?php echo base_url('/projeto/cadastrar'); ?>">Cadastrar novo projeto</a>
+                                </li>
+                                </a>
+                                <a href="<?php echo base_url('/projeto/consultar'); ?>">
+                                    <li class="list-group-item list-group-item-info">Listar Projetos candidatos</li>
+                                </a>
+                            </ul>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-md-8">
+                 <div class="center-block">
             <table class="table">
                 <thead>
                     <tr>
@@ -114,6 +134,11 @@
                 </tbody>
             </table>
         </div>
+                
+            </div>
+        </div>
+        
+       
     </div>
     <!--Footer-->
     <?php $this->load->view("footer");?>

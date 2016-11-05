@@ -75,50 +75,64 @@
                 </div>
                 <div class="col-md-8">
                     <br>
-                    <ul class="media-list">
-                        <?php 
+                    <table class="table">
+                         <?php 
                             if(!empty($categoria)){
                         ?>
-                            <h3 class="page-header"><?php echo $categoria ?></h3>
+                            <caption class="page-header"><?php echo $categoria ?></caption>
                         <?php 
                             }
                         ?>
-                        <?php 
+                        <thead>
+                            <tr>
+                                <th>Critério</th>
+                                <th>Categoria do projeto</th>
+                                <th>Peso</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                        <?php
                         if(!empty($criterios)){
                             foreach($criterios->result() as $criterio){
                         ?>
-                       
-                        <li class="media">
-                            <div class="media-body">
-                                <h4 class="media-heading"><?php echo $criterio->criterio ?></h4>
-                                <span><b>Categoria:</b> <?php echo $criterio->categoriaProjeto ?></span><br>
-                                <span><b>Peso:</b> <?php echo $criterio->peso ?></span>
-                                <?php
+                           <tr>
+                               <td><?php echo $criterio->criterio ?></td>
+                               <td><?php echo $criterio->categoriaProjeto ?></td>
+                               <td><?php echo $criterio->peso ?></td>
+                               <?php
                                     if($criterio->status=='1'){
-                                ?> 
-                                    <a class="btn btn-block btn-success btn-xs disabled" data-toggle="button">Ativo</a><br>
-                                <?php
+                               ?> 
+                                    <td class="success text-center" data-toggle="button">Ativo</td>
+                               <?php
                                     }else{
-                                ?> 
-                                     <a class="btn btn-block btn-danger btn-xs disabled" data-toggle="button">Desativado</a><br>
-                                <?php
+                               ?> 
+                                     <td class="danger text-center" data-toggle="button">Desativado</td>
+                               <?php
                                     }
-                                ?> 
-                                <div class="text-center">
-                                    <a href="<?php echo base_url('/criterio/alterar/'.$criterio->id); ?>" class="active btn btn-primary hidden-xs">
+                               ?> 
+                                <td class="text-center">
+                                   <a href="<?php echo base_url('/criterio/alterar/'.$criterio->id); ?>" class="btn btn-sm btn-primary hidden-xs">
                                         Alterar
-                                        <br>
-                                    </a>
-                                    <a href="<?php echo base_url('/criterio/ativar/'.$criterio->id); ?>" class="btn btn-primary">Ativar</a>
-                                    <a href="<?php echo base_url('/criterio/desativar/'.$criterio->id); ?>" class="btn btn-default">Desativar</a> 
-                                </div>
-                            </div>
-                        </li>
+                                   </a>
+                                   <?php
+                                        if($criterio->status=='0'){
+                                   ?> 
+                                        <a href="<?php echo base_url('/criterio/ativar/'.$criterio->id); ?>" class="btn btn-sm btn-success">Ativar</a>
+                                   <?php
+                                        }else{
+                                   ?> 
+                                        <a href="<?php echo base_url('/criterio/desativar/'.$criterio->id); ?>" class="btn btn-sm btn-danger">Desativar</a> 
+                                   <?php
+                                        }
+                                   ?> 
+                                </td>
+                           </tr>
                         <?php 
                             }
                         }
                         ?>
-                    </ul>
+                    </table>
                 </div>
             </div>
         </div>

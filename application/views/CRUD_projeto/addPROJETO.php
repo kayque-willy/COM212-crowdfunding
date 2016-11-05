@@ -69,7 +69,7 @@
                 <div id="actions" class="row">
                     <div class="col-md-12 text-center">
                         <button type="submit" class="btn btn-success">Adicionar projeto</button>
-                        <a href="<?php echo base_url('/projeto/'); ?>" class="btn btn-default">Cancelar</a>
+                        <a href="<?php echo base_url('/projeto/consultar'); ?>" class="btn btn-default">Cancelar</a>
                     </div>
                 </div>
             <?php echo form_close();?>
