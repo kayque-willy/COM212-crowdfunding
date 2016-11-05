@@ -15,16 +15,17 @@ class Repasse extends CI_Controller {
 		if(!empty($_POST)){
 			
 			//Recebe os dados do formulario
-			$repasse = (empty($_POST['repasse'])) ? '' : $_POST['repasse'];
-			$status = (empty($_POST['status'])) ? '' : $_POST['status'];
-			$peso = (empty($_POST['peso'])) ? '' : $_POST['peso'];
-			$categoriaProjeto = (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
+			$codProjeto = (empty($_POST['codProjeto'])) ? '' : $_POST['codProjeto'];
+			$necessidade = (empty($_POST['necessidade'])) ? '' : $_POST['necessidade'];
+			$data = (empty($_POST['data'])) ? '' : $_POST['data'];
+			$valorParcela = (empty($_POST['valorParcela'])) ? '' : $_POST['valorParcela'];
+			$status = "Não Quitado";
 		
 			//Carrega a model
 			$this->load->model('repasse_model');
 		
 			//Cria um novo repasse com os dados do POST
-			$repasse = new Repasse_model(null,$repasse,$status,$peso,$categoriaProjeto);
+			$repasse = new Repasse_model($codProjeto,$necessidade,$data,$valorParcela,$status);
 			
 			//Insere o repasse no banco
 			if($repasse->insert()){
@@ -81,8 +82,8 @@ class Repasse extends CI_Controller {
 		}
 		
 		//Recebe o filtro
-		$filtro['repasse'] = (empty($_GET['repasse'])) ? '' : $_GET['repasse'];
-		$filtro['categoria_projeto'] = (empty($_GET['categoria'])) ? '' : $_GET['categoria'];
+		$filtro['codProjeto'] = (empty($_GET['codProjeto'])) ? '' : $_GET['codProjeto'];
+		$filtro['data'] = (empty($_GET['data'])) ? '' : $_GET['data'];
 
 		//Carrega a model
 		$this->load->model('repasse_model');
@@ -93,29 +94,28 @@ class Repasse extends CI_Controller {
 		//$consulta o repasse
 		$data['repasses']=$repasse->select($filtro);
 		
-		//Adiciona a categoria selecionada na view
-		$data['categoria'] = $filtro['categoria_projeto'];
-		
 		//Carrega a view 
 		$this->load->view('CRUD_repasse/viewREPASSE',$data); 
 	}
 	
 	#Altera o repasse
-	public function alterar($id=''){
+	public function alterar($codProjeto='',$necessidade=''){
 		//Recebe os dados do formulario para atualização
 		if(!empty($_POST)){
-			$id = (empty($_POST['id'])) ? '' : $_POST['id'];
-			$repasse = (empty($_POST['repasse'])) ? '' : $_POST['repasse'];
-			$peso = (empty($_POST['peso'])) ? '' : $_POST['peso'];
-		
+			$codProjeto = (empty($_POST['codProjeto'])) ? '' : $_POST['codProjeto'];
+			$necessidade = (empty($_POST['necessidade'])) ? '' : $_POST['necessidade'];
+			$valorParcela = (empty($_POST['valorParcela'])) ? '' : $_POST['valorParcela'];
+			$status =  (empty($_POST['status'])) ? NULL : $_POST['status'];
+			$data = now();
+			
 			//Carrega a model
 			$this->load->model('repasse_model');
 				
 			//Cria um novo repasse com os dados do POST
-			$repasse = new Repasse_model(null,$repasse,null,$peso,null);
-
+			$repasse = new Repasse_model(null,null,$data,$valorParcela,$status);
+			
 			//Atualiza o repasse no banco
-			if($repasse->update($id)){
+			if($repasse->update($codProjeto,$necessidade)){
 				//Se a operação for bem sucedida, redireciona com mensagem de sucesso
 				redirect('/repasse/consultar/alt_sucesso', 'refresh');
 			}else{
@@ -126,13 +126,14 @@ class Repasse extends CI_Controller {
 		
 		//Recupera os dados
 		if(!empty($id)){
-			$filtro['id']=$id;
+			$filtro['codProjeto']=$codProjeto;
+			$filtro['necessidade']=$necessidade;
 			
 			//Carrega a model
 			$this->load->model('repasse_model');
 				
 			//Cria um novo repasse com os dados do POST
-			$repasse = new repasse_model();
+			$repasse = new Repasse_model();
 
 			//consulta o projeto pelo codigo
 			$data['repasse']=$repasse->select($filtro);
