@@ -123,8 +123,8 @@
                             echo '<td>'.$projeto->duracao.'</td>';
                             echo '<td>'.$projeto->valor.'</td>';
                             echo '<td>
-                			 <a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-primary">Editar projeto</a>
-                                <a href='.base_url("/projeto/remover/").$projeto->codigo.' class="btn btn-danger" data-toggle="modal">Excluir projeto</a>
+                			 <a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-sm btn-primary">Editar projeto</a>
+                                <a href='.base_url("/projeto/remover/").$projeto->codigo.' class="btn btn-sm btn-danger" data-toggle="modal">Excluir projeto</a>
                 			 </td>';
                 			echo '</tr>';
                            }
