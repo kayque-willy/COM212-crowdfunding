@@ -74,9 +74,9 @@
                         ?>
                         <li class="media">
                             <div class="media-body">
-                                <h4 class="page-header"><?php echo $repasse['repasse']->projetoNome ?></h4>
-                                <span><b>Valor total do repasse</b> <?php echo $repasse['repasse']->projetoCategoria ?></span><br>
+                                <h2 class="page-header"><?php echo $repasse['codProjeto']." - ".$repasse['nomeProjeto'] ?></h2>
                             </div>
+                            <h4><b>Total do repasse:</b> <?php echo 'R$ '.number_format( $repasse['total'] , 2) ?></h4>
                             <!--Repasses do projeto-->
                             <table class="table">
                                 <thead>
@@ -89,22 +89,22 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                 if(isset($repasse['notas'])){
-                                    foreach ($repasse['notas'] as $nota){
+                                 if(isset($repasse['repasses'])){
+                                    foreach ($repasse['repasses'] as $rep){
                                  ?>
                                     <tr>
-                                        <td><?php echo $nota->criterio ?></td>
-                                        <td><?php echo $nota->peso ?></td>
-                                        <td><?php echo $nota->nota ?></td>
-                                        <td><?php echo $nota->nota ?></td>
+                                        <td><?php echo $rep->necessidade ?></td>
+                                        <td><?php echo  'R$ '.number_format( $rep->valorParcela , 2) ?></td>
+                                        <td><?php echo $rep->data ?></td>
                                        <td>
-                                          <a href='<?php echo base_url("/projeto/alterar/").$projeto->codigo ?>' class="btn btn-sm btn-primary">Editar</a>
+                                          <a href='<?php echo base_url("/repasse/alterar/").$rep->codProjeto.'/'.$rep->necessidade ?>' class="btn btn-sm btn-primary">Alterar</a>
                                        </td>
                                     </tr>
                                 <?php
                                     }
                                  }
                                 ?>
+                                
                                </tbody>
                             </table>
                             <!--Repasses do projeto-->

@@ -38,7 +38,6 @@ class Nota_avaliacao_model extends CI_Model{
      //Cria um vetor de valores para atualização
      $data = [];
      if(isset($this->nota)) $data['nota'] = $this->nota;
-    
      //Cria um vetor com a chave primária 
      $where['id_criterio']=$id_criterio;
      $where['id_avaliacao']=$id_avaliacao;

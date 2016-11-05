@@ -91,8 +91,29 @@ class Repasse extends CI_Controller {
 		//Cria um novo objeto repasse
 		$repasse = new Repasse_model();
 		
-		//$consulta o repasse
-		$data['repasses']=$repasse->select($filtro);
+		//Consulta o repasse total 
+		$total=$repasse->total($filtro);
+	
+		//Consulta os repasses por projeto
+		$repasses=[];
+		foreach($total->result() as $row){
+			//Consulta os repasses pelo codigo do projeto
+			$consulta = new Repasse_model();
+			$temp['codProjeto']=$row->codProjeto;
+			$consulta=$consulta->select($temp);
+			
+			//Cria um novo vetor com o os reapasses e o valor total
+			$rep['codProjeto']=$row->codProjeto;
+			$rep['nomeProjeto']= $row->nomeProjeto;
+			$rep['total']= $row->total;
+			$rep['repasses']=$consulta->result();
+			
+			//Adiciona o vetor ao resultado final
+			$repasses[]=$rep;
+		}
+		
+		//Reultado final da consulta
+		$data['repasses']=$repasses;
 		
 		//Carrega a view 
 		$this->load->view('CRUD_repasse/viewREPASSE',$data); 

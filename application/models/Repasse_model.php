@@ -55,7 +55,24 @@ class Repasse_model extends CI_Model{
    //Adiciona clausula where
    if(!empty($filtro['codProjeto'])) $this->db->where('codProjeto', $filtro['codProjeto']);
    if(!empty($filtro['data'])) $this->db->where('data', $filtro['data']);
-   return $this->db->get('repasse');
+   //Consulta
+   $this->db->select('*');    
+   $this->db->from('repasse');
+   return $this->db->get();
+  }
+  
+  #Retorna o total do repasse
+  public function total($filtro='') {
+   //Adiciona clausula where
+   if(!empty($filtro['codProjeto'])) $this->db->where('repasse.codProjeto', $filtro['codProjeto']);
+   if(!empty($filtro['data'])) $this->db->where('repasse.data', $filtro['data']);
+  
+   //Consultar inner join
+   $this->db->select('repasse.codProjeto as codProjeto, projeto.nome as nomeProjeto, sum(valorParcela) as total');    
+   $this->db->from('repasse');
+   $this->db->join('projeto', 'repasse.codProjeto = projeto.codigo','inner');
+   $this->db->group_by('repasse.codProjeto');
+   return $this->db->get();
   }
   
 }
