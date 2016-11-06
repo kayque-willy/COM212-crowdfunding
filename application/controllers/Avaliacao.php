@@ -175,6 +175,7 @@ class Avaliacao extends CI_Controller {
 				$id_criterio = (empty($_POST['id_criterio'])) ? '' : $_POST['id_criterio'];
 				$nota_criterio = (empty($_POST['nota_criterio'])) ? '' : $_POST['nota_criterio'];
 				$sugestoes = (empty($_POST['sugestoes'])) ? '' : $_POST['sugestoes'];
+				$total = (empty($_POST['total'])) ? '' : $_POST['total'];
 				
 				//Carrega a model
 				$this->load->model('nota_avaliacao_model');
@@ -184,8 +185,17 @@ class Avaliacao extends CI_Controller {
 					$nota->update($id_criterio[$i],$id_avaliacao);
 				}
 				
-				//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
-				redirect('/avaliacao/consultar/edit_sucesso', 'refresh');
+				//Atualiza a nota da avaliação
+				$this->load->model('avaliacao_model');
+				$avaliacao = new Avaliacao_model(null,$total,null,null,null,null);
+				
+				if($avaliacao->update($id_avaliacao)){
+					//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
+					redirect('/avaliacao/consultar/edit_sucesso', 'refresh');
+				}else{
+					//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+					redirect('/avaliacao/consultar/edit_falha', 'refresh');
+				}
 			}else{
 				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 				redirect('/avaliacao/consultar/edit_falha', 'refresh');
