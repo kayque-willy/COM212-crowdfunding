@@ -133,14 +133,6 @@ class Avaliacao extends CI_Controller {
 					$data['falha']=true;
 					$data['msg'] = 'Falha ao remover o avaliacao!';
 					break;
-				case 'ativ_sucesso':
-					$data['sucesso']=true;
-					$data['msg'] = 'avaliacao ativado com sucesso!';
-					break;
-				case 'ativ_falha':
-					$data['falha']=true;
-					$data['msg'] = 'Falha ao ativar o avaliacao!';
-					break;
 			}
 		}
 		
@@ -150,9 +142,9 @@ class Avaliacao extends CI_Controller {
 		$filtro['categoria_projeto'] = (empty($_GET['categoria'])) ? '' : $_GET['categoria'];
 
 		//Carrega a model
-		$data=null;
 		$this->load->model('avaliacao_model');
 		$this->load->model('nota_avaliacao_model');
+		$data['avaliacoes']=null;
 			
 		//Cria um novo objeto avaliacao
 		$avaliacao = new Avaliacao_model();
@@ -168,7 +160,7 @@ class Avaliacao extends CI_Controller {
 			$avaliacoes['notas'] = $avaliacoes['notas']->result();
 			$data['avaliacoes'][]=$avaliacoes;
 		}
-		
+	
 		//Carrega a view 
 		$this->load->view('CRUD_avaliacao/viewAVALIACAO',$data); 
 	}

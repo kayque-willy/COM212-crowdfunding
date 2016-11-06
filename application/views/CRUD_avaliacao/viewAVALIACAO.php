@@ -109,12 +109,23 @@
                                     <tr>
                                         <td><?php echo $nota->criterio ?></td>
                                         <td><?php echo $nota->peso ?></td>
-                                        <td><?php echo $nota->nota ?></td>
+                                        <td class="text-center"><?php echo $nota->nota ?></td>
                                     </tr>
                                 <?php
                                     }
                                  }
                                 ?>
+                                <tr class="active">
+                                    <td></td>
+                                    <td><b>Avaliação final</b></td>
+                                    <?php if($avaliacao['avaliacao']->nota>=6){ ?>
+                                        <td class="text-center success">  
+                                    <?php }else{ ?>
+                                        <td class="text-center danger">  
+                                    <?php } ?>
+                                        <b><?php echo $avaliacao['avaliacao']->nota ?> </b>
+                                    </td>
+                                </tr>
                                 </tbody>
                             </table>
                             <div class="text-right">

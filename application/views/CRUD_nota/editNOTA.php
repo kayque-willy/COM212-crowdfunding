@@ -70,7 +70,7 @@
                                         </td>
                                         <td>
                                             <input required name="id_criterio[]" type="hidden" value="<?php echo $criterio->idCriterio ?>">
-                                            <input required id="nota<?php echo $i++ ?>"  name="nota_criterio[]" type="number" class="form-control" placeholder="Nota" onchange="calcular();" value="<?php echo $criterio->nota ?>">
+                                            <input required id="nota<?php echo $i++ ?>"  name="nota_criterio[]" type="number" class="form-control" placeholder="Nota" onchange="calcular();" value="<?php echo $avaliacao['avaliacao']->nota ?>">
                                         </td>
                                     </tr>
                                     <?php

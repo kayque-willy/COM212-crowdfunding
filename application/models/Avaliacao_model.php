@@ -62,7 +62,7 @@ class Avaliacao_model extends CI_Model{
    if(!empty($filtro['categoria_projeto'])) $this->db->where('projeto.categoria', $filtro['categoria_projeto']);
    
    //Consultar inner join
-   $this->db->select('avaliacao.codProjeto as codProjeto, avaliacao.id as id, avaliacao.codAvaliador as codAvaliador, avaliacao.nomeAvaliador as nomeAvaliador, projeto.nome as projetoNome, projeto.categoria as projetoCategoria');    
+   $this->db->select('avaliacao.codProjeto as codProjeto, avaliacao.id as id, avaliacao.codAvaliador as codAvaliador, avaliacao.nomeAvaliador as nomeAvaliador, avaliacao.nota as nota, projeto.nome as projetoNome, projeto.categoria as projetoCategoria');    
    $this->db->from('avaliacao');
    $this->db->join('projeto', 'avaliacao.codProjeto = projeto.codigo','inner');
    return $this->db->get();
