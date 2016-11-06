@@ -29,6 +29,7 @@ class Avaliacao extends CI_Controller {
 			//Insere o avaliacao no banco
 			if($avaliacao->insert()){
 				//Se a operação for bem sucedida, consulta o ID da avaliação conforme o codigo do projeto
+				$data['codProjeto']=$codProjeto;
 				$filtro['codigo_projeto']=$codProjeto;
 				$avaliacao=$avaliacao->select($filtro);
 				
@@ -77,10 +78,12 @@ class Avaliacao extends CI_Controller {
 			$nota_criterio = (empty($_POST['nota_criterio'])) ? '' : $_POST['nota_criterio'];
 			$sugestoes = (empty($_POST['sugestoes'])) ? '' : $_POST['sugestoes'];
 			$total = (empty($_POST['total'])) ? '' : $_POST['total'];
+			$codProjeto = (empty($_POST['codProjeto'])) ? '' : $_POST['codProjeto'];
 			
 			//Carrega a model
 			$this->load->model('nota_avaliacao_model');
 			
+			//Cadastra as notas
 			for ($i = 0; $i < sizeof($id_criterio); $i++) {
 				$nota = new Nota_avaliacao_model($id_criterio[$i], $id_avaliacao,$nota_criterio[$i],$sugestoes);
 				$nota->insert();
@@ -91,8 +94,24 @@ class Avaliacao extends CI_Controller {
 			$avaliacao = new Avaliacao_model(null,$total,null,null,null,null);
 			
 			if($avaliacao->update($id_avaliacao)){
-				//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
-				redirect('/avaliacao/consultar/cad_sucesso', 'refresh');
+				
+				//Verifica a nota para atualizar o status do projeto
+				$total = (float) $total;
+				if($total>=6) $status="aprovado";
+				else $status="reprovado";
+
+				//Atualiza o status do projeto
+				$this->load->model("projeto_model");
+				$projeto = new Projeto_model(null, null,null,null,null,$status,null,null,null);
+	
+				if($projeto->update($codProjeto)){
+					//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
+					redirect('/avaliacao/consultar/cad_sucesso', 'refresh');
+					
+				}else{
+					//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+					redirect('/avaliacao/consultar/cad_falha', 'refresh');
+				}
 			}else{
 				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 				redirect('/avaliacao/consultar/cad_falha', 'refresh');
@@ -176,6 +195,7 @@ class Avaliacao extends CI_Controller {
 				$nota_criterio = (empty($_POST['nota_criterio'])) ? '' : $_POST['nota_criterio'];
 				$sugestoes = (empty($_POST['sugestoes'])) ? '' : $_POST['sugestoes'];
 				$total = (empty($_POST['total'])) ? '' : $_POST['total'];
+				$codProjeto = (empty($_POST['codProjeto'])) ? '' : $_POST['codProjeto'];
 				
 				//Carrega a model
 				$this->load->model('nota_avaliacao_model');
@@ -190,8 +210,23 @@ class Avaliacao extends CI_Controller {
 				$avaliacao = new Avaliacao_model(null,$total,null,null,null,null);
 				
 				if($avaliacao->update($id_avaliacao)){
-					//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
-					redirect('/avaliacao/consultar/edit_sucesso', 'refresh');
+					
+					//Verifica a nota para atualizar o status do projeto
+					$total= (float) $total;
+					if($total>=6) $status="aprovado";
+					else $status="reprovado";
+	
+					//Atualiza o status do projeto
+					$this->load->model("projeto_model");
+					$projeto = new Projeto_model(null, null,null,null,null,$status,null,null,null);
+		
+					if($projeto->update($codProjeto)){
+						//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
+						redirect('/avaliacao/consultar/cad_sucesso', 'refresh');
+					}else{
+						//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+						redirect('/avaliacao/consultar/cad_falha', 'refresh');
+					}
 				}else{
 					//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 					redirect('/avaliacao/consultar/edit_falha', 'refresh');
@@ -200,13 +235,13 @@ class Avaliacao extends CI_Controller {
 				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 				redirect('/avaliacao/consultar/edit_falha', 'refresh');
 			}
-			
 		}
 		
 		//Insere o avaliacao no banco
 		if(!empty($codProjeto)){
 			//Se a operação for bem sucedida, consulta o ID da avaliação conforme o codigo do projeto
 			$filtro['codigo_projeto']=$codProjeto;
+			$data['codProjeto']=$codProjeto;
 				
 			//Carrega a model
 			$this->load->model('avaliacao_model');

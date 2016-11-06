@@ -42,6 +42,9 @@
                             <!-- ID da avaliação -->
                             <input type="hidden" name="id_avaliacao" value="<?php echo $avaliacao->id ?>">
                             <!-- ID da avaliação -->
+                            <!-- Codigo do projeto -->
+                            <input type="hidden" name="codProjeto" value="<?php echo $codProjeto ?>">
+                            <!-- Codigo do projeto -->
                             <!-- Informaçõse do projeto -->
                             <legend>Avaliação <?php echo $avaliacao->projetoNome ?></legend><br>
                             <label>Categoria do projeto: <?php echo $avaliacao->projetoCategoria ?></label><br>
