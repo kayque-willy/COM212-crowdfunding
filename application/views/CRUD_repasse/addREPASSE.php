@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>UNIFUNDING</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -25,11 +24,11 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <ul class="list-group">
-                                <a href="<?php echo base_url('/criterio/cadastrar'); ?>">
-                                    <li class="list-group-item list-group-item-info">Cadastrar Criterio</li>
+                                <a href="<?php echo base_url('/repasse/cadastrar'); ?>">
+                                    <li class="list-group-item list-group-item-info">Cadastrar repasse</li>
                                 </a>
-                                <a href="<?php echo base_url('/criterio/consultar'); ?>">
-                                    <li class="list-group-item">Listar Criterios</li>
+                                <a href="<?php echo base_url('/repasse/consultar'); ?>">
+                                    <li class="list-group-item">Listar repasses</li>
                                 </a>
                             </ul>
                         </div>
@@ -38,45 +37,54 @@
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <!--Formulario de cadastro-->
-                        <form action="<?php echo base_url('/criterio/cadastrar'); ?>" method="POST" class="form-horizontal" role="form">
+                        <form action="<?php echo base_url('/repasse/cadastrar'); ?>" method="POST" class="form-horizontal" role="form">
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
                                     <label>Critério</label>
-                                    <input required name="criterio" type="text" class="form-control" id="criterio" placeholder="Critério de avaliação de projeto">
+                                    <select required name="codProjeto" type="text" class="form-control" id="codProjeto">
+                                        <option value="" disabled selected>Código do projeto</option>
+                                        <?php
+                                        if(!empty($projetos)){
+                                            foreach($projetos->result() as $projeto){
+                                        ?>
+                                            <option><?php echo $projeto->codigo ?></option>  
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+                                    </select>
                                 </div>
                             </div>
-                            <label>Categoria do Projeto</label>
+                            <label>Necessidade</label>
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
-                                    <select required name="categoria" type="text" class="form-control" id="categoria">
-                                        <option value="" disabled selected>Categoria do projeto</option>
-                                        <option>Pesquisa</option>
-                                        <option>Competição Tecnológica</option>
-                                        <option>Inovação no Ensino</option>
-                                        <option>Manutenção e Reforma</option>
-                                        <option>Pequenas Obras</option>
-                                     </select>
+                                    <input required name="necessidade" type="text" class="form-control" placeholder="Necessidade do repasse">
                                 </div>
                             </div>
-                            <label>Status</label>
+                             <label>Data</label>
                             <div class="form-group hidden-xs has-feedback">
+                                <div class="col-sm-10">
+                                    <input required name="data" type="date" class="form-control" placeholder="Data">
+                                </div>
+                            </div>
+                             <label>Valor da parcela</label>
+                            <div class="form-group hidden-xs has-feedback">
+                                <div class="col-sm-10">
+                                    <input required name="valorParcela" type="number" class="form-control" placeholder="Valor da parcela" step=0.01>
+                                </div>
+                            </div>
+                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
                                     <div class="radio">
                                         <label>
-                                              <input type="radio" name="status" id="status1" value="1" checked="">
-                                              Ativado
+                                              <input type="radio" name="status" id="status1" value="Quitado" checked="">
+                                              Quitado
                                         </div>
                                         <div class="radio">
                                             <label>
-                                              <input type="radio" name="status" id="status2" value="0" checked="">
-                                              Desativado</label>
+                                              <input type="radio" name="status" id="status2" value="Não quitado" checked="">
+                                              Não quitado</label>
                                     </div>
-                                </div>
-                            </div>
-                            <label>Peso</label>
-                            <div class="form-group hidden-xs has-feedback">
-                                <div class="col-sm-10">
-                                    <input required name="peso" type="number" class="form-control" id="peso" placeholder="0 a 10" max="10" min="0">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Cadastrar</button>

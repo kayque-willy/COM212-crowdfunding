@@ -17,15 +17,15 @@ class Repasse extends CI_Controller {
 			//Recebe os dados do formulario
 			$codProjeto = (empty($_POST['codProjeto'])) ? '' : $_POST['codProjeto'];
 			$necessidade = (empty($_POST['necessidade'])) ? '' : $_POST['necessidade'];
-			$data = (empty($_POST['data'])) ? '' : $_POST['data'];
+			$data_repasse = (empty($_POST['data'])) ? '' : $_POST['data'];
 			$valorParcela = (empty($_POST['valorParcela'])) ? '' : $_POST['valorParcela'];
-			$status = "Não Quitado";
+			$status = (empty($_POST['status'])) ? '' : $_POST['status'];
 		
 			//Carrega a model
 			$this->load->model('repasse_model');
 		
 			//Cria um novo repasse com os dados do POST
-			$repasse = new Repasse_model($codProjeto,$necessidade,$data,$valorParcela,$status);
+			$repasse = new Repasse_model($codProjeto,$necessidade,$data_repasse,$valorParcela,$status);
 			
 			//Insere o repasse no banco
 			if($repasse->insert()){
@@ -36,8 +36,13 @@ class Repasse extends CI_Controller {
 				redirect('/repasse/consultar/cad_falha', 'refresh');
 			}
 		}
+		//Consulta o codigo dos projetos
+		$this->load->model('projeto_model');
+		$projeto = new Projeto_model();
+		$data['projetos'] = $projeto->select();
+
 		//Carrega a view 
-		$this->load->view('CRUD_repasse/addREPASSE'); 	
+		$this->load->view('CRUD_repasse/addREPASSE',$data); 	
 	}
 	
 	#Lista os repasses
