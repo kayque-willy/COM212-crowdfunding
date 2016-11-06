@@ -88,6 +88,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Cadastrar</button>
+                            <a href="<?php echo base_url('/repasse/consultar'); ?>" class="btn btn-default">Cancelar</a>
                         </form>
                         <!--Formulario de cadastro-->
                     </div>

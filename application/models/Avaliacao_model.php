@@ -6,14 +6,16 @@ class Avaliacao_model extends CI_Model{
   public $codigoProjeto;
   public $nomeAvaliador;
   public $data;
+  public $nota;
  
   #constroi o objeto
-  public function __construct($id='', $codigoAvaliador='',$codigoProjeto='',$nomeAvaliador='',$data=''){
+  public function __construct($id='', $nota='', $codigoAvaliador='',$codigoProjeto='',$nomeAvaliador='',$data=''){
      if(isset($id)) $this->id=$id;
      if(isset($codigoAvaliador)) $this->codigoAvaliador=$codigoAvaliador;
      if(isset($codigoProjeto)) $this->codigoProjeto=$codigoProjeto;
      if(isset($nomeAvaliador)) $this->nomeAvaliador=$nomeAvaliador;
      if(isset($data)) $this->data=$data;
+     if(isset($nota)) $this->nota=$nota;
   }
   
  #insere um novo registro no banco
@@ -43,6 +45,7 @@ class Avaliacao_model extends CI_Model{
      if(isset($this->codAvaliador)) $data['codAvaliador'] = $this->codAvaliador;
      if(isset($this->nomeAvaliador)) $data['nomeAvaliador'] = $this->nomeAvaliador;
      if(isset($this->data)) $data['data'] = $this->data;
+     if(isset($this->nota)) $data['nota'] = $this->nota;
      
      //Cria um vetor com a chave primária 
      $where['id']=$id;

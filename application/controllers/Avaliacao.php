@@ -24,7 +24,7 @@ class Avaliacao extends CI_Controller {
 			$this->load->model('avaliacao_model');
 		
 			//Cria um novo avaliacao com os dados do POST
-			$avaliacao = new Avaliacao_model(null,$codAvaliador,$codProjeto,$nomeAvaliador,$data_avaliacao);
+			$avaliacao = new Avaliacao_model(null,null,$codAvaliador,$codProjeto,$nomeAvaliador,$data_avaliacao);
 		
 			//Insere o avaliacao no banco
 			if($avaliacao->insert()){
@@ -56,13 +56,19 @@ class Avaliacao extends CI_Controller {
 				redirect('/avaliacao/consultar/cad_falha', 'refresh');
 			}
 		}else{
+			//Consulta o codigo dos projetos
+			$this->load->model('projeto_model');
+			$projeto = new Projeto_model();
+			$data['projetos'] = $projeto->select();
+
 			//Carrega a view 
-			$this->load->view('CRUD_avaliacao/addAVALIACAO'); 
+			$this->load->view('CRUD_avaliacao/addAVALIACAO',$data); 
 		}
 	}
 	
 	#Cadastra as notas de avaliação do projeto
 	public function avaliar(){
+		
 		if(!empty($_POST['id_criterio']) and !empty($_POST['nota_criterio']) and !empty($_POST['id_avaliacao'])){
 			
 			//Recebe os dados do formulario
@@ -70,6 +76,7 @@ class Avaliacao extends CI_Controller {
 			$id_criterio = (empty($_POST['id_criterio'])) ? '' : $_POST['id_criterio'];
 			$nota_criterio = (empty($_POST['nota_criterio'])) ? '' : $_POST['nota_criterio'];
 			$sugestoes = (empty($_POST['sugestoes'])) ? '' : $_POST['sugestoes'];
+			$total = (empty($_POST['total'])) ? '' : $_POST['total'];
 			
 			//Carrega a model
 			$this->load->model('nota_avaliacao_model');
@@ -79,8 +86,17 @@ class Avaliacao extends CI_Controller {
 				$nota->insert();
 			}
 			
-			//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
-			redirect('/avaliacao/consultar/cad_sucesso', 'refresh');
+			//Atualiza a nota da avaliação
+			$this->load->model('avaliacao_model');
+			$avaliacao = new Avaliacao_model(null,$total,null,null,null,null);
+			
+			if($avaliacao->update($id_avaliacao)){
+				//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
+				redirect('/avaliacao/consultar/cad_sucesso', 'refresh');
+			}else{
+				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+				redirect('/avaliacao/consultar/cad_falha', 'refresh');
+			}
 		}else{
 			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 			redirect('/avaliacao/consultar/cad_falha', 'refresh');

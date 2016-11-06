@@ -80,7 +80,7 @@
                                 <tr>
                                     <td>Total</td>
                                     <td></td>
-                                    <td><input name="total" type="number" class="form-control" id="result" placeholder="Total" disabled></td>
+                                    <td><input name="total" type="number" class="form-control" id="result" placeholder="Total" readonly></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -88,7 +88,7 @@
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
                                     <label>Sugestões</label>
-                                    <textarea required name="sugestoes" class="form-control" placeholder="Sugestões para melhoria" rows="5" style="resize:none;" maxlength="250"></textarea>
+                                    <textarea name="sugestoes" class="form-control" placeholder="Sugestões para melhoria" rows="5" style="resize:none;" maxlength="250"></textarea>
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Salvar avaliação</button>
