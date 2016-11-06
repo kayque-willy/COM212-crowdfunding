@@ -22,7 +22,13 @@
         <h3 class="page-header">Adicionar novo Projeto Candidato</h3>
         <div class="row">
             <?php echo form_open_multipart('projeto/cadastrar');?>
-                <div class="col-md-6">
+                <div href="#" class="thumbnail col-md-3">
+                <div class="form-group">
+                    <label class="control-label text-center">Imagem do projeto</label>
+                    <img id="blah" src='<?php echo base_url('/assets/img/').'img.png' ?>' height="230" width="50" />
+                </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label required class="control-label">Nome do rpojeto</label>
                         <input name="nome" class="form-control" type="text" placeholder="Nome do projeto">
@@ -50,12 +56,11 @@
                             <option>Pequenas Obras</option>
                         </select>
                     </div>
-
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="form-group">
                         <label class="control-label">Imagem</label>
-                        <input required name="imagem" type="file">
+                        <input required name="imagem" type="file" id="imgInp">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="exampleInputEmail1">Link de video descritivo</label>
@@ -78,6 +83,25 @@
         <!--Footer-->
         <?php $this->load->view("footer");?>
         <!--Footer-->
+<script>
+     function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#imgInp").change(function(){
+        readURL(this);
+    });
+    
+    
+</script>        
 </body>
 
 </html>

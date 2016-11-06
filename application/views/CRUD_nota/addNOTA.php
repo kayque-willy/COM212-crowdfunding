@@ -58,18 +58,19 @@
                                 </thead>
                                 <tbody>
                                 <?php
+                                 $i=1;
                                  if(isset($criterios)){
                                     foreach ($criterios->result() as $criterio){
-                                 ?>
+                                    ?>
                                     <tr>
                                         <td><?php echo $criterio->criterio ?></td>
-                                        <td><?php echo $criterio->peso ?></td>
+                                        <td id="peso<?php echo $i ?>" value="<?php echo $criterio->peso ?>"><?php echo $criterio->peso ?></td>
                                         <td>
                                             <input required name="id_criterio[]" type="hidden" value="<?php echo $criterio->id ?>">
-                                            <input required name="nota_criterio[]" type="number" class="form-control" placeholder="Nota">
+                                            <input required id="nota<?php echo $i++ ?>"  name="nota_criterio[]" type="number" class="form-control" placeholder="Nota" onblur="calcular();">
                                         </td>
                                     </tr>
-                                <?php
+                                    <?php
                                     }
                                  }
                                 ?>
@@ -99,6 +100,13 @@
     <!--Footer-->
     <?php $this->load->view("footer");?>
     <!--Footer-->
+    <script>
+        function calcular(){
+            var valor1 = parseInt(document.getElementById('txt1').value, 10);
+            var valor2 = parseInt(document.getElementById('txt2').value, 10);
+            document.getElementById('result').value = valor1 + valor2;
+        }
+    </script>
 </body>
 
 </html>

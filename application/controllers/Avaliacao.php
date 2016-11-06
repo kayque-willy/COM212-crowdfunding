@@ -55,10 +55,10 @@ class Avaliacao extends CI_Controller {
 				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 				redirect('/avaliacao/consultar/cad_falha', 'refresh');
 			}
+		}else{
+			//Carrega a view 
+			$this->load->view('CRUD_avaliacao/addAVALIACAO'); 
 		}
-		//Carrega a view 
-		$this->load->view('CRUD_avaliacao/addAVALIACAO'); 
-		//$this->load->view('CRUD_nota/addNOTA');
 	}
 	
 	#Cadastra as notas de avaliação do projeto

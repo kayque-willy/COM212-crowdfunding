@@ -32,7 +32,6 @@
                     <label class="control-label text-center">Imagem do projeto</label>
                     <img src='<?php echo "data:;base64,".base64_encode($proj->imagem); ?>' height="230" width="50" />
                 </div>
-
             </div>
             <div class="col-md-4">
                 <div class="form-group">
@@ -93,7 +92,7 @@
             <div id="actions" class="row">
                 <div class="col-md-12 text-center">
                     <button type="submit" class="btn btn-primary">Salvar alterações no projeto</button>
-                    <a href="<?php echo base_url('/projeto/'); ?>" class="btn btn-default">Cancelar</a>
+                    <a href="<?php echo base_url('/projeto/consultar'); ?>" class="btn btn-default">Cancelar</a>
                 </div>
             </div>
             <?php

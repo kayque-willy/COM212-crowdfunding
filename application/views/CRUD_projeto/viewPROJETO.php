@@ -83,11 +83,11 @@
         <!--Filtro -->
         
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="panel panel-primary">
                         <div class="panel-body">
                             <ul class="list-group">
-                                <li class="list-group-item">
+                                <li class="list-group-item ">
                                     <a href="<?php echo base_url('/projeto/cadastrar'); ?>">Cadastrar novo projeto</a>
                                 </li>
                                 </a>
@@ -98,7 +98,7 @@
                         </div>
                     </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                  <div class="center-block">
             <table class="table">
                 <thead>
