@@ -6,6 +6,12 @@ class Projeto extends CI_Controller {
 	#Index do controller
 	public function index() {
 	   	
+	   	//Recebe o filtro
+		$filtro['codigo'] = (empty($_GET['codigo'])) ? '' : $_GET['codigo'];
+		$filtro['nome'] = (empty($_GET['nome'])) ? '' : $_GET['nome'];
+		$filtro['categoria'] = (empty($_GET['categoria'])) ? '' : $_GET['categoria'];
+		$filtro['status'] = 'aprovado';
+	   	
 		//Carrega a model
 		$this->load->model('projeto_model');
 			
@@ -13,7 +19,7 @@ class Projeto extends CI_Controller {
 		$projeto = new Projeto_model();
 		
 		//$consulta o projeto
-		$data['projetos']=$projeto->select();
+		$data['projetos']=$projeto->select($filtro);
 		
 	   //Carrega a view da index do projeto
 	   $this->load->view('CRUD_projeto/indexPROJETO_fim',$data); 
@@ -74,7 +80,7 @@ class Projeto extends CI_Controller {
 		$this->load->view('CRUD_projeto/addPROJETO'); 	
 	}
 	
-	#Lista os projetos
+	#Lista os projetos candidatos
 	public function consultar($result=''){
 		
 		//Mensagem de resultado de alguma operação
@@ -111,6 +117,7 @@ class Projeto extends CI_Controller {
 		$filtro['codigo'] = (empty($_GET['codigo'])) ? '' : $_GET['codigo'];
 		$filtro['nome'] = (empty($_GET['nome'])) ? '' : $_GET['nome'];
 		$filtro['categoria'] = (empty($_GET['categoria'])) ? '' : $_GET['categoria'];
+		$filtro['status'] = 'candidato';
 				
 		//Carrega a model
 		$this->load->model('projeto_model');
@@ -229,5 +236,23 @@ class Projeto extends CI_Controller {
 		
 		//Carrega a view 
 		$this->load->view('CRUD_projeto/readPROJETO',$data); 
+	}
+	
+	#Visaliza o projeto aprovado
+	public function projeto_aprovado($codigo=''){
+		//Recebe o código
+		$filtro['codigo']=$codigo;
+		
+		//Carrega a model
+		$this->load->model('projeto_model');
+			
+		//Cria um novo objeto projeto
+		$projeto = new Projeto_model();
+		
+		//$consulta o projeto
+		$data['projetos']=$projeto->select($filtro);
+		
+		//Carrega a view 
+		$this->load->view('CRUD_projeto/read_aprovPROJETO',$data); 
 	}
 }

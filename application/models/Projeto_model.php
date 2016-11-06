@@ -74,6 +74,7 @@ class Projeto_model extends CI_Model{
    if(!empty($filtro['codigo'])) $this->db->where('codigo', $filtro['codigo']);
    if(!empty($filtro['nome'])) $this->db->where('nome', $filtro['nome']);
    if(!empty($filtro['categoria'])) $this->db->where('categoria', $filtro['categoria']);
+   if(!empty($filtro['status'])) $this->db->where('status', $filtro['status']);
    return $this->db->get('projeto');
   }
 }

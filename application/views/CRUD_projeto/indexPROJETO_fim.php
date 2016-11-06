@@ -21,7 +21,33 @@
     <!-- Fim da barra de navehação superior -->
     <div class="wrapper" role="main">
         <div class="container">
+            <h3 class="page-header">Projetos aprovados</h3>
+            <!--Filtro -->
             <div class="row">
+               <form action="<?php echo base_url('/projeto/'); ?>" class="form-inline pull-left" method="GET">
+                    <div class="form-group">
+                        <input name="codigo" type="text" class="form-control" placeholder="Filtrar por codigo">
+                    </div>
+                    <div class="form-group">
+                        <input name="nome" type="text" class="form-control" placeholder="Filtrar por nome">
+                    </div>
+                    <div class="form-group">
+                        <select name="categoria" type="text" class="form-control" placeholder="Filtrar por categoria">
+                                    <option value="" disabled selected>Categoria</option>
+                                    <option>Pesquisa</option>
+                                    <option>Competição Tecnológica</option>
+                                    <option>Inovação no Ensino</option>
+                                    <option>Manutenção e Reforma</option>
+                                    <option>Pequenas Obras</option>
+                                 </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Filtrar</button>
+                </form>
+            </div>
+            <!--Filtro -->
+            <br>
+            <div class="row">
+                <!--Projetos aprovados -->
                 <div id="conteudo" class="col-xs-12 col-sm-8 col-md-9">
                     <?php    
                     if(isset($projetos)){
@@ -36,7 +62,7 @@
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8">
-                                <h2><a href="#"><?php echo $projeto->nome ?></a></h2>
+                                <h2><a href="<?php echo base_url("/projeto/projeto_aprovado/").$projeto->codigo ?>"><?php echo $projeto->codigo.' - '.$projeto->nome ?></a></h2>
                                 <p>
                                     <?php echo $projeto->descricao ?>
                                 </p>
@@ -48,7 +74,7 @@
                     }
                     ?>
                 </div>
-
+                <!--Projetos aprovados -->
                 <!-- CRUD e-mail de noticias, Barra Lateral -->
                 <div id="sidebar" class="col-xs-12 col-sm-4 col-md-3">
                     <div class="widget">
@@ -69,7 +95,7 @@
                         </ul>
                     </div>
                 </div>
-
+                <!-- CRUD e-mail de noticias, Barra Lateral -->
             </div>
         </div>
     </div>
