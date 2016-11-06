@@ -44,9 +44,9 @@
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url('/projeto/consultar'); ?>">Projetos Candidatos</a></li>
                         <li class="divider"></li>
-                        <li><a href="<?php echo base_url('/criterio/consultar'); ?>">Critérios de avaliação</a></li>
-                        <li class="divider"></li>
                         <li><a href="<?php echo base_url('/avaliacao/consultar'); ?>">Avaliações de projetos candidatos</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo base_url('/criterio/consultar'); ?>">Critérios de avaliação</a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url('/repasse/consultar'); ?>">Repasses financeiros</a></li>
                     </ul>

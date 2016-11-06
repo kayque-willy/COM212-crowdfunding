@@ -64,10 +64,13 @@
                                     ?>
                                     <tr>
                                         <td><?php echo $criterio->criterio ?></td>
-                                        <td id="peso<?php echo $i ?>" value="<?php echo $criterio->peso ?>"><?php echo $criterio->peso ?></td>
+                                        <td>
+                                            <input type="hidden" id="peso<?php echo $i ?>" value="<?php echo $criterio->peso ?>">
+                                            <?php echo $criterio->peso ?>
+                                        </td>
                                         <td>
                                             <input required name="id_criterio[]" type="hidden" value="<?php echo $criterio->id ?>">
-                                            <input required id="nota<?php echo $i++ ?>"  name="nota_criterio[]" type="number" class="form-control" placeholder="Nota" onblur="calcular();">
+                                            <input required id="nota<?php echo $i++ ?>"  name="nota_criterio[]" type="number" class="form-control" placeholder="Nota" onchange="calcular();">
                                         </td>
                                     </tr>
                                     <?php
@@ -77,7 +80,7 @@
                                 <tr>
                                     <td>Total</td>
                                     <td></td>
-                                    <td><input type="number" class="form-control" id="criterio" placeholder="Total"></td>
+                                    <td><input name="total" type="number" class="form-control" id="result" placeholder="Total" disabled></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -89,6 +92,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Salvar avaliação</button>
+                            <a href="<?php echo base_url('/avaliacao/consultar'); ?>" class="btn btn-default">Cancelar</a>
                         </form>
                         <!--Formulario de cadastro-->
                     </div>
@@ -102,9 +106,19 @@
     <!--Footer-->
     <script>
         function calcular(){
-            var valor1 = parseInt(document.getElementById('txt1').value, 10);
-            var valor2 = parseInt(document.getElementById('txt2').value, 10);
-            document.getElementById('result').value = valor1 + valor2;
+            
+            var total = <?php echo $i ?>;
+            var soma = 0;
+            var somaPeso = 0;
+            
+            for (i = 1; i < total; i++) { 
+                var peso = parseInt(document.getElementById('peso'+i).value, 10);
+                var nota = parseInt(document.getElementById('nota'+i).value, 10);
+                var soma = soma + (peso*nota);
+                var somaPeso = somaPeso + peso;
+            }
+            
+            document.getElementById('result').value = soma/somaPeso;
         }
     </script>
 </body>

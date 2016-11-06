@@ -65,6 +65,7 @@
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Avaliar projeto</button>
+                            <a href="<?php echo base_url('/avaliacao/consultar'); ?>" class="btn btn-default">Cancelar</a>
                         </form>
                         <!--Formulario de cadastro-->
                     </div>

@@ -58,30 +58,35 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                 if(isset($avaliacao['notas'])){
-                                    foreach ($avaliacao['notas'] as $criterio){
-                                 ?>
+                                 $i=1;
+                                if(isset($avaliacao['notas'])){
+                                    foreach ($avaliacao['notas']  as $criterio){
+                                    ?>
                                     <tr>
                                         <td><?php echo $criterio->criterio ?></td>
-                                        <td><?php echo $criterio->peso ?></td>
+                                        <td>
+                                            <input type="hidden" id="peso<?php echo $i ?>" value="<?php echo $criterio->peso ?>">
+                                            <?php echo $criterio->peso ?>
+                                        </td>
                                         <td>
                                             <input required name="id_criterio[]" type="hidden" value="<?php echo $criterio->idCriterio ?>">
-                                            <input required name="nota_criterio[]" type="number" class="form-control" placeholder="Nota" value="<?php echo $criterio->nota ?>">
+                                            <input required id="nota<?php echo $i++ ?>"  name="nota_criterio[]" type="number" class="form-control" placeholder="Nota" onchange="calcular();" value="<?php echo $criterio->nota ?>">
                                         </td>
                                     </tr>
-                                <?php
+                                    <?php
                                     }
                                  }
                                 ?>
                                 <tr>
                                     <td>Total</td>
                                     <td></td>
-                                    <td><input type="number" class="form-control" id="criterio" placeholder="Total"></td>
+                                    <td><input name="total" type="number" class="form-control" id="result" placeholder="Total" disabled></td>
                                 </tr>
                                 </tbody>
                             </table>
                             <!--Critérios-->
                             <button type="submit" class="btn btn-primary">Salvar avaliação</button>
+                            <a href="<?php echo base_url('/avaliacao/consultar'); ?>" class="btn btn-default">Cancelar</a>
                         </form>
                         <!--Formulario de cadastro-->
                     </div>
@@ -93,6 +98,23 @@
     <!--Footer-->
     <?php $this->load->view("footer");?>
     <!--Footer-->
+    <script>
+        function calcular(){
+            
+            var total = <?php echo $i ?>;
+            var soma = 0;
+            var somaPeso = 0;
+            
+            for (i = 1; i < total; i++) { 
+                var peso = parseInt(document.getElementById('peso'+i).value, 10);
+                var nota = parseInt(document.getElementById('nota'+i).value, 10);
+                var soma = soma + (peso*nota);
+                var somaPeso = somaPeso + peso;
+            }
+            
+            document.getElementById('result').value = soma/somaPeso;
+        }
+    </script>
 </body>
 
 </html>
