@@ -63,6 +63,9 @@
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8">
                                 <h2><a href="<?php echo base_url("/projeto/projeto_aprovado/").$projeto->codigo ?>"><?php echo $projeto->codigo.' - '.$projeto->nome ?></a></h2>
+                                <h3>
+                                    <?php echo $projeto->categoria ?>
+                                </h3>
                                 <p>
                                     <?php echo $projeto->descricao ?>
                                 </p>

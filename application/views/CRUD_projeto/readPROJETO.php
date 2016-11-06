@@ -35,8 +35,10 @@
                                     <p><b>Descrição:</b> <?php echo $projeto->descricao ?></p>
                                     <p><b>Categoria:</b> <?php echo $projeto->categoria ?></p>
                                     <p><b>Duração prevista:</b> <?php echo $projeto->duracao ?></p>
-                                    <p><b>Valor previsto:</b> <?php echo $projeto->valor ?></p>
-                                    <p><b>Status:</b> <?php echo $projeto->status ?></p>
+                                    <p><b>Valor previsto:</b> <?php echo 'R$ '.number_format( $projeto->valor , 2)  ?> </p>
+                                    <div class="alert alert-primary">
+                                        <p><b>Status:</b> <?php echo $projeto->status ?></p>
+                                    </div>
                                 </div>
                                 <div id="actions" class="row">
                                     <div class="col-md-12 text-center">

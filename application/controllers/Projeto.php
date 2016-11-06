@@ -239,7 +239,22 @@ class Projeto extends CI_Controller {
 	}
 	
 	#Visaliza o projeto aprovado
-	public function projeto_aprovado($codigo=''){
+	public function projeto_aprovado($codigo='',$result=''){
+		
+		//Mensagem de resultado de alguma operação
+		if(isset($result)){
+			switch ($result){
+				case 'alt_sucesso':
+					$data['sucesso']=true;
+					$data['msg'] = 'Projeto finalizado com sucesso!';
+					break;
+				case 'alt_falha': 
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao finalizar o projeto!';
+					break;
+			}
+		}
+		
 		//Recebe o código
 		$filtro['codigo']=$codigo;
 		
@@ -254,5 +269,27 @@ class Projeto extends CI_Controller {
 		
 		//Carrega a view 
 		$this->load->view('CRUD_projeto/read_aprovPROJETO',$data); 
+	}
+	
+	#Finaliza o projeto
+	public function finalizar($cod=''){
+		
+		//Recebe o status de finalizado
+		$status = 'finalizado';
+			
+		//Carrega a model
+		$this->load->model('projeto_model');
+				
+		//Cria um novo projeto com os dados do POST
+		$projeto = new Projeto_model(NULL,NULL,NULL,NULL,NULL,$status,NULL,NULL,NULL);
+			
+		//Atualiza o projeto no banco
+		if($projeto->update($cod)){
+			//Se a operação for bem sucedida, redireciona com mensagem de sucesso
+			redirect('/projeto/projeto_aprovado/'.$cod.'/alt_sucesso', 'refresh');
+		}else{
+			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+			redirect('/projeto/projeto_aprovado/'.$cod.'/alt_falha', 'refresh');
+		}
 	}
 }

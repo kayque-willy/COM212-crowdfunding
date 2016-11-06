@@ -19,6 +19,26 @@
         <div class="wrapper" role="main">
             <div class="container">
                 <div class="row">
+                    <!-- Mensagem -->
+                    <?php if (isset($sucesso)){  ?>
+                    <div class="alert alert-success">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Operação realizada com sucesso!</strong>
+                        <p>
+                            <?php echo $msg; ?>
+                        </p>
+                    </div>
+                    <?php } ?>
+                    <?php if (isset($falha)){ ?>
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Falha ao realizar operação!</strong>
+                        <p>
+                            <?php echo $msg; ?>
+                        </p>
+                    </div>
+                    <?php } ?>
+                    <!-- Mensagem -->
                     <div id="conteudo" class="col-xs-12 col-sm-8 col-md-9">
                     <?php    
                     if(isset($projetos)){
@@ -35,8 +55,25 @@
                                     <p><b>Descrição:</b> <?php echo $projeto->descricao ?></p>
                                     <p><b>Categoria:</b> <?php echo $projeto->categoria ?></p>
                                     <p><b>Duração prevista:</b> <?php echo $projeto->duracao ?></p>
-                                    <p><b>Valor previsto:</b> <?php echo $projeto->valor ?></p>
+                                    <p><b>Valor previsto:</b> <?php echo 'R$ '.number_format( $projeto->valor , 2) ?></p>
+                                    <?php
+                                        if($projeto->status=='aprovado'){
+                                    ?>
+                                       <div class="alert alert-success">
+                                    <?php
+                                        }else if($projeto->status=='reprovado'){
+                                    ?> 
+                                        <div class="alert alert-danger">
+                                    <?php
+                                        }else if($projeto->status=='finalizado'){
+                                    ?> 
+                                        <div class="alert alert-primary">
+                                            
+                                    <?php
+                                        }
+                                    ?>
                                     <p><b>Status:</b> <?php echo $projeto->status ?></p>
+                                    </div>
                                 </div>
                                 <div id="actions" class="row">
                                     <div class="col-md-12 text-center">
