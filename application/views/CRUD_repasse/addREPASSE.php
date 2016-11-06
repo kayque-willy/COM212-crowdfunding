@@ -18,7 +18,7 @@
     <!--Header-->
     <div class="section">
         <div class="container">
-            <h3 class="page-header">Cadastrar critério de avaliação de projeto</h3>
+            <h3 class="page-header">Cadastrar repasse financeiro de projeto</h3>
             <div class="row">
                 <div class="col-md-4">
                     <div class="panel panel-primary">
@@ -40,7 +40,7 @@
                         <form action="<?php echo base_url('/repasse/cadastrar'); ?>" method="POST" class="form-horizontal" role="form">
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
-                                    <label>Critério</label>
+                                    <label>Código do projeto</label>
                                     <select required name="codProjeto" type="text" class="form-control" id="codProjeto">
                                         <option value="" disabled selected>Código do projeto</option>
                                         <?php

@@ -19,17 +19,17 @@
     <!--Header-->
     <div class="section">
         <div class="container">
-            <h3 class="page-header">Cadastrar critério de avaliação de projeto</h3>
+            <h3 class="page-header">Alterar parcela do repasse financeiro</h3>
             <div class="row">
                 <div class="col-md-4">
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <ul class="list-group">
-                                <a href="<?php echo base_url('/criterio/cadastrar'); ?>">
-                                    <li class="list-group-item list-group-item-info">Cadastrar Criterio</li>
+                                <a href="<?php echo base_url('/repasse/cadastrar'); ?>">
+                                    <li class="list-group-item list-group-item-info">Cadastrar repasse</li>
                                 </a>
-                                <a href="<?php echo base_url('/criterio/consultar'); ?>">
-                                    <li class="list-group-item">Listar Criterios</li>
+                                <a href="<?php echo base_url('/repasse/consultar'); ?>">
+                                    <li class="list-group-item">Listar repasses</li>
                                 </a>
                             </ul>
                         </div>
@@ -38,26 +38,22 @@
                 <div class="col-md-8">
                     <div class="col-md-12">
                         <?php
-                        if(isset($criterio)){
-                            foreach ($criterio->result() as $crit) {
+                        if(isset($repasse)){
+                            foreach ($repasse->result() as $rep) {
                         ?>
                         <!--Formulario de cadastro-->
-                        <form action="<?php echo base_url('/criterio/alterar'); ?>" method="POST" class="form-horizontal" role="form">
-                            <input type="hidden" name="id" value='<?php echo $crit->id; ?>'>
+                        <form action="<?php echo base_url('/repasse/alterar'); ?>" method="POST" class="form-horizontal" role="form">
+                            <legend>Projeto: <?php echo $rep->codProjeto." - ". $rep->necessidade ?></legend>
+                            <input type="hidden" name="codProjeto" value='<?php echo $rep->codProjeto; ?>'>
+                            <input type="hidden" name="necessidade" value='<?php echo $rep->necessidade; ?>'>
+                            <label>valor da parcela</label>
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
-                                    <label>Critério</label>
-                                    <input required name="criterio" type="text" class="form-control" id="criterio" placeholder="Critério de avaliação de projeto" value='<?php echo $crit->criterio; ?>'>
+                                    <input required name="valorParcela" type="number" class="form-control" placeholder="Valor da parcela" step=0.01 value='<?php echo $rep->valorParcela; ?>'>
                                 </div>
                             </div>
-                            <label>Peso</label>
-                            <div class="form-group hidden-xs has-feedback">
-                                <div class="col-sm-10">
-                                    <input required name="peso" type="number" class="form-control" id="peso" placeholder="0 a 10" max="10" min="0" value='<?php echo $crit->peso; ?>'>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Atualizar critério</button>
-                            <a href="<?php echo base_url('/criterio/consultar'); ?>" class="btn btn-default">Cancelar</a>
+                            <button type="submit" class="btn btn-primary">Atualizar repasse</button>
+                            <a href="<?php echo base_url('/repasse/consultar'); ?>" class="btn btn-default">Cancelar</a>
                         </form>
                         <!--Formulario de cadastro-->
                          <?php

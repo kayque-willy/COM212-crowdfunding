@@ -54,6 +54,7 @@ class Repasse_model extends CI_Model{
   public function select($filtro='') {
    //Adiciona clausula where
    if(!empty($filtro['codProjeto'])) $this->db->where('codProjeto', $filtro['codProjeto']);
+   if(!empty($filtro['necessidade'])) $this->db->where('necessidade', $filtro['necessidade']);
    if(!empty($filtro['data'])) $this->db->where('data', $filtro['data']);
    //Consulta
    $this->db->select('*');    

@@ -132,7 +132,7 @@ class Repasse extends CI_Controller {
 			$necessidade = (empty($_POST['necessidade'])) ? '' : $_POST['necessidade'];
 			$valorParcela = (empty($_POST['valorParcela'])) ? '' : $_POST['valorParcela'];
 			$status =  (empty($_POST['status'])) ? NULL : $_POST['status'];
-			$data = now();
+			$data = date("Y-m-d"); 
 			
 			//Carrega a model
 			$this->load->model('repasse_model');
@@ -151,9 +151,9 @@ class Repasse extends CI_Controller {
 		}
 		
 		//Recupera os dados
-		if(!empty($id)){
+		if(!empty($codProjeto) and !empty($necessidade)){
 			$filtro['codProjeto']=$codProjeto;
-			$filtro['necessidade']=$necessidade;
+			$filtro['necessidade']=urldecode($necessidade);
 			
 			//Carrega a model
 			$this->load->model('repasse_model');
@@ -163,6 +163,8 @@ class Repasse extends CI_Controller {
 
 			//consulta o projeto pelo codigo
 			$data['repasse']=$repasse->select($filtro);
+			
+			var_dump($data['repasse']->result());
 			
 			//Carrega a view 
 			$this->load->view('CRUD_repasse/editREPASSE',$data); 
