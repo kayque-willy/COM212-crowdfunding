@@ -28,6 +28,9 @@ class Projeto extends CI_Controller {
 	#Cria um novo projeto
 	public function cadastrar(){
 		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos')) redirect('/projeto/', 'refresh');
+		
 		if(!empty($_POST)){
 			
 			//Recebe os dados do formulario
@@ -83,6 +86,9 @@ class Projeto extends CI_Controller {
 	#Lista os projetos candidatos
 	public function consultar($result=''){
 		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
+		
 		//Mensagem de resultado de alguma operação
 		if(isset($result)){
 			switch ($result){
@@ -134,6 +140,10 @@ class Projeto extends CI_Controller {
 	
 	#Altera o projeto
 	public function alterar($cod=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos')) redirect('/projeto/', 'refresh');
+		
 		//Recebe os dados do formulario para atualização
 		if(!empty($_POST)){
 			$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
@@ -201,6 +211,9 @@ class Projeto extends CI_Controller {
 	#Deletea o projeto 
 	public function remover($cod=''){
 		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos')) redirect('/projeto/', 'refresh');
+		
 		//Recebe os dados do formulario
 		$codigo = (empty($cod)) ? '' : $cod;
 		
@@ -220,8 +233,11 @@ class Projeto extends CI_Controller {
 		}
 	}
 
-	#Visaliza o projeto individudal
+	#Visualiza o projeto individudal
 	public function ver_projeto($codigo=''){
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
+		
 		//Recebe o código
 		$filtro['codigo']=$codigo;
 		
@@ -238,7 +254,7 @@ class Projeto extends CI_Controller {
 		$this->load->view('CRUD_projeto/readPROJETO',$data); 
 	}
 	
-	#Visaliza o projeto aprovado
+	#Visualiza o projeto aprovado
 	public function projeto_aprovado($codigo='',$result=''){
 		
 		//Mensagem de resultado de alguma operação
@@ -273,6 +289,9 @@ class Projeto extends CI_Controller {
 	
 	#Finaliza o projeto
 	public function finalizar($cod=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos')) redirect('/projeto/', 'refresh');
 		
 		//Recebe o status de finalizado
 		$status = 'finalizado';

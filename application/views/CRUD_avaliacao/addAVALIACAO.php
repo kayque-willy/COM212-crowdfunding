@@ -25,9 +25,11 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <ul class="list-group">
+                                <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Avaliador de Projetos')){ ?>
                                 <a href="<?php echo base_url('/avaliacao/cadastrar'); ?>">
                                     <li class="list-group-item list-group-item-info">Avaliar projeto</li>
                                 </a>
+                                <?php } ?>
                                 <a href="<?php echo base_url('/avaliacao/consultar'); ?>">
                                     <li class="list-group-item">Consultar avaliações</li>
                                 </a>

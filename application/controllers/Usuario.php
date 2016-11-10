@@ -12,6 +12,9 @@ class Usuario extends CI_Controller {
 	#Cria um novo usuario no banco
 	public function cadastrar(){
 	
+		//Restrição de acesso
+		if($_SESSION['tipo']!='Administrativo') redirect('/projeto/', 'refresh');
+		
 		if(!empty($_POST)){
 			//Recebe os dados do formulario
 			$login= (empty($_POST['login'])) ? '' : $_POST['login'];
@@ -49,6 +52,9 @@ class Usuario extends CI_Controller {
 	
 	#Consultar os usuarios
 	public function consultar($result=''){
+		
+		//Restrição de acesso
+		if($_SESSION['tipo']=='Usuário Público') redirect('/projeto/', 'refresh');
 		
 		//Mensagem de resultado de alguma operação
 		if(isset($result)){

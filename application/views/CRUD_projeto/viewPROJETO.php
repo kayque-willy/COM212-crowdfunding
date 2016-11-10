@@ -87,9 +87,11 @@
                 <div class="panel panel-primary">
                         <div class="panel-body">
                             <ul class="list-group">
+                                <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos')){ ?>
                                 <li class="list-group-item ">
                                     <a href="<?php echo base_url('/projeto/cadastrar'); ?>">Cadastrar novo projeto</a>
                                 </li>
+                                <?php } ?>    
                                 </a>
                                 <a href="<?php echo base_url('/projeto/consultar'); ?>">
                                     <li class="list-group-item list-group-item-info">Listar Projetos candidatos</li>
@@ -121,16 +123,20 @@
                             echo '<td><a href="'.base_url("/projeto/ver_projeto/$projeto->codigo").'">'.$projeto->nome.'</a></td>';
                             echo '<td>'.$projeto->categoria.'</td>';
                             echo '<td>'.$projeto->duracao.'</td>';
-                            echo '<td>'.$projeto->valor.'</td>';
-                            echo '<td>
-                			 <a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-sm btn-primary">Editar</a>
-                                <a href='.base_url("/projeto/remover/").$projeto->codigo.' class="btn btn-sm btn-danger" data-toggle="modal">Excluir</a>
-                			 </td>';
+                            echo '<td>'.'R$ '.number_format($projeto->valor).'</td>';
+                            if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos')){
+                               $str= '<td>
+                        			 <a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-sm btn-primary">Editar</a>
+                                        <a href='.base_url("/projeto/remover/").$projeto->codigo.' class="btn btn-sm btn-danger" data-toggle="modal">Excluir</a>
+                        			 </td>';
+                            }else 
+                                $str= '<td></td>';
+                            echo $str;
                 			echo '</tr>';
                            }
                         }
                 	?>
-                        <!-- Percorre o objeto de consulta enviado do controller-->
+                    <!-- Percorre o objeto de consulta enviado do controller-->
                 </tbody>
             </table>
         </div>

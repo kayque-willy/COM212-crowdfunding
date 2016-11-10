@@ -66,9 +66,11 @@
                     <div class="panel panel-primary">
                         <div class="panel-body">
                             <ul class="list-group">
-                                 <a href="<?php echo base_url('/avaliacao/cadastrar'); ?>">
-                                    <li class="list-group-item ">Avaliar projeto</li>
+                                <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Avaliador de Projetos')){ ?>
+                                <a href="<?php echo base_url('/avaliacao/cadastrar'); ?>">
+                                    <li class="list-group-item list-group-item">Avaliar projeto</li>
                                 </a>
+                                <?php } ?>
                                 <a href="<?php echo base_url('/avaliacao/consultar'); ?>">
                                     <li class="list-group-item list-group-item-info">Consultar avaliações</li>
                                 </a>
@@ -129,9 +131,11 @@
                                 </tbody>
                             </table>
                             <div class="text-right">
-                                    <a href="<?php echo base_url('/avaliacao/alterar/'.$avaliacao['avaliacao']->codProjeto); ?>" class="active btn btn-primary hidden-xs">
-                                        Alterar
-                                    </a>
+                                <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Avaliador de Projetos')){ ?>
+                                <a href="<?php echo base_url('/avaliacao/alterar/'.$avaliacao['avaliacao']->codProjeto); ?>" class="active btn btn-primary hidden-xs">
+                                    Alterar
+                                </a>
+                                <?php } ?>
                                 </div>
                             <!--Critérios-->
                         </li>

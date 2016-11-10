@@ -12,6 +12,9 @@ class Criterio extends CI_Controller {
 	#Cria um novo criterio
 	public function cadastrar(){
 		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
+		
 		if(!empty($_POST)){
 			
 			//Recebe os dados do formulario
@@ -41,6 +44,9 @@ class Criterio extends CI_Controller {
 	
 	#Lista os criterios
 	public function consultar($result=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
 		
 		//Mensagem de resultado de alguma operação
 		if(isset($result)){
@@ -102,6 +108,10 @@ class Criterio extends CI_Controller {
 	
 	#Altera o criterio
 	public function alterar($id=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
+		
 		//Recebe os dados do formulario para atualização
 		if(!empty($_POST)){
 			$id = (empty($_POST['id'])) ? '' : $_POST['id'];
@@ -148,6 +158,9 @@ class Criterio extends CI_Controller {
 	#Desativar o criterio 
 	public function desativar($id=''){
 		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
+		
 		//Carrega a model
 		$this->load->model('criterio_avaliacao_model');
 			
@@ -166,6 +179,9 @@ class Criterio extends CI_Controller {
 	
 	#Ativar o criterio 
 	public function ativar($id=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
 		
 		//Carrega a model
 		$this->load->model('criterio_avaliacao_model');

@@ -12,6 +12,9 @@ class Repasse extends CI_Controller {
 	#Cria um novo repasse
 	public function cadastrar(){
 		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos')) redirect('/projeto/', 'refresh');
+		
 		if(!empty($_POST)){
 			
 			//Recebe os dados do formulario
@@ -47,6 +50,9 @@ class Repasse extends CI_Controller {
 	
 	#Lista os repasses
 	public function consultar($result=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos')) redirect('/projeto/', 'refresh');
 		
 		//Mensagem de resultado de alguma operação
 		if(isset($result)){
@@ -126,6 +132,10 @@ class Repasse extends CI_Controller {
 	
 	#Altera o repasse
 	public function alterar($codProjeto='',$necessidade=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos')) redirect('/projeto/', 'refresh');
+		
 		//Recebe os dados do formulario para atualização
 		if(!empty($_POST)){
 			$codProjeto = (empty($_POST['codProjeto'])) ? '' : $_POST['codProjeto'];

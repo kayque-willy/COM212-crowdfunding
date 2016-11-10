@@ -42,8 +42,10 @@
                                 </div>
                                 <div id="actions" class="row">
                                     <div class="col-md-12 text-center">
-                                        <a href="<?php echo base_url("/projeto/alterar/").$projeto->codigo; ?>" class="btn btn-primary">Editar projeto</a>
-                                        <a href="<?php echo base_url("/projeto/remover/").$projeto->codigo; ?>"  class="btn btn-danger" data-toggle="modal">Excluir projeto</a>
+                                        <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos')){ ?>
+                                            <a href="<?php echo base_url("/projeto/alterar/").$projeto->codigo; ?>" class="btn btn-primary">Editar projeto</a>
+                                            <a href="<?php echo base_url("/projeto/remover/").$projeto->codigo; ?>"  class="btn btn-danger" data-toggle="modal">Excluir projeto</a>
+                                        <?php } ?>
                                         <a href="<?php echo base_url('/projeto/consultar'); ?>" class="btn btn-default">Retornar</a>
                                     </div>
                                 </div>

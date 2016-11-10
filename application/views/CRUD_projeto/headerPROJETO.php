@@ -42,13 +42,21 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar projetos<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo base_url('/projeto/consultar'); ?>">Projetos Candidatos</a></li>
-                        <li class="divider"></li>
-                        <li><a href="<?php echo base_url('/avaliacao/consultar'); ?>">Avaliações de projetos candidatos</a></li>
-                        <li class="divider"></li>
-                        <li><a href="<?php echo base_url('/criterio/consultar'); ?>">Critérios de avaliação</a></li>
-                        <li class="divider"></li>
-                        <li><a href="<?php echo base_url('/repasse/consultar'); ?>">Repasses financeiros</a></li>
+                        <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos') or ($_SESSION['tipo']=='Avaliador de Projetos') ) {?>
+                            <li><a href="<?php echo base_url('/projeto/consultar'); ?>">Projetos Candidatos</a></li>
+                        <?php } ?>
+                        <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Avaliador de Projetos')){ ?>
+                            <li class="divider"></li>
+                            <li><a href="<?php echo base_url('/avaliacao/consultar'); ?>">Avaliações de projetos candidatos</a></li>
+                        <?php } ?>
+                        <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos') or ($_SESSION['tipo']=='Avaliador de Projetos') ) {?>
+                            <li class="divider"></li>
+                            <li><a href="<?php echo base_url('/criterio/consultar'); ?>">Critérios de avaliação</a></li>
+                        <?php } ?>
+                        <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos')){ ?>
+                            <li class="divider"></li>
+                            <li><a href="<?php echo base_url('/repasse/consultar'); ?>">Repasses financeiros</a></li>
+                        <?php } ?>    
                     </ul>
                 </li>
                 <!--Administração Projetos candidatos-->
@@ -57,9 +65,13 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <?php echo $_SESSION['login'] ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a class="btn" href="<?php echo base_url("/usuario/cadastrar ") ?>">Adicionar usuario</a></li>
-                        <li><a class="btn" href="<?php echo base_url("/usuario/consultar ") ?>">Ver usuarios</a></li>
-                        <li class="divider"></li>
+                        <?php if($_SESSION['tipo']=='Administrativo') {?>
+                            <li><a class="btn" href="<?php echo base_url("/usuario/cadastrar ") ?>">Adicionar usuario</a></li>
+                        <?php } ?>
+                        <?php if($_SESSION['tipo']!='Usuário Público') {?>
+                            <li><a class="btn" href="<?php echo base_url("/usuario/consultar ") ?>">Ver usuarios</a></li>
+                            <li class="divider"></li>
+                        <?php } ?>
                         <li><a class="btn" href='<?php echo base_url("/usuario/alterar/".$_SESSION["login"]) ?>'>Atualizar perfil</a></li>
                         <li><a class="btn" href="<?php echo base_url("/usuario/logoff ") ?>">Sair</a></li>
                     </ul>

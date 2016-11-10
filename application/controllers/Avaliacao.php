@@ -12,6 +12,9 @@ class Avaliacao extends CI_Controller {
 	#Cria um novo avaliacao
 	public function cadastrar(){
 	
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
+		
 		if(!empty($_POST)){
 			
 			//Recebe os dados do formulario
@@ -70,6 +73,10 @@ class Avaliacao extends CI_Controller {
 	#Cadastra as notas de avaliação do projeto
 	public function avaliar(){
 		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
+		
+		
 		if(!empty($_POST['id_criterio']) and !empty($_POST['nota_criterio']) and !empty($_POST['id_avaliacao'])){
 			
 			//Recebe os dados do formulario
@@ -124,6 +131,9 @@ class Avaliacao extends CI_Controller {
 	
 	#Lista os avaliacaos
 	public function consultar($result=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
 		
 		//Mensagem de resultado de alguma operação
 		if(isset($result)){
@@ -187,6 +197,9 @@ class Avaliacao extends CI_Controller {
 	#Altera o avaliacao
 	public function alterar($codProjeto=''){
 			
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
+		
 		if(!empty($_POST)){
 			if(!empty($_POST['id_criterio']) and !empty($_POST['nota_criterio']) and !empty($_POST['id_avaliacao'])){
 				//Recebe os dados do formulario

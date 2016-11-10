@@ -43,8 +43,13 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <?php echo $_SESSION['login'] ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a class="btn" href="<?php echo base_url("/usuario/cadastrar ") ?>">Adicionar usuario</a></li>
-                        <li><a class="btn" href="<?php echo base_url("/usuario/consultar ") ?>">Ver usuarios</a></li>
+                        <?php if($_SESSION['tipo']=='Administrativo') {?>
+                            <li><a class="btn" href="<?php echo base_url("/usuario/cadastrar ") ?>">Adicionar usuario</a></li>
+                        <?php } ?>
+                        <?php if($_SESSION['tipo']!='Usuário Público') {?>
+                            <li><a class="btn" href="<?php echo base_url("/usuario/consultar ") ?>">Ver usuarios</a></li>
+                            <li class="divider"></li>
+                        <?php } ?>
                         <li><a class="btn" href='<?php echo base_url("/usuario/alterar/".$_SESSION["login"]) ?>'>Atualizar perfil</a></li>
                         <li><a class="btn" href="<?php echo base_url("/usuario/logoff ") ?>">Sair</a></li>
                     </ul>

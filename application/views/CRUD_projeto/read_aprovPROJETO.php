@@ -77,7 +77,9 @@
                                 </div>
                                 <div id="actions" class="row">
                                     <div class="col-md-12 text-center">
-                                        <a href="<?php echo base_url("/projeto/finalizar/").$projeto->codigo; ?>" class="btn btn-primary">Finalizar projeto</a>
+                                        <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos')){ ?>
+                                            <a href="<?php echo base_url("/projeto/finalizar/").$projeto->codigo; ?>" class="btn btn-primary">Finalizar projeto</a>
+                                        <?php } ?>
                                         <a href="<?php echo base_url('/projeto/'); ?>" class="btn btn-default">Retornar</a>
                                     </div>
                                 </div>
