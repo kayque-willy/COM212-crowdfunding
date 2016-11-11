@@ -43,6 +43,10 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar projetos<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos') or ($_SESSION['tipo']=='Avaliador de Projetos') ) {?>
+                           <li><a href="<?php echo base_url('/projeto/todosProjetos'); ?>">Todos os projetos</a></li>
+                        <?php } ?>
+                         <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos') or ($_SESSION['tipo']=='Avaliador de Projetos') ) {?>
+                            <li class="divider"></li>
                             <li><a href="<?php echo base_url('/projeto/consultar'); ?>">Projetos Candidatos</a></li>
                         <?php } ?>
                         <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Avaliador de Projetos')){ ?>

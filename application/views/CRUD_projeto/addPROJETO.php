@@ -60,7 +60,7 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label class="control-label">Imagem</label>
-                        <input required name="imagem" type="file" id="imgInp">
+                        <input name="imagem" type="file" id="imgInp">
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="exampleInputEmail1">Link de video descritivo</label>

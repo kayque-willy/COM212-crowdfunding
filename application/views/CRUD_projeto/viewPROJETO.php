@@ -124,9 +124,20 @@
                             echo '<td>'.$projeto->categoria.'</td>';
                             echo '<td>'.$projeto->duracao.'</td>';
                             echo '<td>'.'R$ '.number_format($projeto->valor).'</td>';
-                            if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos')){
+                            if(($_SESSION['tipo']=='Gestor de Projetos')){
                                $str= '<td>
-                        			 <a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-sm btn-primary">Editar</a>
+                        			    <a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-sm btn-primary">Editar</a>
+                                        <a href='.base_url("/projeto/remover/").$projeto->codigo.' class="btn btn-sm btn-danger" data-toggle="modal">Excluir</a>
+                        			 </td>';
+                            }else if(($_SESSION['tipo']=='Avaliador de Projetos')){
+                                $str= '<td>
+                                        <a href='.base_url("/avaliacao/cadastrar/").$projeto->codigo.' class="btn btn-sm btn-warning" data-toggle="modal">Avaliar</a>
+                                       </td>';
+                            
+                            }else if ($_SESSION['tipo']=='Administrativo'){   
+                                 $str= '<td>
+                        			    <a href='.base_url("/avaliacao/cadastrar/").$projeto->codigo.' class="btn btn-sm btn-warning" data-toggle="modal">Avaliar</a>
+                        			    <a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-sm btn-primary">Editar</a>
                                         <a href='.base_url("/projeto/remover/").$projeto->codigo.' class="btn btn-sm btn-danger" data-toggle="modal">Excluir</a>
                         			 </td>';
                             }else 

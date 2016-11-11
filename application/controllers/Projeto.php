@@ -22,7 +22,7 @@ class Projeto extends CI_Controller {
 		$data['projetos']=$projeto->select($filtro);
 		
 	   //Carrega a view da index do projeto
-	   $this->load->view('CRUD_projeto/indexPROJETO_fim',$data); 
+	   $this->load->view('CRUD_projeto/indexPROJETO',$data); 
 	 }
 	
 	#Cria um novo projeto
@@ -136,6 +136,61 @@ class Projeto extends CI_Controller {
 		
 		//Carrega a view 
 		$this->load->view('CRUD_projeto/viewPROJETO',$data); 
+	}
+	
+	#Lista todos os projetos
+	public function todosProjetos($result=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
+		
+		//Mensagem de resultado de alguma operação
+		if(isset($result)){
+			switch ($result){
+				case 'cad_sucesso': 
+					$data['sucesso']=true;
+					$data['msg'] = 'Projeto cadastrado com sucesso!';
+					break;
+				case 'cad_falha': 
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao cadastrar o projeto!';
+					break;
+				case 'alt_sucesso':
+					$data['sucesso']=true;
+					$data['msg'] = 'Projeto atualizado com sucesso!';
+					break;
+				case 'alt_falha': 
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao atualizar o projeto!';
+					break;
+				case 'des_sucesso':
+					$data['sucesso']=true;
+					$data['msg'] = 'Projeto desativado com sucesso!';
+					break;
+				case 'des_falha':
+					$data['falha']=true;
+					$data['msg'] = 'Falha ao remover o projeto!';
+					break;
+			}
+		}
+		
+		//Recebe o filtro
+		$filtro['codigo'] = (empty($_GET['codigo'])) ? '' : $_GET['codigo'];
+		$filtro['nome'] = (empty($_GET['nome'])) ? '' : $_GET['nome'];
+		$filtro['categoria'] = (empty($_GET['categoria'])) ? '' : $_GET['categoria'];
+		$filtro['status'] = (empty($_GET['status'])) ? '' : $_GET['status'];
+				
+		//Carrega a model
+		$this->load->model('projeto_model');
+			
+		//Cria um novo objeto projeto
+		$projeto = new Projeto_model();
+		
+		//$consulta o projeto
+		$data['projetos']=$projeto->select($filtro);
+		
+		//Carrega a view 
+		$this->load->view('CRUD_projeto/listPROJETO',$data); 
 	}
 	
 	#Altera o projeto
