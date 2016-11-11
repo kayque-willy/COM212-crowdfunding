@@ -3,17 +3,19 @@ class Projeto_model extends CI_Model{
  
   public $codigo;
   public $nome;
+  public $imagem;
+  public $video;
+  public $descricao;
   public $categoria;
   public $duracao;
   public $valor;
   public $status;
-  public $descricao;
-  public $video;
-  public $imagem;
+  public $prazoMaximo;
+  public $valorMaximo;
+  public $valorMinimo;
     
- 
   #constroi o objeto
-  public function __construct($codigo='', $nome='',$categoria='',$duracao='',$valor='',$status='',$descricao='',$video='',$imagem=''){
+  public function __construct($codigo='', $nome='',$categoria='',$duracao='',$valor='',$status='',$descricao='',$video='',$imagem='',$prazoMaximo='',$valorMaximo='',$valorMinimo=''){
      if(isset($codigo)) $this->codigo=$codigo;
      if(isset($nome)) $this->nome=$nome;
      if(isset($categoria)) $this->categoria=$categoria;
@@ -23,6 +25,9 @@ class Projeto_model extends CI_Model{
      if(isset($descricao)) $this->descricao=$descricao;
      if(isset($video)) $this->video=$video;
      if(isset($imagem['full_path'])) $this->imagem = file_get_contents($imagem['full_path']);
+     if(isset($prazoMaximo)) $this->prazoMaximo=$prazoMaximo;
+     if(isset($valorMaximo)) $this->valorMaximo=$valorMaximo;
+     if(isset($valorMinimo)) $this->valorMinimo=$valorMinimo;
   }
   
   #insere um novo registro no banco
@@ -38,6 +43,9 @@ class Projeto_model extends CI_Model{
      if(isset($this->descricao)) $data['descricao'] = $this->descricao;
      if(isset($this->video)) $data['video'] = $this->video;
      if(isset($this->imagem)) $data['imagem'] = $this->imagem;
+     if(isset($prazoMaximo)) $data['prazoMaximo']=$this->prazoMaximo;
+     if(isset($valorMaximo)) $data['valorMaximo']=$this->valorMaximo;
+     if(isset($valorMinimo)) $data['valorMinimo']=$this->valorMinimo;
      return $this->db->insert('projeto',$data);
  }
   
@@ -60,6 +68,9 @@ class Projeto_model extends CI_Model{
      if(isset($this->descricao)) $data['descricao'] = $this->descricao;
      if(isset($this->video)) $data['video'] = $this->video;
      if(isset($this->imagem)) $data['imagem'] = $this->imagem;
+     if(isset($prazoMaximo)) $data['prazoMaximo']=$this->prazoMaximo;
+     if(isset($valorMaximo)) $data['valorMaximo']=$this->valorMaximo;
+     if(isset($valorMinimo)) $data['valorMinimo']=$this->valorMinimo;
      
      //Cria um vetor com a chave primária 
      $where['codigo']=$codigo;
@@ -75,6 +86,10 @@ class Projeto_model extends CI_Model{
    if(!empty($filtro['nome'])) $this->db->where('nome', $filtro['nome']);
    if(!empty($filtro['categoria'])) $this->db->where('categoria', $filtro['categoria']);
    if(!empty($filtro['status'])) $this->db->where('status', $filtro['status']);
+   if(!empty($filtro['prazoMaximo'])) $this->db->where('prazoMaximo', $filtro['prazoMaximo']);
+   if(!empty($filtro['valorMaximo'])) $this->db->where('valorMaximo', $filtro['valorMaximo']);
+   if(!empty($filtro['valorMinimo'])) $this->db->where('valorMinimo', $filtro['valorMinimo']);
    return $this->db->get('projeto');
   }
+  
 }
