@@ -76,7 +76,6 @@ class Avaliacao extends CI_Controller {
 		//Restrição de acesso
 		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
 		
-		
 		if(!empty($_POST['id_criterio']) and !empty($_POST['nota_criterio']) and !empty($_POST['id_avaliacao'])){
 			
 			//Recebe os dados do formulario
@@ -104,17 +103,21 @@ class Avaliacao extends CI_Controller {
 				
 				//Verifica a nota para atualizar o status do projeto
 				$total = (float) $total;
-				if($total>=6) $status="aprovado";
-				else $status="reprovado";
+				if($total>=6){
+					$status="aprovado";
+					$prazoMaximo= date('d/m/Y', strtotime("+365 days",strtotime(date("Y-m-d"))));
+				}else{
+					$status="reprovado";
+					$prazoMaximo=null;
+				} 
 
 				//Atualiza o status do projeto
 				$this->load->model("projeto_model");
-				$projeto = new Projeto_model(null, null,null,null,null,$status,null,null,null);
+				$projeto = new Projeto_model(null,null,null,null,null,$status,null,null,null,$prazoMaximo,null,null);
 	
 				if($projeto->update($codProjeto)){
 					//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso
 					redirect('/avaliacao/consultar/cad_sucesso', 'refresh');
-					
 				}else{
 					//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 					redirect('/avaliacao/consultar/cad_falha', 'refresh');
@@ -225,13 +228,18 @@ class Avaliacao extends CI_Controller {
 				if($avaliacao->update($id_avaliacao)){
 					
 					//Verifica a nota para atualizar o status do projeto
-					$total= (float) $total;
-					if($total>=6) $status="aprovado";
-					else $status="reprovado";
+					$total = (float) $total;
+					if($total>=6){
+						$status="aprovado";
+						$prazoMaximo= date('d/m/Y', strtotime("+365 days",strtotime(date("Y-m-d"))));
+					}else{
+						$status="reprovado";
+						$prazoMaximo=null;
+					} 
 	
 					//Atualiza o status do projeto
 					$this->load->model("projeto_model");
-					$projeto = new Projeto_model(null, null,null,null,null,$status,null,null,null);
+					$projeto = new Projeto_model(null,null,null,null,null,$status,null,null,null,$prazoMaximo,null,null);
 		
 					if($projeto->update($codProjeto)){
 						//Se a operação for bem sucedida, redireciona a consulta com mensagem de sucesso

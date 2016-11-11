@@ -41,6 +41,8 @@ class Projeto extends CI_Controller {
 			$valor = (empty($_POST['valor'])) ? '' : $_POST['valor'];
 			$video = (empty($_POST['video'])) ? '' : $_POST['video'];
 			$status = 'candidato';
+			$valorMaximo=$valor;
+			$valorMinimo='10';
 			
 			//Tratamento para salvar a imagem
 			$imagem=null;
@@ -61,7 +63,7 @@ class Projeto extends CI_Controller {
 			$this->load->model('projeto_model');
 		
 			//Cria um novo projeto com os dados do POST
-			$projeto = new Projeto_model(null,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem);
+			$projeto = new Projeto_model(null,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem,null,$valorMaximo,$valorMinimo);
 			
 			//Insere o projeto no banco
 			if($projeto->insert()){
@@ -260,10 +262,9 @@ class Projeto extends CI_Controller {
 			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 			redirect('/projeto/consultar/alt_falha', 'refresh');
 		}
-		
 	}
 	
-	#Deletea o projeto 
+	#Deleta o projeto 
 	public function remover($cod=''){
 		
 		//Restrição de acesso
@@ -364,6 +365,56 @@ class Projeto extends CI_Controller {
 		}else{
 			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
 			redirect('/projeto/projeto_aprovado/'.$cod.'/alt_falha', 'refresh');
+		}
+	}
+	
+	#Atualiza critérios de restrição de financiamento de projeto
+	public function restricao($cod=''){
+		
+		//Restrição de acesso
+		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Gestor de Projetos')) redirect('/projeto/', 'refresh');
+		
+		//Recebe os dados do formulario para atualização
+		if(!empty($_POST)){
+			$codigo = (empty($_POST['codigo'])) ? '' : $_POST['codigo'];
+			$prazoMaximo = (empty($_POST['prazoMaximo'])) ? '' : $_POST['prazoMaximo'];
+			$valorMaximo = (empty($_POST['valorMaximo'])) ? '' : $_POST['valorMaximo'];
+			$valorMinimo = (empty($_POST['valorMinimo'])) ? '' : $_POST['valorMinimo'];
+			
+			//Carrega a model
+			$this->load->model('projeto_model');
+				
+			//Cria um novo projeto com os dados do POST
+			$projeto = new Projeto_model(null,null,null,null,null,null,null,null,null,$prazoMaximo,$valorMaximo,$valorMinimo);
+			
+			//Atualiza o projeto no banco
+			if($projeto->update($codigo)){
+				//Se a operação for bem sucedida, redireciona com mensagem de sucesso
+				redirect('/projeto/consultar/alt_sucesso', 'refresh');
+			}else{
+				//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+				redirect('/projeto/consultar/alt_falha', 'refresh');
+			}
+		}
+		
+		//Recupera os dados
+		if(!empty($cod)){
+			$filtro['codigo']=$cod;
+			
+			//Carrega a model
+			$this->load->model('projeto_model');
+				
+			//Cria um novo objeto projeto
+			$projeto = new Projeto_model();
+			
+			//consulta o projeto pelo codigo
+			$data['projeto']=$projeto->select($filtro);
+			
+			//Carrega a view 
+			$this->load->view('CRUD_projeto/restricaoPROJETO',$data); 
+		}else{
+			//Se a operação não for bem sucedida, redireciona a consulta com mensagem de falha
+			redirect('/projeto/consultar/alt_falha', 'refresh');
 		}
 	}
 }
