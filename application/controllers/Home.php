@@ -6,7 +6,11 @@ class Home extends CI_Controller {
 	public function index(){
 		$this->load->model('financiamento_model');
 		$financiamento = new Financiamento_model();
-		$financiamento->relatorio();
+		
+		$filtro['data_inicial']='2016-11-01';
+		$filtro['data_final']='2016-11-30';
+		
+		$financiamento->relatorioCategoria($filtro);
 		
 		//Carrega a index do site
 		$this->load->view('home.php');
