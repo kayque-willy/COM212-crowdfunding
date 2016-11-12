@@ -12,7 +12,7 @@ class Home extends CI_Controller {
 		$filtro['categoria_projeto']='Pesquisa';
 		$filtro['soma_categoria']=true;
 		
-		$financiamento->relatorioCategoria($filtro);
+		$financiamento->relatorio($filtro);
 		
 		//Carrega a index do site
 		$this->load->view('home.php');

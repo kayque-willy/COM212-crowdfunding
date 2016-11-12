@@ -96,16 +96,13 @@ class Financiamento_model extends CI_Model{
   public function relatorio($filtro='') {
    if(!empty($filtro['data_inicial'])) $this->db->where('data >=', $filtro['data_inicial']);
    if(!empty($filtro['data_final'])) $this->db->where('data <=', $filtro['data_final']);
-   if(!empty($filtro['valor_projeto'])) $this->db->where('projeto.valor', $filtro['valor_projeto']);
+   if(!empty($filtro['codigo_projeto'])) $this->db->where('projeto.codigo', $filtro['codigo_projeto']);
 
-   
    //Consultar inner join
-   $this->db->select('projeto.codigo as codigo, projeto.nome as nome, sum(financiamento.valor) as total, projeto.categoria as categoria');    
+   $this->db->select('projeto.codigo as codigo, projeto.nome as nome, financiamento.login as financiador, financiamento.valor as valor, projeto.categoria as categoria');    
    $this->db->from('financiamento');
    $this->db->join('projeto', 'financiamento.codProjeto = projeto.codigo','inner');
-   $this->db->group_by('projeto.codigo');
    $this->db->get();
-   
    var_dump($this->db->last_query()); 
       
   }
