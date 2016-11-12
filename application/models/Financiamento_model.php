@@ -8,9 +8,10 @@ class Financiamento_model extends CI_Model{
   public $formaPagamento;
   public $codProjeto;
   public $data;
+  public $login;
     
   #Constroi o objeto
-  public function __construct($id='',$tipo='',$quantidadeModulos='',$valor='',$formaPagamento='',$codProjeto='',$data=''){
+  public function __construct($id='',$tipo='',$quantidadeModulos='',$valor='',$formaPagamento='',$codProjeto='',$data='',$login=''){
      if(isset($id)) $this->id=$id;
      if(isset($tipo)) $this->tipo=$tipo;
      if(isset($quantidadeModulos)) $this->quantidadeModulos=$quantidadeModulos;
@@ -18,6 +19,7 @@ class Financiamento_model extends CI_Model{
      if(isset($formaPagamento)) $this->formaPagamento=$formaPagamento;
      if(isset($codProjeto)) $this->codProjeto=$codProjeto;
      if(isset($data)) $this->data=$data;
+     if(isset($login)) $this->login=$login;
   }
   
   #Insere um novo registro no banco
@@ -30,6 +32,7 @@ class Financiamento_model extends CI_Model{
      if(isset($this->formaPagamento)) $data['formaPagamento'] = $this->formaPagamento;
      if(isset($this->codProjeto)) $data['codProjeto'] = $this->codProjeto;
      if(isset($this->data)) $data['data'] = $this->data;
+     if(isset($this->login)) $data['login'] = $this->login;
      return $this->db->insert('financiamento',$data);
   }
   
@@ -50,6 +53,7 @@ class Financiamento_model extends CI_Model{
      if(isset($this->formaPagamento)) $data['formaPagamento'] = $this->formaPagamento;
      if(isset($this->codProjeto)) $data['codProjeto'] = $this->codProjeto;
      if(isset($this->data)) $data['data'] = $this->data;
+     if(isset($this->login)) $data['login'] = $this->login;
      //Cria um vetor com a chave primária 
      $where['id']=$id;
      //$this->db->update(nome da tabela,valores de atualização,referência)
@@ -76,21 +80,24 @@ class Financiamento_model extends CI_Model{
    if(!empty($filtro['data_final'])) $this->db->where('data <=', $filtro['data_final']);
    if(!empty($filtro['categoria_projeto'])) $this->db->where('projeto.categoria', $filtro['categoria_projeto']);
    
+   //Se tiver isset no soma_categoria ele agrupa a soma por categoria
+   if(!empty($filtro['soma_categoria'])) $this->db->group_by('projeto.categoria');
+   //Se tiver isset no soma_projeto ele agrupa a soma por projeto
+   if(!empty($filtro['soma_projeto'])) $this->db->group_by('projeto.codigo');
+   
    //Consultar inner join
    $this->db->select('projeto.codigo as codigo, projeto.nome as nome, sum(financiamento.valor) as total, projeto.categoria as categoria');    
    $this->db->from('financiamento');
    $this->db->join('projeto', 'financiamento.codProjeto = projeto.codigo','inner');
-   $this->db->group_by('projeto.codigo');
-   $this->db->get();
-   
-   var_dump($this->db->last_query());
+   return $this->db->get();
   }
   
-  #Relatório de financiamento dos Projetos por categoria
+  #Relatório de investimentos financeiro
   public function relatorio($filtro='') {
-   //Adiciona clausula where
-   if((!empty($filtro['data_inicial'])) and (!empty($filtro['data_final']))) $this->db->where('financiamento.data BETWEEN $filtro["data_inicial"] AND  $filtro["data_final"]');
-   if(!empty($filtro['categoria_projeto'])) $this->db->where('projeto.categoria', $filtro['categoria_projeto']);
+   if(!empty($filtro['data_inicial'])) $this->db->where('data >=', $filtro['data_inicial']);
+   if(!empty($filtro['data_final'])) $this->db->where('data <=', $filtro['data_final']);
+   if(!empty($filtro['valor_projeto'])) $this->db->where('projeto.valor', $filtro['valor_projeto']);
+
    
    //Consultar inner join
    $this->db->select('projeto.codigo as codigo, projeto.nome as nome, sum(financiamento.valor) as total, projeto.categoria as categoria');    
@@ -99,7 +106,8 @@ class Financiamento_model extends CI_Model{
    $this->db->group_by('projeto.codigo');
    $this->db->get();
    
-   var_dump($this->db->last_query());
+   var_dump($this->db->last_query()); 
+      
   }
   
 }

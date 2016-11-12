@@ -9,6 +9,8 @@ class Home extends CI_Controller {
 		
 		$filtro['data_inicial']='2016-11-01';
 		$filtro['data_final']='2016-11-30';
+		$filtro['categoria_projeto']='Pesquisa';
+		$filtro['soma_categoria']=true;
 		
 		$financiamento->relatorioCategoria($filtro);
 		
