@@ -44,6 +44,14 @@ class Financiamento extends CI_Controller {
 			}
 		}
 		
+	    //Carrega a model
+	    $this->load->model("projeto_model");
+		$projeto= new Projeto_model();
+		
+		//Consulta o projeto pelo codigo
+		$filtro['codigo']=$codProjeto;
+		$data['projeto']=$projeto->select($filtro);
+		
 		$data['codProjeto']=$codProjeto;
 		
 		//Carrega a view 
