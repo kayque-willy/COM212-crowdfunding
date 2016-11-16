@@ -79,12 +79,27 @@
             <div class="form-group col-md-6">
                 <label for="campo2">STATUS:</label>
                 <div class="progress">
-                    <div class="progress-bar progress-bar-success" style="width: 35%">
-                        <span class="sr-only">65% Complete (success)</span>
-                    </div>
-                    <div class="progress-bar progress-bar-danger" style="width: 10%">
-                        <span class="sr-only">35% Complete (danger)</span>
-                    </div>
+                    <?php 
+                    if($proj->status=='aprovado'){
+                    ?>
+                        <div class="progress-bar progress-bar-success" style="width: 100%">
+                            <span>Aprovado</span>
+                        </div>
+                    <?php
+                    }else if($proj->status=='reprovado'){
+                    ?>
+                        <div class="progress-bar progress-bar-danger" style="width: 100%">
+                            <span>Reprovado</span>
+                        </div>
+                    <?php
+                    }else if($proj->status=='candidato'){
+                    ?>
+                        <div class="progress-bar progress-bar-warning" style="width: 100%">
+                            <span>Candidato</span>
+                        </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
             <!-- Status -->

@@ -10,8 +10,8 @@ class Avaliacao extends CI_Controller {
 	 }
 	
 	#Cria um novo avaliacao
-	public function cadastrar(){
-	
+	public function cadastrar($codProjeto=''){
+		
 		//Restrição de acesso
 		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Avaliador de Projetos')) redirect('/projeto/', 'refresh');
 		
@@ -31,6 +31,7 @@ class Avaliacao extends CI_Controller {
 		
 			//Insere o avaliacao no banco
 			if($avaliacao->insert()){
+				
 				//Se a operação for bem sucedida, consulta o ID da avaliação conforme o codigo do projeto
 				$data['codProjeto']=$codProjeto;
 				$filtro['codigo_projeto']=$codProjeto;
@@ -60,11 +61,15 @@ class Avaliacao extends CI_Controller {
 				redirect('/avaliacao/consultar/cad_falha', 'refresh');
 			}
 		}else{
-			//Consulta o codigo dos projetos
-			$this->load->model('projeto_model');
-			$projeto = new Projeto_model();
-			$data['projetos'] = $projeto->select();
-
+			if(empty($codProjeto)){
+				//Consulta o codigo dos projetos
+				$this->load->model('projeto_model');
+				$projeto = new Projeto_model();
+				$data['projetos'] = $projeto->select();
+			}else{
+				//Se não adiciona o código do parâmetro
+				$data['codProjeto']=$codProjeto;
+			}
 			//Carrega a view 
 			$this->load->view('CRUD_avaliacao/addAVALIACAO',$data); 
 		}

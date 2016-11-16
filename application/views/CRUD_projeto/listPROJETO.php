@@ -70,11 +70,14 @@
                                        </td>';
                             
                             }else if ($_SESSION['tipo']=='Administrativo'){   
-                                 $str= '<td>
-                        			    <a href='.base_url("/avaliacao/cadastrar/").$projeto->codigo.' class="btn btn-sm btn-warning" data-toggle="modal">Avaliar</a>
-                        			    <a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-sm btn-primary">Editar</a>
-                                        <a href='.base_url("/projeto/remover/").$projeto->codigo.' class="btn btn-sm btn-danger" data-toggle="modal">Excluir</a>
-                        			 </td>';
+                                $str= '<td>';
+                        		
+                        		if($projeto->status=='candidato')
+                        		  $str.='<a href='.base_url("/avaliacao/cadastrar/").$projeto->codigo.' class="btn btn-sm btn-warning" data-toggle="modal">Avaliar</a> ';
+                        			 
+                            	$str.='<a href='.base_url("/projeto/alterar/").$projeto->codigo.' class="btn btn-sm btn-primary">Editar</a>
+                                       <a href='.base_url("/projeto/remover/").$projeto->codigo.' class="btn btn-sm btn-danger" data-toggle="modal">Excluir</a>
+                            		  </td>';
                             }else 
                                 $str= '<td></td>';
                             echo $str;

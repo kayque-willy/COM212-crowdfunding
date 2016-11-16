@@ -45,17 +45,25 @@
                             <div class="form-group hidden-xs has-feedback">
                                 <div class="col-sm-10">
                                     <label>Codigo do projeto</label>
-                                    <select required name="codProjeto" type="text" class="form-control" id="codProjeto">
-                                        <option value="" disabled selected>Código do projeto</option>
-                                        <?php
-                                        if(!empty($projetos)){
-                                            foreach($projetos->result() as $projeto){
-                                        ?>
-                                            <option><?php echo $projeto->codigo ?></option>  
-                                        <?php
+                                    <?php
+                                        if(!empty($codProjeto)){
+                                    ?>
+                                     <input name="codProjeto" type="text" class="form-control" readonly value="<?php echo $codProjeto ?>"
+                                    <?php
+                                        }else{
+                                    ?>
+                                        <select required name="codProjeto" type="text" class="form-control" id="codProjeto">
+                                            <option value="" disabled selected>Código do projeto</option>
+                                    <?php
+                                            if(!empty($projetos)){
+                                                foreach($projetos->result() as $projeto){
+                                    ?>
+                                                <option><?php echo $projeto->codigo ?></option>  
+                                    <?php
+                                                }
                                             }
                                         }
-                                        ?>
+                                    ?>
                                     </select>
                                 </div>
                             </div>
