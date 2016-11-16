@@ -69,6 +69,8 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <?php echo $_SESSION['login'] ?><span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                         <li><a href="<?php echo base_url('/financiamento/consultar'); ?>">Meus financiamentos</a></li>    
+                         <li class="divider"></li>
                         <?php if($_SESSION['tipo']=='Administrativo') {?>
                             <li><a class="btn" href="<?php echo base_url("/usuario/cadastrar ") ?>">Adicionar usuario</a></li>
                         <?php } ?>
