@@ -2,7 +2,6 @@
 <html>
 
 <head>
-
     <title>UNIFUNDING</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta charset="utf-8">
@@ -63,6 +62,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-8 col-md-8">
                                 <h2><a href="<?php echo base_url("/projeto/projeto_aprovado/").$projeto->codigo ?>"><?php echo $projeto->codigo.' - '.$projeto->nome ?></a></h2>
+                                <a href="<?php echo base_url("/financiamento/financiar/").$projeto->codigo ?>" class="btn btn-md btn-success">Financiar</a>
                                 <h3>
                                     <?php echo $projeto->categoria ?>
                                 </h3>

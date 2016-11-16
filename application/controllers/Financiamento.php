@@ -10,7 +10,7 @@ class Financiamento extends CI_Controller {
 	 }
 	
 	#Cria um novo financiamento
-	public function financiar(){
+	public function financiar($codProjeto=''){
 		
 		//Restrição de acesso
 		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Financiador Acadêmico')  and ($_SESSION['tipo']!='Usuário Público')) redirect('/financiamento/', 'refresh');
@@ -44,8 +44,10 @@ class Financiamento extends CI_Controller {
 			}
 		}
 		
+		$data['codProjeto']=$codProjeto;
+		
 		//Carrega a view 
-		$this->load->view('CRUD_financiamento/addFINANCIAMENTO'); 	
+		$this->load->view('CRUD_financiamento/addFINANCIAMENTO',$data); 	
 	}
 	
 	#Lista os financiamentos candidatos
@@ -103,7 +105,7 @@ class Financiamento extends CI_Controller {
 	}
 
 	#Relatório de financiamento de projeto por categoria
-	public funciont relatorioCategoria(){
+	public function relatorioCategoria(){
 		
 		//Restrição de acesso
 		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Financiador Acadêmico')  and ($_SESSION['tipo']!='Usuário Público')) redirect('/financiamento/', 'refresh');
@@ -125,7 +127,7 @@ class Financiamento extends CI_Controller {
 	}
 	
 	#Relatório de financiamento de projetos
-	public funciont relatorio(){
+	public function relatorio(){
 		
 		//Restrição de acesso
 		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Financiador Acadêmico')  and ($_SESSION['tipo']!='Usuário Público')) redirect('/financiamento/', 'refresh');

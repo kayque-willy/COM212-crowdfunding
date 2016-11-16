@@ -7,33 +7,33 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-            <a class="navbar-brand" href="/projeto/">UNIFUNDING</a>
+            <a class="navbar-brand" href="<?php echo base_url() ?>">UNIFUNDING</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="/projeto/">Home</a></li>
+                <li><a href="<?php echo base_url() ?>">Home</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tipos de projetos<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Pesquisa</a></li>
+                        <li><a href="<?php echo base_url('/projeto/?categoria=Pesquisa') ?>">Pesquisa</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Competição Tecnológica</a></li>
+                        <li><a href="<?php echo base_url('/projeto/?categoria=Competição Tecnológica') ?>">Competição Tecnológica</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Inovação no Ensino</a></li>
+                        <li><a href="<?php echo base_url('/projeto/?categoria=Inovação no Ensino') ?>">Inovação no Ensino</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Manutenção e Reforma</a></li>
+                        <li><a href="<?php echo base_url('/projeto/?categoria=Manutenção e Reforma') ?>">Manutenção e Reforma</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Pequenas Obras</a></li>
+                        <li><a href="<?php echo base_url('/projeto/?categoria=Pequenas Obras') ?>">Pequenas Obras</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Projetos</a></li>
+                <li><a href="<?php echo base_url("/projeto/"); ?>">Projetos</a></li>
                 <li>
-                    <form class="navbar-form " role="search">
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Escreva o nome do projeto a ser buscado">
-                        </div>
-                        <button type="submit" class="btn btn-default">Buscar Projeto</button>
-                    </form>
+                    <form action="<?php echo base_url('/projeto/'); ?>" class="navbar-form navbar-right" role="search" method="GET">
+                            <div class="form-group">
+                                <input name="nome" type="text" class="form-control" placeholder="Escreva o nome do projeto a ser buscado">
+                            </div>
+                            <inpu type="submit" class="btn btn-default">Buscar Projeto</button>
+                        </form>
                     <!--Navegação a direita-->
                 </li>
             </ul>
