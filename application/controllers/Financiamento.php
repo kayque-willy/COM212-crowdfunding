@@ -18,11 +18,11 @@ class Financiamento extends CI_Controller {
 		if(!empty($_POST)){
 			
 			//Recebe os dados do formulario
-			$tipo = (empty($_POST['nome'])) ? '' : $_POST['nome'];
-			$quantidadeModulos = (empty($_POST['descricao'])) ? '' : $_POST['descricao'];
-			$valor = (empty($_POST['categoria'])) ? '' : $_POST['categoria'];
-			$formaPagamento = (empty($_POST['duracao'])) ? '' : $_POST['duracao'];
-			$codfinanciamento = (empty($_POST['valor'])) ? '' : $_POST['valor'];
+			$tipo = (empty($_POST['tipo'])) ? '' : $_POST['tipo'];
+			$quantidadeModulos = (empty($_POST['quantidadeModulos'])) ? '' : $_POST['quantidadeModulos'];
+			$valor = (empty($_POST['valor'])) ? '' : $_POST['valor'];
+			$formaPagamento = (empty($_POST['formaPagamento'])) ? '' : $_POST['formaPagamento'];
+			$codProjeto = (empty($_POST['codProjeto'])) ? '' : $_POST['codProjeto'];
 			$data = date('Y-m-d');
 			$login = (empty($_SESSION['login'])) ? '' : $_SESSION['login'];
 			
