@@ -30,7 +30,7 @@ class Financiamento extends CI_Controller {
 			$this->load->model('financiamento_model');
 		
 			//Cria um novo financiamento com os dados do POST
-			$financiamento = new Financiamento_model(null,$nome,$categoria,$duracao,$valor,$status,$descricao,$video,$imagem,null,$valorMaximo,$valorMinimo);
+			$financiamento = new Financiamento_model(null,$tipo,$quantidadeModulos,$valor,$formaPagamento,$codProjeto,$data,$login);
 			
 			//Insere o financiamento no banco
 			if($financiamento->insert()){
