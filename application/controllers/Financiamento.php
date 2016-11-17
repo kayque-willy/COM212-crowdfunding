@@ -97,8 +97,8 @@ class Financiamento extends CI_Controller {
 		//Recebe o filtro
 		$filtro['nome'] = (empty($_GET['nome'])) ? '' : $_GET['nome'];
 		$filtro['data'] = (empty($_GET['data'])) ? '' : $_GET['data'];
+		$filtro['login'] = $_SESSION['login'];
 	
-				
 		//Carrega a model
 		$this->load->model('financiamento_model');
 			
@@ -107,7 +107,7 @@ class Financiamento extends CI_Controller {
 		
 		//$consulta o financiamento
 		$data['financiamentos']=$financiamento->select($filtro);
-		
+	
 		//Carrega a view 
 		$this->load->view('CRUD_financiamento/viewFINANCIAMENTO',$data); 
 	}

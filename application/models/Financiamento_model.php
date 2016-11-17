@@ -63,13 +63,17 @@ class Financiamento_model extends CI_Model{
   #Retorna o objeto
   public function select($filtro='') {
    //Adiciona clausula where
-   if(!empty($filtro['codProjeto'])) $this->db->where('codProjeto', $filtro['codProjeto']);
-   if(!empty($filtro['tipo'])) $this->db->where('tipo', $filtro['tipo']);
-   if(!empty($filtro['formaPagamento'])) $this->db->where('formaPagamento', $filtro['formaPagamento']);
-   if(!empty($filtro['data'])) $this->db->where('data', $filtro['data']);
-   //Consulta
-   $this->db->select('*');    
+   if(!empty($filtro['login'])) $this->db->where('financiamento.login', $filtro['login']);
+   if(!empty($filtro['nome'])) $this->db->where('projeto.nome', $filtro['nome']);
+   if(!empty($filtro['codProjeto'])) $this->db->where('financiamento.codProjeto', $filtro['codProjeto']);
+   if(!empty($filtro['tipo'])) $this->db->where('financiamento.tipo', $filtro['tipo']);
+   if(!empty($filtro['formaPagamento'])) $this->db->where('financiamento.formaPagamento', $filtro['formaPagamento']);
+   if(!empty($filtro['data'])) $this->db->where('financiamento.data', $filtro['data']);
+  
+   //Consultar inner join
+   $this->db->select('financiamento.* , projeto.nome as nome, projeto.categoria as categoria');    
    $this->db->from('financiamento');
+   $this->db->join('projeto', 'financiamento.codProjeto = projeto.codigo','inner');
    return $this->db->get();
   }
   

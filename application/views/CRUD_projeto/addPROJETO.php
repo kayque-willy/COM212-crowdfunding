@@ -14,7 +14,9 @@
 
 <body>
     <!--Header-->
-    <?php $this->load->view("CRUD_projeto/headerPROJETO");?>
+    <?php 
+    $this->load->view("CRUD_projeto/headerPROJETO");
+    ?>
     <!--Header-->
     <!-- Fim da barra de navehação superior-->
     <!-- Inicio de um CRUD -->

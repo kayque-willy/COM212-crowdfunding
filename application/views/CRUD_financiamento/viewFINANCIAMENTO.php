@@ -19,7 +19,7 @@
     <!--Header-->
     <div class="section">
         <div class="container">
-            <h3 class="page-header text-center">Meus financiamentos</h3>
+            <h3 class="page-header">Meus financiamentos</h3>
             <!--mensagem-->
             <?php if (isset($sucesso)){  ?>
             <div class="alert alert-success">
@@ -41,7 +41,7 @@
             <?php } ?>
             <!--mensagem-->
             <!--filtro-->
-            <form action="<?php echo base_url('/finaciamento/consultar'); ?>" class="form-inline pull-right" method="GET">
+            <form action="<?php echo base_url('/financiamento/consultar'); ?>" class="form-inline pull-left" method="GET">
                 <div class="form-group">
                     <input name="nome" type="text" class="form-control" placeholder="Filtrar nome do projeto">
                 </div>
@@ -52,36 +52,34 @@
             </form>
             <!--filtro-->
             <div class="row">
-                <div class="col-md-4">
-                    <div class="panel panel-primary">
-                        <div class="panel-body">
-                            <ul class="list-group">
-                                <a href="<?php echo base_url('/finaciamento/consultar'); ?>">
-                                    <li class="list-group-item list-group-item-info">Meus financiamentos</li>
-                                </a>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-8">
+               
+                <div class="col-md-10">
                     <ul class="media-list">
+                        <br>
+                        <table class="table">
+                         <thead>
+                            <tr>
+                                <th>Projeto</th>
+                                <th>Categoria</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
                         <?php 
-                        if(!empty($finaciamento)){
-                            foreach($finaciamento as $finaciamento){
+                        if(!empty($financiamentos)){
+                            foreach($financiamentos->result() as $financiamento){
                         ?>
-                        <li class="media">
-                                <a class="pull-left" href="#"><img class="media-object" src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" height="64" width="64"></a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Nome</h4><p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque
-                                        ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at,
-                                        tempus viverra turpis.</p><h4 class="media-heading">Data: dd/mm/aaaa</h4><h4 class="media-heading">Valor:</h4>
-                                </div>
-                            </li>
-                        <hr>
+                            <tr>
+                                <td><?php echo $financiamento->nome ?></td>
+                                <td><?php echo $financiamento->categoria ?></td>
+                                <td><?php echo $financiamento->data ?></td>
+                                <td><?php echo 'R$ '.number_format($financiamento->valor) ?></td>
+                            </tr>
                         <?php 
                             }
                         }
                         ?>
+                        </table>
                     </ul>
                 </div>
             </div>

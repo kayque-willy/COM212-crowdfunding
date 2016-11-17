@@ -15,8 +15,11 @@
 
 <body>
     <!--Header-->
-    <?php $this->load->view("CRUD_projeto/headerPROJETO");?>
-    <!--Header-->
+        <?php 
+        if(empty($_SESSION['login'])) $this->load->view("header");
+        else  $this->load->view("CRUD_projeto/headerPROJETO");
+        ?>
+        <!--Header-->
     <!-- Fim da barra de navehação superior -->
     <div class="wrapper" role="main">
         <div class="container">
