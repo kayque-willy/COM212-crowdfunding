@@ -38,29 +38,42 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos')){ ?>
+                <!--Administração Projetos candidatos-->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Relatórios<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo base_url('/financiamento/relatorio'); ?>">Investimentos por projeto</a></li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo base_url('/financiamento/relatorioCategoria'); ?>">Investimentos por categoria</a></li>
+                    </ul>
+                </li>
+                <!--Administração Projetos candidatos-->
+                <?php } ?>   
+                
                 <!--Administração Projetos candidatos-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrar projetos<b class="caret"></b></a>
                     <ul class="dropdown-menu">
+                        <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos')){ ?>
+                            <li><a href="<?php echo base_url('/repasse/consultar'); ?>">Repasses financeiros</a></li>
+                        <?php } ?>   
                         <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos') or ($_SESSION['tipo']=='Avaliador de Projetos') ) {?>
+                            <li class="divider"></li>
                            <li><a href="<?php echo base_url('/projeto/todosProjetos'); ?>">Todos os projetos</a></li>
                         <?php } ?>
-                         <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos') or ($_SESSION['tipo']=='Avaliador de Projetos') ) {?>
+                        <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos') or ($_SESSION['tipo']=='Avaliador de Projetos') ) {?>
                             <li class="divider"></li>
                             <li><a href="<?php echo base_url('/projeto/consultar'); ?>">Projetos Candidatos</a></li>
                         <?php } ?>
                         <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Avaliador de Projetos')){ ?>
-                            <li class="divider"></li>
+                           
                             <li><a href="<?php echo base_url('/avaliacao/consultar'); ?>">Avaliações de projetos candidatos</a></li>
                         <?php } ?>
                         <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos') or ($_SESSION['tipo']=='Avaliador de Projetos') ) {?>
-                            <li class="divider"></li>
                             <li><a href="<?php echo base_url('/criterio/consultar'); ?>">Critérios de avaliação</a></li>
                         <?php } ?>
-                        <?php if(($_SESSION['tipo']=='Administrativo') or ($_SESSION['tipo']=='Gestor de Projetos')){ ?>
-                            <li class="divider"></li>
-                            <li><a href="<?php echo base_url('/repasse/consultar'); ?>">Repasses financeiros</a></li>
-                        <?php } ?>    
+                       
                     </ul>
                 </li>
                 <!--Administração Projetos candidatos-->

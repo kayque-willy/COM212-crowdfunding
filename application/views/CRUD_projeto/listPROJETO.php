@@ -19,11 +19,13 @@
     <!-- Fim da barra de navehação superior-->
     <!-- Inicio de um CRUD -->
     <div id="main" class="container-fluid">
-        <h3 class="page-header">Todos os projetos</h3>
+        <h3 class="page-header text-center">Todos os projetos</h3>
         <div class="row">
 <div id="list" class="row">
 	
-	<div class="table-responsive col-md-12">
+	<div class="col-md-1">
+	</div>
+	<div class="table-responsive col-md-10 text-center">
 		<table class="table table-striped" cellspacing="0" cellpadding="0">
 			<thead>
 				<tr>

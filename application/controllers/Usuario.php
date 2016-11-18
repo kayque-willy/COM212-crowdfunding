@@ -214,7 +214,7 @@ class Usuario extends CI_Controller {
 				$_SESSION['tipo']=$login->tipo;
 				
 				//Redireciona para a consulta de projetos
-				redirect('/projeto/', 'refresh');
+				redirect('', 'refresh');
 			}
 		}else{
 			//Carrega a view 

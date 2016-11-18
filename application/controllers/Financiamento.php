@@ -145,14 +145,19 @@ class Financiamento extends CI_Controller {
 		$filtro['data_final'] = (empty($_GET['data_final'])) ? '' : $_GET['data_final'];
 		$filtro['codigo_projeto'] = (empty($_GET['codigo_projeto'])) ? '' : $_GET['codigo_projeto'];
 		
-		//Carrega a model
-		$this->load->model('financiamento_model');
+		if(!empty($filtro['codigo_projeto'])){
+			//Carrega a model
+			$this->load->model('financiamento_model');
 			
-		//Cria um novo objeto financiamento
-		$financiamento = new Financiamento_model();
+			//Cria um novo objeto financiamento
+			$financiamento = new Financiamento_model();
 		
-		//Realiza a consulta do relatório
-		$data['relatorio_projeto'] = $financiamento->relatorio($filtro);
+			//Realiza a consulta do relatório
+			$data['pdf']=true;
+			$data['relatorio_projeto'] = $financiamento->relatorio($filtro);
+		}else {
+			$data=null;
+		}
 		
 		//Carrega a view 
 		$this->load->view('CRUD_financiamento/relFINANCIAMENTO',$data); 
