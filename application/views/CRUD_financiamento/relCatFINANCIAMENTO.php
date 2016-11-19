@@ -30,9 +30,6 @@
                 <div class="form-group">
                     <input name="data_final" type="date" class="form-control" placeholder="Data final">
                 </div>
-                <div class="form-group">
-                    <input name="codigo_projeto" type="text" class="form-control" placeholder="Código do projeto">
-                </div>
                 <button type="submit" class="btn btn-primary">Gerar relatório</button>
                 <?php
                 if(!empty($pdf)){
@@ -48,16 +45,13 @@
         <div class="section">
             <div class="container-fluid">
                 <div class="row">
-                  
-                    <div class="col-md-9">
+                    <div class="col-md-6">
                         <?php
                         if(isset($categorias)){
                             foreach($categorias as $categoria){
-                                
-                                var_dump($categoria);
                         ?>
                         <div class="row">
-                            <table class="table table-striped" cellspacing="0" cellpadding="0">
+                            <table class="table table-striped table-responsive" cellspacing="0" cellpadding="0">
                                     <thead>
                                         <tr>
                                             <th><?php echo $categoria['categoria']->categoria?></th>
@@ -66,13 +60,12 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                        if(isset($relatorio_projeto)){
-                                          foreach ($relatorio_projeto->result() as $relatorio) {
+                                        if(isset($categoria['projeto'])){
+                                          foreach ($categoria['projeto'] as $projeto) {
                                     ?>
                                         <tr>
-                                            <td><?php echo $relatorio->financiador ?></td>
-                                            <td><?php echo $relatorio->data ?></td>
-                                            <td>R$ <?php echo $relatorio->valor ?></td>
+                                            <td><?php echo $projeto->nome ?></td>
+                                            <td>R$ <?php echo $projeto->total ?></td>
                                         </tr>
                                     <?php
                                           }
@@ -80,7 +73,7 @@
                                     ?>
                                     <tr>
                                         <th>TOTAL</th>
-                                        <th><?php echo $categoria['categoria']->total ?> </th>
+                                        <th>R$ <?php echo $categoria['categoria']->total ?> </th>
                                     </tr>
                                     </tbody>
                             </table>

@@ -129,7 +129,7 @@ class Financiamento extends CI_Controller {
 			$financiamento = new Financiamento_model();
 			$categoria=[];
 			
-			#PESQUISA#
+			#Pesquisa#
 			//Soma categoria
 			$filtro['categoria_projeto']='Pesquisa';
 			$filtro['soma_categoria']=true;
@@ -145,8 +145,10 @@ class Financiamento extends CI_Controller {
 			$filtro['soma_projeto']=true;
 			$categoria['pesquisa']['projeto']=$financiamento->relatorioCategoria($filtro);
 			$categoria['pesquisa']['projeto']=$categoria['pesquisa']['projeto']->result();
-			if(isset($categoria['pesquisa']['projeto'][0]))
-				$categoria['pesquisa']['projeto']=$categoria['pesquisa']['projeto'][0];
+			if(empty($categoria['pesquisa']['projeto']))
+				unset($categoria['pesquisa']['projeto']);
+			if(empty($categoria['pesquisa']))
+				unset($categoria['pesquisa']);
 			
 			#Competição Tecnológica#
 			//Soma categoria
@@ -164,9 +166,11 @@ class Financiamento extends CI_Controller {
 			$filtro['soma_projeto']=true;
 			$categoria['competicaoTecnologica']['projeto']=$financiamento->relatorioCategoria($filtro);
 			$categoria['competicaoTecnologica']['projeto']=$categoria['competicaoTecnologica']['projeto']->result();
-			if(isset($categoria['competicaoTecnologica']['projeto'][0]))
-				$categoria['competicaoTecnologica']['projeto']=$categoria['competicaoTecnologica']['projeto'][0];
-			
+			if(empty($categoria['competicaoTecnologica']['projeto']))
+				unset($categoria['competicaoTecnologica']['projeto']);
+			if(empty($categoria['competicaoTecnologica']))
+				unset($categoria['competicaoTecnologica']);
+		
 			#Inovação no Ensino#
 			//Soma categoria
 			$filtro['categoria_projeto']='Inovação no Ensino';
@@ -183,8 +187,11 @@ class Financiamento extends CI_Controller {
 			$filtro['soma_projeto']=true;
 			$categoria['inovacaoEnsino']['projeto']=$financiamento->relatorioCategoria($filtro);
 			$categoria['inovacaoEnsino']['projeto']=$categoria['inovacaoEnsino']['projeto']->result();
-			if(isset($categoria['inovacaoEnsino']['projeto'][0]))
-				$categoria['inovacaoEnsino']['projeto']=$categoria['inovacaoEnsino']['projeto'][0];
+			if(empty($categoria['inovacaoEnsino']['projeto']))
+				unset($categoria['inovacaoEnsino']['projeto']);
+			if(empty($categoria['inovacaoEnsino']))
+				unset($categoria['inovacaoEnsino']);
+			
 		
 			#Manutenção e Reforma#
 			//Soma categoria
@@ -202,8 +209,10 @@ class Financiamento extends CI_Controller {
 			$filtro['soma_projeto']=true;
 			$categoria['manutencaoReforma']['projeto']=$financiamento->relatorioCategoria($filtro);
 			$categoria['manutencaoReforma']['projeto']=$categoria['manutencaoReforma']['projeto']->result();
-			if(isset($categoria['manutencaoReforma']['projeto'][0]))
-				$categoria['manutencaoReforma']['projeto']=$categoria['manutencaoReforma']['projeto'][0];
+			if(empty($categoria['manutencaoReforma']['projeto']))
+				unset($categoria['manutencaoReforma']['projeto']);
+			if(empty($categoria['manutencaoReforma']))
+				unset($categoria['manutencaoReforma']);
 		
 			#Pequenas Obras#
 			//Soma categoria
@@ -221,10 +230,10 @@ class Financiamento extends CI_Controller {
 			$filtro['soma_projeto']=true;
 			$categoria['pequenasObras']['projeto']=$financiamento->relatorioCategoria($filtro);
 			$categoria['pequenasObras']['projeto']=$categoria['pequenasObras']['projeto']->result();
-			if(isset($categoria['pequenasObras']['projeto'][0]))
-				$categoria['pequenasObras']['projeto']=$categoria['pequenasObras']['projeto'][0];
-		
-			var_dump($categoria);
+			if(empty($categoria['pequenasObras']['projeto']))
+				unset($categoria['pequenasObras']['projeto']);
+			if(empty($categoria['pequenasObras']))
+				unset($categoria['pequenasObras']);
 		
 			//Adiciona as somas das categorias
 			$data['categorias']=$categoria;
