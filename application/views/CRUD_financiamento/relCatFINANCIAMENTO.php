@@ -23,7 +23,7 @@
         <h3 class="page-header text-center">Relatório de investimentos financeiros</h3>
         <div class="row">
             <!--Filtro -->
-            <form action="<?php echo base_url('/financiamento/relatorio'); ?>" class="form-inline text-center" method="GET">
+            <form action="<?php echo base_url('/financiamento/relatorioCategoria'); ?>" class="form-inline text-center" method="GET">
                 <div class="form-group">
                     <input name="data_inicial" type="date" class="form-control" placeholder="Data inicial">
                 </div>
@@ -48,46 +48,47 @@
         <div class="section">
             <div class="container-fluid">
                 <div class="row">
-                    <dvi class="col-md-1"></dvi>
-                    <div class="col-md-10">
-                        <table class="table table-striped" cellspacing="0" cellpadding="0">
-                            <thead>
-                                <tr>
+                  
+                    <div class="col-md-9">
+                        <?php
+                        if(isset($categorias)){
+                            foreach($categorias as $categoria){
+                                
+                                var_dump($categoria);
+                        ?>
+                        <div class="row">
+                            <table class="table table-striped" cellspacing="0" cellpadding="0">
+                                    <thead>
+                                        <tr>
+                                            <th><?php echo $categoria['categoria']->categoria?></th>
+                                            <th>Valor investido</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                     <?php
-                                    if(isset($relatorio_projeto)){
-                                      foreach ($relatorio_projeto->result() as $relatorio) {
+                                        if(isset($relatorio_projeto)){
+                                          foreach ($relatorio_projeto->result() as $relatorio) {
                                     ?>
-                                        <th><?php echo $relatorio->nome ?></th>
+                                        <tr>
+                                            <td><?php echo $relatorio->financiador ?></td>
+                                            <td><?php echo $relatorio->data ?></td>
+                                            <td>R$ <?php echo $relatorio->valor ?></td>
+                                        </tr>
                                     <?php
-                                        break;
-                                      }
+                                          }
                                     }
                                     ?>
-                                </tr>
-                            </thead>
-                            <thead>
-                                <tr>
-                                    <th>Financiador</th>
-                                    <th>Data</th>
-                                    <th>Valor</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                if(isset($relatorio_projeto)){
-                                  foreach ($relatorio_projeto->result() as $relatorio) {
-                                ?>
-                                <tr>
-                                    <td><?php echo $relatorio->financiador ?></td>
-                                    <td><?php echo $relatorio->data ?></td>
-                                    <td>R$ <?php echo $relatorio->valor ?></td>
-                                </tr>
-                                <?php
-                                  }
-                                }
-                                ?>
-                            </tbody>
-                        </table>
+                                    <tr>
+                                        <th>TOTAL</th>
+                                        <th><?php echo $categoria['categoria']->total ?> </th>
+                                    </tr>
+                                    </tbody>
+                            </table>
+                        </div>
+                        <?php
+                                }     
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

@@ -118,18 +118,117 @@ class Financiamento extends CI_Controller {
 		//Restrição de acesso
 		if(($_SESSION['tipo']!='Administrativo') and ($_SESSION['tipo']!='Financiador Acadêmico')  and ($_SESSION['tipo']!='Usuário Público')) redirect('/financiamento/', 'refresh');
 	
-		//Recebe o filtro
-		$filtro['nome'] = (empty($_GET['nome'])) ? '' : $_GET['nome'];
-		$filtro['data'] = (empty($_GET['data'])) ? '' : $_GET['data'];
-		
-		//Carrega a model
-		$this->load->model('financiamento_model');
+			//Recebe o filtro
+			$filtro['nome'] = (empty($_GET['nome'])) ? '' : $_GET['nome'];
+			$filtro['data'] = (empty($_GET['data'])) ? '' : $_GET['data'];
 			
-		//Cria um novo objeto financiamento
-		$financiamento = new Financiamento_model();
+			//Carrega a model
+			$this->load->model('financiamento_model');
+				
+			//Cria um novo objeto financiamento
+			$financiamento = new Financiamento_model();
+			$categoria=[];
+			
+			#PESQUISA#
+			//Soma categoria
+			$filtro['categoria_projeto']='Pesquisa';
+			$filtro['soma_categoria']=true;
+			$categoria['pesquisa']=$financiamento->relatorioCategoria($filtro);
+			$categoria['pesquisa']=$categoria['pesquisa']->result();
+			if(isset($categoria['pesquisa'][0])){
+				$categoria['pesquisa']['categoria']=$categoria['pesquisa'][0];
+				unset($categoria['pesquisa'][0]);
+			}
 		
-		########TERMINAR A IMPLEMENTAÇÃO DO RELATÓRIO AQUI#######
+			//Soma projeto
+			$filtro['soma_categoria']=null;
+			$filtro['soma_projeto']=true;
+			$categoria['pesquisa']['projeto']=$financiamento->relatorioCategoria($filtro);
+			$categoria['pesquisa']['projeto']=$categoria['pesquisa']['projeto']->result();
+			if(isset($categoria['pesquisa']['projeto'][0]))
+				$categoria['pesquisa']['projeto']=$categoria['pesquisa']['projeto'][0];
+			
+			#Competição Tecnológica#
+			//Soma categoria
+			$filtro['categoria_projeto']='Competição Tecnológica';
+			$filtro['soma_categoria']=true;
+			$categoria['competicaoTecnologica']=$financiamento->relatorioCategoria($filtro);
+			$categoria['competicaoTecnologica']=$categoria['competicaoTecnologica']->result();
+			if(isset($categoria['competicaoTecnologica'][0])){
+				$categoria['competicaoTecnologica']['categoria']=$categoria['competicaoTecnologica'][0];
+				unset($categoria['competicaoTecnologica'][0]);
+			}
+			
+			//Soma projeto
+			$filtro['soma_categoria']=null;
+			$filtro['soma_projeto']=true;
+			$categoria['competicaoTecnologica']['projeto']=$financiamento->relatorioCategoria($filtro);
+			$categoria['competicaoTecnologica']['projeto']=$categoria['competicaoTecnologica']['projeto']->result();
+			if(isset($categoria['competicaoTecnologica']['projeto'][0]))
+				$categoria['competicaoTecnologica']['projeto']=$categoria['competicaoTecnologica']['projeto'][0];
+			
+			#Inovação no Ensino#
+			//Soma categoria
+			$filtro['categoria_projeto']='Inovação no Ensino';
+			$filtro['soma_categoria']=true;
+			$categoria['inovacaoEnsino']=$financiamento->relatorioCategoria($filtro);
+			$categoria['inovacaoEnsino']=$categoria['inovacaoEnsino']->result();
+			if(isset($categoria['inovacaoEnsino'][0])){
+				$categoria['inovacaoEnsino']['categoria']=$categoria['inovacaoEnsino'][0];
+				unset($categoria['inovacaoEnsino'][0]);
+			} 
+			
+			//Soma projeto
+			$filtro['soma_categoria']=null;
+			$filtro['soma_projeto']=true;
+			$categoria['inovacaoEnsino']['projeto']=$financiamento->relatorioCategoria($filtro);
+			$categoria['inovacaoEnsino']['projeto']=$categoria['inovacaoEnsino']['projeto']->result();
+			if(isset($categoria['inovacaoEnsino']['projeto'][0]))
+				$categoria['inovacaoEnsino']['projeto']=$categoria['inovacaoEnsino']['projeto'][0];
 		
+			#Manutenção e Reforma#
+			//Soma categoria
+			$filtro['categoria_projeto']='Manutenção e Reforma';
+			$filtro['soma_categoria']=true;
+			$categoria['manutencaoReforma']=$financiamento->relatorioCategoria($filtro);
+			$categoria['manutencaoReforma']=$categoria['manutencaoReforma']->result();
+			if(isset($categoria['inovacaoEnsino'][0])){
+				$categoria['manutencaoReforma']['categoria']=$categoria['manutencaoReforma'][0];
+				unset($categoria['inovacaoEnsino'][0]);
+			} 
+			
+			//Soma projeto
+			$filtro['soma_categoria']=null;
+			$filtro['soma_projeto']=true;
+			$categoria['manutencaoReforma']['projeto']=$financiamento->relatorioCategoria($filtro);
+			$categoria['manutencaoReforma']['projeto']=$categoria['manutencaoReforma']['projeto']->result();
+			if(isset($categoria['manutencaoReforma']['projeto'][0]))
+				$categoria['manutencaoReforma']['projeto']=$categoria['manutencaoReforma']['projeto'][0];
+		
+			#Pequenas Obras#
+			//Soma categoria
+			$filtro['categoria_projeto']='Pequenas Obras';
+			$filtro['soma_categoria']=true;
+			$categoria['pequenasObras']=$financiamento->relatorioCategoria($filtro);
+			$categoria['pequenasObras']=$categoria['pequenasObras']->result();
+			if(isset($categoria['pequenasObras'][0])){
+				$categoria['pequenasObras']['categoria']=$categoria['pequenasObras'][0];
+				unset($categoria['pequenasObras'][0]);
+			} 
+			
+			//Soma projeto
+			$filtro['soma_categoria']=null;
+			$filtro['soma_projeto']=true;
+			$categoria['pequenasObras']['projeto']=$financiamento->relatorioCategoria($filtro);
+			$categoria['pequenasObras']['projeto']=$categoria['pequenasObras']['projeto']->result();
+			if(isset($categoria['pequenasObras']['projeto'][0]))
+				$categoria['pequenasObras']['projeto']=$categoria['pequenasObras']['projeto'][0];
+		
+			var_dump($categoria);
+		
+			//Adiciona as somas das categorias
+			$data['categorias']=$categoria;
+			
 		//Carrega a view 
 		$this->load->view('CRUD_financiamento/relCatFINANCIAMENTO',$data); 
 	}

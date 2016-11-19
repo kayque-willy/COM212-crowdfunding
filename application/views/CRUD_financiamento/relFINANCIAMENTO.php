@@ -75,7 +75,9 @@
                             <tbody>
                                 <?php
                                 if(isset($relatorio_projeto)){
+                                  $total=0;         
                                   foreach ($relatorio_projeto->result() as $relatorio) {
+                                    $total+=$relatorio->valor;
                                 ?>
                                 <tr>
                                     <td><?php echo $relatorio->financiador ?></td>
@@ -86,6 +88,11 @@
                                   }
                                 }
                                 ?>
+                                <tr>
+                                    <td class="active"><b>Total investido</b></td>
+                                    <td class="active"></td>
+                                    <td class="active"><b>R$ <?php echo $total ?></b></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
