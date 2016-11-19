@@ -85,14 +85,16 @@
                                     <td>R$ <?php echo $relatorio->valor ?></td>
                                 </tr>
                                 <?php
-                                  }
-                                }
+                                    }       
                                 ?>
                                 <tr>
                                     <td class="active"><b>Total investido</b></td>
                                     <td class="active"></td>
                                     <td class="active"><b>R$ <?php echo $total ?></b></td>
                                 </tr>
+                                <?php
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>

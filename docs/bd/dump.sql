@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Máquina: 127.0.0.1
--- Data de Criação: 16-Nov-2016 às 20:05
+-- Data de Criação: 19-Nov-2016 às 19:58
 -- Versão do servidor: 5.5.50-0ubuntu0.14.04.1
 -- versão do PHP: 5.5.9-1ubuntu4.19
 
@@ -91,21 +91,20 @@ CREATE TABLE IF NOT EXISTS `financiamento` (
   PRIMARY KEY (`id`),
   KEY `codProjeto` (`codProjeto`),
   KEY `login` (`login`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Extraindo dados da tabela `financiamento`
 --
 
 INSERT INTO `financiamento` (`id`, `tipo`, `quantidadeModulos`, `valor`, `formaPagamento`, `codProjeto`, `data`, `login`) VALUES
-(1, 'integral', NULL, 20000, 'Boleto Bancário', 28, '2016-11-01', ''),
-(2, 'integral', NULL, 30000, 'Cartão de Crédito', 28, '2016-11-03', ''),
-(3, 'integral', NULL, 50000, 'Cartão de Crédito', 28, '2016-11-16', ''),
-(4, 'integral', NULL, 20000, 'Boleto Bancário', 29, '2016-11-01', ''),
-(5, 'integral', NULL, 50000, 'Cartão de Crédito', 30, '2016-11-16', ''),
-(6, 'integral', NULL, 50000, 'Cartão de Crédito', 29, '2016-11-16', ''),
 (8, 'Integral', 0, 1500, ' Boleto Bancário', 28, '2016-11-16', 'admin'),
-(9, 'Integral', 0, 5000, 'Cartão de Crédito', 28, '2016-11-16', 'admin');
+(9, 'Integral', 0, 5000, 'Cartão de Crédito', 28, '2016-11-16', 'admin'),
+(10, 'Integral', 0, 25000, 'Cartão de Crédito', 28, '2016-11-17', 'admin'),
+(11, 'Integral', 0, 1500, ' Boleto Bancário', 29, '2016-11-16', 'admin'),
+(12, 'Integral', 0, 5000, ' Boleto Bancário', 29, '2016-11-16', 'admin'),
+(13, 'Integral', 0, 25000, 'Cartão de Crédito', 30, '2016-11-17', 'admin'),
+(14, 'Integral', 0, 5000, 'Cartão de Crédito', 30, '2016-11-17', 'admin');
 
 -- --------------------------------------------------------
 

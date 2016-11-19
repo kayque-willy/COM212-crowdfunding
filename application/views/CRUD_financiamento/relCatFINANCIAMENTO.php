@@ -20,7 +20,7 @@
     <!--Header-->
 
     <div id="main" class="container-fluid">
-        <h3 class="page-header text-center">Relatório de investimentos financeiros</h3>
+        <h3 class="page-header text-center">Relatório de investimentos financeiros por categoria de projeto</h3>
         <div class="row">
             <!--Filtro -->
             <form action="<?php echo base_url('/financiamento/relatorioCategoria'); ?>" class="form-inline text-center" method="GET">
@@ -45,6 +45,7 @@
         <div class="section">
             <div class="container-fluid">
                 <div class="row">
+                    <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <?php
                         if(isset($categorias)){
@@ -96,6 +97,9 @@
 <!--Footer-->
 <?php $this->load->view("footer");?>
 <!--Footer-->
+<script>
+   
+</script>
 </body>
 
 </html>
